@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Doctor · Dentística</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth
+    }
+
+    :root {
+      --uva: #110820;
+      --uva-deep: #0A0514;
+      --uva-mid: #1E1038;
+      --uva-light: #2A1650;
+      --metal: #A8B4BE;
+      --metal-l: #C8D4DC;
+      --metal-d: #6B7D8A;
+      --lila: #B8A9C9;
+      --lila-b: #CFC3DF;
+      --lila-d: #9B8AB5;
+      --lila-dim: rgba(184, 169, 201, 0.10);
+      --surface: #160C2A;
+      --surface2: #1C1035;
+      --txt: #EDF0F3;
+      --txt-m: #7E8FA0;
+      --white: #FAFBFC;
+      --urgency: #E07070;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--uva);
+      color: var(--txt);
+      line-height: 1;
+      overflow-x: hidden
+    }
+
+    /* ── SHARED ── */
+    .s-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lila);
+      margin-bottom: 14px
+    }
+
+    .s-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--lila)
+    }
+
+    .s-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white)
+    }
+
+    .s-title em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--lila);
+      color: var(--uva-deep);
+      padding: 15px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all .3s
+    }
+
+    .btn-main:hover {
+      background: var(--lila-b);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(184, 169, 201, .3)
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(184, 169, 201, .22);
+      color: var(--metal-l);
+      padding: 14px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 400;
+      transition: all .3s
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--lila);
+      color: var(--lila)
+    }
+
+    /* ── ANNOUNCEMENT ── */
+    .ann {
+      background: var(--uva-deep);
+      color: var(--lila);
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      z-index: 201;
+      border-bottom: 1px solid rgba(184, 169, 201, .1)
+    }
+
+    .ann-track {
+      display: flex;
+      gap: 28px;
+      white-space: nowrap;
+      animation: ann-scroll 20s linear infinite;
+      padding-left: 6%;
+      align-items: center;
+      will-change: transform
+    }
+
+    .ann-item {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-size: .88rem;
+      font-weight: 300;
+      letter-spacing: .03em;
+      color: var(--lila)
+    }
+
+    .ann-item .bi {
+      font-size: 1.05rem;
+      flex-shrink: 0
+    }
+
+    @keyframes ann-scroll {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-40%)
+      }
+    }
+
+    .ann:hover .ann-track {
+      animation-play-state: paused
+    }
+
+    @media(max-width:640px) {
+      .ann {
+        height: 56px
+      }
+
+      .ann-track {
+        animation-duration: 28s;
+        padding-left: 14px
+      }
+
+      .ann-item {
+        font-size: .82rem;
+        gap: 8px
+      }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0 6%;
+      width: 100%;
+      height: 68px;
+      background: rgba(10, 5, 20, .93);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(184, 169, 201, .08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .logo {
+      font-family: 'Marcellus', serif;
+      font-size: 1.25rem;
+      letter-spacing: .14em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase
+    }
+
+    .logo b {
+      color: var(--lila);
+      font-weight: 400
+    }
+
+    .nav-r {
+      display: flex;
+      align-items: center;
+      gap: 18px
+    }
+
+    .nav-link {
+      color: var(--metal);
+      text-decoration: none;
+      font-size: .78rem;
+      transition: color .2s
+    }
+
+    .nav-link:hover {
+      color: var(--lila)
+    }
+
+    .nav-cta {
+      background: var(--lila);
+      color: var(--uva-deep);
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: all .3s
+    }
+
+    .nav-cta:hover {
+      background: var(--lila-b)
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 38px;
+      background: transparent;
+      border: 1px solid rgba(184, 169, 201, 0.15);
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--metal-l);
+      flex-shrink: 0
+    }
+
+    .nav-toggle .bar {
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      display: block;
+      position: relative
+    }
+
+    .nav-toggle .bar::before,
+    .nav-toggle .bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      transition: transform .22s
+    }
+
+    .nav-toggle .bar::before {
+      top: -6px
+    }
+
+    .nav-toggle .bar::after {
+      top: 6px
+    }
+
+    .mobile-menu {
+      position: fixed;
+      right: 16px;
+      top: 110px;
+      background: rgba(10, 5, 20, 0.97);
+      border: 1px solid rgba(184, 169, 201, 0.12);
+      border-radius: 14px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1200;
+      min-width: 210px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7)
+    }
+
+    .mobile-menu.show {
+      display: flex
+    }
+
+    .mobile-menu .mobile-link {
+      color: var(--metal-l);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: .85rem;
+      transition: background .18s, color .18s
+    }
+
+    .mobile-menu .mobile-link:hover {
+      background: rgba(184, 169, 201, 0.07);
+      color: var(--lila)
+    }
+
+    .mobile-menu .mobile-cta {
+      background: var(--lila);
+      color: var(--uva-deep);
+      font-weight: 700;
+      text-align: center;
+      margin-top: 4px
+    }
+
+    .mobile-menu .mobile-cta:hover {
+      background: var(--lila-b)
+    }
+
+    @media(max-width:768px) {
+      .nav-toggle {
+        display: inline-flex
+      }
+
+      .nav-r {
+        display: none
+      }
+    }
+
+    /* ══════════════════════════
+       BLOQUE 1 — DOCTOR
+    ══════════════════════════ */
+    .doc-section {
+      padding: 100px 6% 0 6%;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden
+    }
+
+    .doc-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
+    }
+
+    .doc-section::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 169, 201, .04) 0%, transparent 65%);
+      pointer-events: none
+    }
+
+    .doc-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 72px;
+      align-items: start;
+      position: relative;
+      z-index: 1
+    }
+
+    @media(max-width:960px) {
+      .doc-inner {
+        grid-template-columns: 1fr;
+        gap: 48px
+      }
+    }
+
+    /* Columna foto */
+    .doc-visual {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .doc-photo-card {
+      background: linear-gradient(160deg, var(--surface2), var(--uva-mid));
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 22px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative
+    }
+
+    .doc-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .doc-photo-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 169, 201, .15) 0%, transparent 65%);
+      pointer-events: none
+    }
+
+    .doc-years-chip {
+      position: absolute;
+      top: 40%;
+      right: -16px;
+      background: var(--lila);
+      color: var(--uva-deep);
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+      z-index: 2
+    }
+
+    .chip-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      font-style: italic;
+      line-height: 1
+    }
+
+    .chip-label {
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-top: 3px;
+      line-height: 1.3
+    }
+
+    .doc-quote-card {
+      position: absolute;
+      top: 28px;
+      left: -20px;
+      background: rgba(28, 16, 53, .92);
+      border: 1px solid rgba(184, 169, 201, .15);
+      border-radius: 14px;
+      padding: 16px 18px;
+      max-width: 220px;
+      backdrop-filter: blur(12px);
+      z-index: 2
+    }
+
+    .dqc-stars {
+      color: var(--lila);
+      font-size: .68rem;
+      letter-spacing: 2px;
+      margin-bottom: 7px
+    }
+
+    .dqc-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: .82rem;
+      color: var(--white);
+      line-height: 1.5;
+      margin-bottom: 8px
+    }
+
+    .dqc-author {
+      font-size: .62rem;
+      color: var(--metal-d);
+      font-weight: 300
+    }
+
+    @media(max-width:960px) {
+      .doc-years-chip {
+        right: 16px
+      }
+
+      .doc-quote-card {
+        display: none
+      }
+    }
+
+    /* Stats + testimonio + cta debajo de la foto */
+    .doc-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px
+    }
+
+    .doc-stat {
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .08);
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+      transition: border-color .25s
+    }
+
+    .doc-stat:hover {
+      border-color: rgba(184, 169, 201, .2)
+    }
+
+    .doc-stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      font-style: italic;
+      color: var(--lila);
+      line-height: 1;
+      margin-bottom: 5px
+    }
+
+    .doc-stat-l {
+      font-size: .62rem;
+      color: var(--metal-d);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 300;
+      line-height: 1.3
+    }
+
+    .doc-mini-test {
+      margin-top: 14px;
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 14px;
+      padding: 18px 20px;
+      position: relative
+    }
+
+    .doc-mini-test::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent);
+      border-radius: 14px 14px 0 0
+    }
+
+    .dmt-stars {
+      color: var(--lila);
+      font-size: .7rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px
+    }
+
+    .dmt-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: .84rem;
+      color: var(--white);
+      line-height: 1.55;
+      margin-bottom: 10px
+    }
+
+    .dmt-author {
+      font-size: .62rem;
+      color: var(--metal-d);
+      font-weight: 300
+    }
+
+    .doc-side-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      background: var(--lila);
+      color: var(--uva-deep);
+      padding: 14px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: .84rem;
+      font-weight: 700;
+      transition: all .3s
+    }
+
+    .doc-side-cta:hover {
+      background: var(--lila-b);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184, 169, 201, .3)
+    }
+
+    .doc-side-note {
+      text-align: center;
+      font-size: .62rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-top: 8px
+    }
+
+    /* Columna contenido */
+    .doc-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 6px;
+      color: var(--white)
+    }
+
+    .doc-name em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .doc-specialty {
+      font-size: .78rem;
+      color: var(--lila);
+      font-weight: 500;
+      letter-spacing: .08em;
+      margin-bottom: 24px
+    }
+
+    .doc-bio {
+      font-size: .95rem;
+      color: var(--metal);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 36px;
+      border-left: 2px solid rgba(184, 169, 201, .15);
+      padding-left: 20px
+    }
+
+    .doc-bio strong {
+      color: var(--metal-l);
+      font-weight: 500
+    }
+
+    /* Formación — heading grande */
+    .doc-formation {
+      margin-bottom: 36px
+    }
+
+    .doc-formation-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px
+    }
+
+    .doc-formation-heading::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--lila);
+      flex-shrink: 0
+    }
+
+    .doc-formation-heading h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1
+    }
+
+    .doc-formation-heading h3 em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .form-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .form-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .08);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color .25s
+    }
+
+    .form-card:hover {
+      border-color: rgba(184, 169, 201, .2)
+    }
+
+    .form-card.featured {
+      border-color: rgba(184, 169, 201, .2);
+      background: linear-gradient(135deg, var(--surface2), rgba(184, 169, 201, .05))
+    }
+
+    .form-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .form-name {
+      font-size: .86rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+      line-height: 1.3
+    }
+
+    .form-card.featured .form-name {
+      color: var(--lila-b)
+    }
+
+    .form-institution {
+      font-size: .72rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      line-height: 1.4
+    }
+
+    .form-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .2);
+      color: var(--lila);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-top: 5px
+    }
+
+    /* Mis cualidades — heading grande */
+    .doc-traits-section {
+      margin-bottom: 36px
+    }
+
+    .doc-traits-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px
+    }
+
+    .doc-traits-heading::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--lila);
+      flex-shrink: 0
+    }
+
+    .doc-traits-heading h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1
+    }
+
+    .doc-traits-heading h3 em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .doc-traits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    @media(max-width:500px) {
+      .doc-traits {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .trait {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .06);
+      border-radius: 10px;
+      padding: 14px;
+      transition: border-color .25s
+    }
+
+    .trait:hover {
+      border-color: rgba(184, 169, 201, .16)
+    }
+
+    .trait-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .trait-text {
+      font-size: .78rem;
+      color: var(--metal);
+      font-weight: 300;
+      line-height: 1.5
+    }
+
+    .trait-text strong {
+      color: var(--txt);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 2px
+    }
+
+    /* Botones centrados */
+    .doc-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 8px
+    }
+
+    /* ══════════════════════════
+       BLOQUE 2 — TRATAMIENTOS
+    ══════════════════════════ */
+    .trat-section {
+      padding: 100px 6%;
+      background: var(--uva);
+      position: relative
+    }
+
+    .trat-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(184, 169, 201, .15), transparent)
+    }
+
+    .trat-inner {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .trat-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 56px
+    }
+
+    @media(max-width:768px) {
+      .trat-header {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .trat-intro {
+      font-size: .92rem;
+      color: var(--metal);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-top: .8rem;
+      max-width: 460px
+    }
+
+    .trat-header-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .78rem;
+      color: var(--lila);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: gap .25s
+    }
+
+    .trat-header-cta:hover {
+      gap: 10px
+    }
+
+    .trat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    @media(max-width:768px) {
+      .trat-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .trat-card {
+      background: var(--surface);
+      border: 1px solid rgba(184, 169, 201, .07);
+      border-radius: 18px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all .35s;
+      display: flex;
+      flex-direction: column
+    }
+
+    .trat-card:hover {
+      border-color: rgba(184, 169, 201, .2);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4)
+    }
+
+    .trat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .4s ease
+    }
+
+    .trat-card:hover::after {
+      transform: scaleX(1)
+    }
+
+    .trat-card.featured {
+      background: linear-gradient(150deg, var(--surface) 0%, rgba(184, 169, 201, .06) 100%);
+      border-color: rgba(184, 169, 201, .16)
+    }
+
+    .trat-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent)
+    }
+
+    .trat-card.wide {
+      grid-column: 1/-1;
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+      padding: 28px 36px
+    }
+
+    @media(max-width:768px) {
+      .trat-card.wide {
+        flex-direction: column;
+        gap: 20px;
+        grid-column: auto
+      }
+    }
+
+    .trat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4rem;
+      font-style: italic;
+      color: rgba(184, 169, 201, .07);
+      line-height: 1;
+      margin-bottom: 10px;
+      transition: color .3s
+    }
+
+    .trat-card:hover .trat-num {
+      color: rgba(184, 169, 201, .14)
+    }
+
+    .trat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      width: fit-content
+    }
+
+    .badge-resina {
+      background: rgba(184, 169, 201, .10);
+      color: var(--lila);
+      border: 1px solid rgba(184, 169, 201, .2)
+    }
+
+    .badge-disilicato {
+      background: rgba(184, 169, 201, .15);
+      color: var(--lila-b);
+      border: 1px solid rgba(184, 169, 201, .28)
+    }
+
+    .badge-otros {
+      background: rgba(168, 180, 190, .08);
+      color: var(--metal);
+      border: 1px solid rgba(168, 180, 190, .14)
+    }
+
+    .trat-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.1
+    }
+
+    .trat-card.featured .trat-name {
+      font-size: 1.8rem
+    }
+
+    .trat-simple-desc {
+      font-size: .88rem;
+      color: var(--metal);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1
+    }
+
+    .trat-simple-desc strong {
+      color: var(--metal-l);
+      font-weight: 500
+    }
+
+    .trat-for {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(184, 169, 201, .07);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: .72rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-bottom: 20px;
+      line-height: 1.4
+    }
+
+    .trat-for span {
+      color: var(--lila);
+      font-weight: 500
+    }
+
+    .trat-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px
+    }
+
+    .tb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      color: var(--txt);
+      font-weight: 300
+    }
+
+    .tb-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--lila);
+      flex-shrink: 0;
+      opacity: .7
+    }
+
+    .trat-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--lila);
+      margin-bottom: 4px
+    }
+
+    .trat-card.featured .trat-price {
+      font-size: 2.2rem;
+      color: var(--lila-b)
+    }
+
+    .trat-price-note {
+      font-size: .68rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-bottom: 18px
+    }
+
+    .trat-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: all .3s
+    }
+
+    .tc-filled {
+      background: var(--lila);
+      color: var(--uva-deep)
+    }
+
+    .tc-filled:hover {
+      background: var(--lila-b);
+      box-shadow: 0 8px 24px rgba(184, 169, 201, .3)
+    }
+
+    .tc-ghost {
+      border: 1px solid rgba(184, 169, 201, .18);
+      color: var(--metal-l)
+    }
+
+    .tc-ghost:hover {
+      border-color: var(--lila);
+      color: var(--lila)
+    }
+
+    .wide-left {
+      flex-shrink: 0
+    }
+
+    .wide-right {
+      flex: 1
+    }
+
+    .otros-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px
+    }
+
+    .otro-tag {
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: .74rem;
+      color: var(--metal);
+      font-weight: 300;
+      transition: all .25s;
+      cursor: default
+    }
+
+    .otro-tag:hover {
+      border-color: rgba(184, 169, 201, .28);
+      color: var(--lila)
+    }
+
+    .trat-band {
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--lila-dim), var(--surface));
+      border: 1px solid rgba(184, 169, 201, .12);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .trat-band-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 5px
+    }
+
+    .trat-band-title em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .trat-band-sub {
+      font-size: .8rem;
+      color: var(--metal-d);
+      font-weight: 300
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--uva-deep);
+      border-top: 1px solid rgba(184, 169, 201, .08);
+      padding: 28px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .72rem;
+      color: var(--metal-d);
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    footer a {
+      color: var(--lila);
+      text-decoration: none
+    }
+
+    /* ── WHATSAPP ── */
+    .wa {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37, 211, 102, .5);
+      z-index: 99;
+      text-decoration: none;
+      transition: all .3s;
+      animation: wap 3s infinite
+    }
+
+    .wa:hover {
+      transform: scale(1.1)
+    }
+
+    @keyframes wap {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 24px rgba(37, 211, 102, .5)
+      }
+
+      50% {
+        box-shadow: 0 4px 40px rgba(37, 211, 102, .8)
+      }
+    }
+
+    @media(max-width:768px) {
+      .doc-section {
+        padding: 80px 4%
+      }
+
+      .doc-photo-card {
+        aspect-ratio: 3/4
+      }
+
+      .trat-section {
+        padding: 80px 4%
+      }
+
+      .trat-band {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="ann" role="region">
+    <div class="ann-track">
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">DENTÍSTI<b>CA</b></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Abrir menú"><span
+        class="bar"></span></button>
+    <div class="nav-r">
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="valoracion.html">Valoraciones</a>
+      <a class="nav-link" href="tratamientos.html">Tratamientos</a>
+      <a class="nav-link" href="doctor.html">El Doctor</a>
+      <a class="nav-cta" href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración">Agendar
+        cita</a>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-link">Inicio</a>
+    <a href="valoracion.html" class="mobile-link">Valoraciones</a>
+    <a href="tratamientos.html" class="mobile-link">Tratamientos</a>
+    <a href="doctor.html" class="mobile-link">El Doctor</a>
+    <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración"
+      class="mobile-link mobile-cta">Agendar cita</a>
+  </div>
+
+  <!-- ══════════════════════════
+     BLOQUE 1 — DR. JORGE
+══════════════════════════ -->
+  <section class="doc-section" id="doctor">
+    <div class="doc-inner">
+
+      <!-- COLUMNA FOTO -->
+      <div class="doc-visual">
+
+        <div class="doc-photo-card">
+          <img src="doctor.JPG" alt="Dr. Jorge De La Rosa">
+        </div>
+
+        <div class="doc-years-chip">
+          <div class="chip-num">10+</div>
+          <div class="chip-label">años en<br>estética dental</div>
+        </div>
+
+        <!-- STATS DEBAJO DE LA FOTO -->
+        <div class="doc-stats-grid">
+          <div class="doc-stat">
+            <div class="doc-stat-n">500+</div>
+            <div class="doc-stat-l">Sonrisas diseñadas</div>
+          </div>
+          <div class="doc-stat">
+            <div class="doc-stat-n">98%</div>
+            <div class="doc-stat-l">Pacientes satisfechos</div>
+          </div>
+          <div class="doc-stat">
+            <div class="doc-stat-n">1 día</div>
+            <div class="doc-stat-l">Resultado en resina</div>
+          </div>
+          <div class="doc-stat">
+            <div class="doc-stat-n">$0</div>
+            <div class="doc-stat-l">Para agendar</div>
+          </div>
+        </div>
+
+        <!-- MINI TESTIMONIO -->
+        <div class="doc-mini-test">
+          <div class="dmt-stars">★★★★★</div>
+          <div class="dmt-text">"Hoy sonrío en todas las fotos sin pensarlo dos veces. Fue la mejor inversión que hice
+            en mí misma."</div>
+          <div class="dmt-author">Wendy C. · Diseño en Resina</div>
+        </div>
+
+        <!-- CTA LATERAL -->
+        <a href="https://wa.me/573217264415?text=Hola%20Dr.%20Jorge!%20Quiero%20agendar%20mi%20valoración"
+          class="doc-side-cta">
+          <span>Agendar con el Dr. Jorge</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <div class="doc-side-note">Sin pago previo · Respuesta en minutos</div>
+
+      </div>
+
+      <!-- COLUMNA CONTENIDO -->
+      <div class="doc-content">
+
+        <div class="s-eyebrow">Quién te va a atender</div>
+        <h2 class="doc-name">Dr. Jorge<br><em>De La Rosa</em></h2>
+        <p class="doc-specialty">Especialista en Diseño de Sonrisa · Barranquilla, Colombia</p>
+
+        <p class="doc-bio">
+          Soy odontólogo con más de 10 años dedicados casi exclusivamente a la estética dental.
+          Lo que más me gusta de este trabajo no es el procedimiento en sí —
+          es ese momento en que el paciente se mira al espejo por primera vez
+          y no puede dejar de sonreír.<br><br>
+          Aquí no vas a encontrar tecnicismos ni protocolos fríos.
+          Te explico todo en lenguaje sencillo, te muestro exactamente qué vamos a hacer
+          y <strong>no empezamos hasta que estés completamente seguro</strong>.
+          Cada caso lo manejo yo personalmente — desde la primera valoración hasta el resultado final.
+        </p>
+
+        <!-- FORMACIÓN — título grande -->
+        <div class="doc-formation">
+          <div class="doc-formation-heading">
+            <h3>Formación y <em>certificaciones</em></h3>
+          </div>
+          <div class="form-cards">
+            <div class="form-card featured">
+              <div class="form-icon"><i class="bi bi-mortarboard-fill"></i></div>
+              <div>
+                <div class="form-name">Diplomado en Odontología Estética</div>
+                <div class="form-institution">Universidad del Norte · Barranquilla<br>Una de las instituciones
+                  académicas más reconocidas de Colombia en ciencias de la salud</div>
+                <div class="form-badge">✦ Formación de alto nivel</div>
+              </div>
+            </div>
+            <div class="form-card featured">
+              <div class="form-icon"><i class="bi bi-star-fill"></i></div>
+              <div>
+                <div class="form-name">Curso Especializado en Estética Dental</div>
+                <div class="form-institution">Instituto Opzione · Formación internacional en técnicas avanzadas de
+                  diseño de sonrisa y materiales estéticos</div>
+                <div class="form-badge">✦ Técnicas internacionales</div>
+              </div>
+            </div>
+            <div class="form-card">
+              <div class="form-icon"><i class="bi bi-book-half"></i></div>
+              <div>
+                <div class="form-name">Formación continua en diseño de sonrisa</div>
+                <div class="form-institution">Actualización constante en protocolos, materiales y técnicas digitales —
+                  porque en estética dental quien deja de aprender deja de avanzar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MIS CUALIDADES — título grande -->
+        <div class="doc-traits-section">
+          <div class="doc-traits-heading">
+            <h3>Mis <em>cualidades</em></h3>
+          </div>
+          <div class="doc-traits">
+            <div class="trait">
+              <div class="trait-icon"><i class="bi bi-people"></i></div>
+              <div class="trait-text"><strong>Cercano y sin tecnicismos</strong>Te explico todo en palabras simples. Sin
+                jerga, sin apresurarte.</div>
+            </div>
+            <div class="trait">
+              <div class="trait-icon"><i class="bi bi-search-heart-fill"></i></div>
+              <div class="trait-text"><strong>Perfeccionista con cada detalle</strong>Los milímetros importan en
+                estética. Cada caso lo reviso hasta que esté exactamente como debe estar.</div>
+            </div>
+            <div class="trait">
+              <div class="trait-icon"><i class="bi bi-geo-alt-fill"></i></div>
+              <div class="trait-text"><strong>Contigo en todo el proceso</strong>No te transfiero a asistentes. Desde la
+                primera cita hasta el resultado final, soy yo quien te acompaña.</div>
+            </div>
+            <div class="trait">
+              <div class="trait-icon"><i class="bi bi-heart-fill"></i></div>
+              <div class="trait-text"><strong>Apasionado por lo que hace</strong>Elegí la estética dental porque me
+                cambia la vida verle cambiar la tuya. Eso no es un slogan — es lo que me levanta cada mañana.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTONES CENTRADOS -->
+        
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+     BLOQUE 2 — TRATAMIENTOS
+══════════════════════════ -->
+  <section class="trat-section" id="servicios">
+    <div class="trat-inner">
+
+      <div class="trat-header">
+        <div>
+          <div class="s-eyebrow">Qué podemos hacer por tu sonrisa</div>
+          <h2 class="s-title">Simple. Claro.<br><em>Sin complicaciones.</em></h2>
+          <p class="trat-intro">No necesitas saber nada de odontología para entender tus opciones. Aquí te lo explicamos
+            como a un amigo.</p>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20saber%20qué%20tratamiento%20me%20conviene"
+          class="trat-header-cta">
+          ¿No sabes cuál te conviene? Pregúntanos
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="trat-grid">
+
+        <!-- RESINA -->
+        <div class="trat-card">
+          <div class="trat-num">01</div>
+          <div class="trat-badge badge-resina">El más solicitado</div>
+          <div class="trat-name">Diseño de Sonrisa<br>en Resina</div>
+          <p class="trat-simple-desc">Imagina que le ponemos una "funda" muy delgada a tus dientes que los hace ver
+            perfectos al instante. <strong>El mismo día sales con tu sonrisa nueva</strong>, sin desgastar ni tocar el
+            diente natural.</p>
+          <div class="trat-for"><span>Ideal si:</span> quieres cambio rápido, presupuesto más accesible o un resultado
+            visible de inmediato</div>
+          <div class="trat-bullets">
+            <div class="tb">
+              <div class="tb-dot"></div>Resultado el mismo día de la cita
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>No se toca ni desgasta el diente natural
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>Corrección de color, forma y espacios
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>Reversible si algún día quieres cambiar
+            </div>
+          </div>
+          <div class="trat-price">$1.300.000</div>
+          <div class="trat-price-note">por diente · precio final después de valoración</div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Resina"
+            class="trat-cta tc-ghost">
+            <span>Me interesa la Resina</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- DISILICATO -->
+        <div class="trat-card featured">
+          <div class="trat-num">02</div>
+          <div class="trat-badge badge-disilicato">✦ La opción definitiva</div>
+          <div class="trat-name">Diseño de Sonrisa<br>en Disilicato</div>
+          <p class="trat-simple-desc">Cerámica de altísima calidad que imita exactamente el aspecto del diente natural.
+            <strong>No se nota que son carillas. Se nota que tienes una sonrisa perfecta.</strong> Permanente y muy
+            resistente.</p>
+          <div class="trat-for"><span>Ideal si:</span> quieres el mejor resultado posible, permanente y con acabado de
+            más alta calidad</div>
+          <div class="trat-bullets">
+            <div class="tb">
+              <div class="tb-dot"></div>Resultado más natural y premium del mercado
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>Resistencia muy superior a la resina
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>Larga duración con cuidado básico
+            </div>
+            <div class="tb">
+              <div class="tb-dot"></div>Translucidez idéntica al diente real
+            </div>
+          </div>
+          <div class="trat-price">$5.000.000</div>
+          <div class="trat-price-note">por diente · precio final después de valoración</div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Disilicato"
+            class="trat-cta tc-filled">
+            <span>Me interesa el Disilicato</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- OTROS -->
+        <div class="trat-card wide">
+          <div class="wide-left">
+            <div class="trat-num" style="margin-bottom:6px">03</div>
+            <div class="trat-badge badge-otros">También hacemos</div>
+            <div class="trat-name" style="font-size:1.4rem;margin-bottom:8px">Otros tratamientos</div>
+            <p style="font-size:.82rem;color:var(--metal-d);font-weight:300;max-width:240px;line-height:1.6">Si tu caso
+              necesita algo diferente, también lo tenemos cubierto.</p>
+          </div>
+          <div class="wide-right">
+            <div class="otros-list">
+              <div class="otro-tag"><i class="bi bi-emoji-smile-fill"></i> Ortodoncia</div>
+              <div class="otro-tag"><i class="bi bi-stars"></i> Blanqueamiento dental</div>
+              <div class="otro-tag"><i class="bi bi-tools"></i> Rehabilitación oral</div>
+              <div class="otro-tag"><i class="bi bi-wrench"></i> Limpieza profesional</div>
+              <div class="otro-tag"><i class="bi bi-clipboard2-pulse"></i> Odontología general</div>
+              <div class="otro-tag"><i class="bi bi-camera-fill"></i> Radiografías</div>
+            </div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20otros%20tratamientos"
+              style="display:inline-flex;align-items:center;gap:6px;color:var(--lila);text-decoration:none;font-size:.82rem;font-weight:500;transition:gap .25s"
+              onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+              Preguntar por un tratamiento específico
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM BAND -->
+      <div class="trat-band">
+        <div>
+          <p class="trat-band-title">¿No sabes cuál es <em>tu opción</em>?</p>
+          <div class="trat-band-sub">Envíanos una foto de tu sonrisa y el Dr. Jorge te dice exactamente qué tratamiento
+            tiene más sentido para tu caso — sin costo y sin compromiso.</div>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20saber%20qué%20tratamiento%20me%20conviene%20para%20mi%20caso"
+          class="btn-main">
+          Enviar foto — es gratis
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
+    <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
+  </footer>
+
+  <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística"
+    target="_blank">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('show') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = menu.classList.toggle('show');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      });
+      menu.querySelectorAll('.mobile-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

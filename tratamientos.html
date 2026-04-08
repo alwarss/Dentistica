@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tratamientos · Dentística</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth
+    }
+
+    :root {
+      --uva: #110820;
+      --uva-deep: #0A0514;
+      --uva-mid: #1E1038;
+      --uva-light: #2A1650;
+      --metal: #A8B4BE;
+      --metal-l: #C8D4DC;
+      --metal-d: #6B7D8A;
+      --lila: #B8A9C9;
+      --lila-b: #CFC3DF;
+      --lila-d: #9B8AB5;
+      --lila-dim: rgba(184, 169, 201, 0.10);
+      --lila-glow: rgba(184, 169, 201, 0.06);
+      --surface: #160C2A;
+      --surface2: #1C1035;
+      --txt: #EDF0F3;
+      --txt-m: #7E8FA0;
+      --white: #FAFBFC;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--uva);
+      color: var(--txt);
+      line-height: 1;
+      overflow-x: hidden
+    }
+
+    /* ── SHARED ── */
+    .s-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lila);
+      margin-bottom: 14px
+    }
+
+    .s-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--lila)
+    }
+
+    .s-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white)
+    }
+
+    .s-title em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--lila);
+      color: var(--uva-deep);
+      padding: 15px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all .3s;
+      white-space: nowrap
+    }
+
+    .btn-main:hover {
+      background: var(--lila-b);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(184, 169, 201, .28)
+    }
+
+    /* ── ANNOUNCEMENT ── */
+    .ann {
+      background: var(--uva-deep);
+      color: var(--lila);
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      z-index: 201;
+      border-bottom: 1px solid rgba(184, 169, 201, .1)
+    }
+
+    .ann-track {
+      display: flex;
+      gap: 28px;
+      white-space: nowrap;
+      animation: ann-scroll 20s linear infinite;
+      padding-left: 6%;
+      align-items: center;
+      will-change: transform
+    }
+
+    .ann-item {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-size: .88rem;
+      font-weight: 300;
+      letter-spacing: .03em;
+      color: var(--lila)
+    }
+
+    .ann-item .bi {
+      font-size: 1.05rem;
+      flex-shrink: 0
+    }
+
+    @keyframes ann-scroll {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-40%)
+      }
+    }
+
+    .ann:hover .ann-track {
+      animation-play-state: paused
+    }
+
+    @media(max-width:640px) {
+      .ann {
+        height: 56px
+      }
+
+      .ann-track {
+        animation-duration: 28s;
+        padding-left: 14px
+      }
+
+      .ann-item {
+        font-size: .82rem;
+        gap: 8px
+      }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0 6%;
+      width: 100%;
+      height: 68px;
+      background: rgba(10, 5, 20, .93);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(184, 169, 201, .08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .logo {
+      font-family: 'Marcellus', serif;
+      font-size: 1.25rem;
+      letter-spacing: .14em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase
+    }
+
+    .logo b {
+      color: var(--lila);
+      font-weight: 400
+    }
+
+    .nav-r {
+      display: flex;
+      align-items: center;
+      gap: 18px
+    }
+
+    .nav-link {
+      color: var(--metal);
+      text-decoration: none;
+      font-size: .78rem;
+      transition: color .2s
+    }
+
+    .nav-link:hover {
+      color: var(--lila)
+    }
+
+    .nav-cta {
+      background: var(--lila);
+      color: var(--uva-deep);
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: all .3s
+    }
+
+    .nav-cta:hover {
+      background: var(--lila-b)
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 38px;
+      background: transparent;
+      border: 1px solid rgba(184, 169, 201, 0.15);
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--metal-l);
+      flex-shrink: 0
+    }
+
+    .nav-toggle .bar {
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      display: block;
+      position: relative
+    }
+
+    .nav-toggle .bar::before,
+    .nav-toggle .bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      transition: transform .22s
+    }
+
+    .nav-toggle .bar::before {
+      top: -6px
+    }
+
+    .nav-toggle .bar::after {
+      top: 6px
+    }
+
+    .mobile-menu {
+      position: fixed;
+      right: 16px;
+      top: 110px;
+      background: rgba(10, 5, 20, 0.97);
+      border: 1px solid rgba(184, 169, 201, 0.12);
+      border-radius: 14px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1200;
+      min-width: 210px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7)
+    }
+
+    .mobile-menu.show {
+      display: flex
+    }
+
+    .mobile-menu .mobile-link {
+      color: var(--metal-l);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: .85rem;
+      transition: background .18s, color .18s
+    }
+
+    .mobile-menu .mobile-link:hover {
+      background: rgba(184, 169, 201, 0.07);
+      color: var(--lila)
+    }
+
+    .mobile-menu .mobile-cta {
+      background: var(--lila);
+      color: var(--uva-deep);
+      font-weight: 700;
+      text-align: center;
+      margin-top: 4px
+    }
+
+    .mobile-menu .mobile-cta:hover {
+      background: var(--lila-b)
+    }
+
+    @media(max-width:768px) {
+      .nav-toggle {
+        display: inline-flex
+      }
+
+      .nav-r {
+        display: none
+      }
+    }
+
+    /* ── SECTION ── */
+    .trat-section {
+      padding: 68px 6% 60px;
+      position: relative
+    }
+
+    .trat-inner {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .trat-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: end;
+      margin-bottom: 56px
+    }
+
+    @media(max-width:768px) {
+      .trat-header {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .trat-intro {
+      font-size: .92rem;
+      color: var(--metal);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-top: .8rem;
+      max-width: 460px
+    }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px
+    }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 100px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--metal);
+      transition: all .25s;
+      white-space: nowrap
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(184, 169, 201, .28);
+      color: var(--lila)
+    }
+
+    .tab-btn.active {
+      background: var(--lila);
+      border-color: var(--lila);
+      color: var(--uva-deep);
+      font-weight: 600
+    }
+
+    .tab-btn .t-icon {
+      font-size: .95rem
+    }
+
+    /* ── PANEL ── */
+    .panels-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden
+    }
+
+    .panel {
+      display: none;
+      animation: panelIn .35s ease both;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 20px;
+      overflow: hidden
+    }
+
+    .panel.active {
+      display: grid
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @media(max-width:900px) {
+      .panel {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .panel.p-featured {
+      border-color: rgba(184, 169, 201, .22);
+      background: linear-gradient(150deg, var(--surface) 0%, rgba(184, 169, 201, .04) 100%)
+    }
+
+    .panel.p-featured::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent);
+      pointer-events: none;
+      z-index: 1
+    }
+
+    /* ── PANEL LEFT ── */
+    .panel-left {
+      padding: 44px;
+      display: flex;
+      flex-direction: column
+    }
+
+    @media(max-width:600px) {
+      .panel-left {
+        padding: 28px 24px
+      }
+    }
+
+    .panel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+      width: fit-content;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .2);
+      color: var(--lila)
+    }
+
+    .panel-badge.badge-star {
+      background: rgba(184, 169, 201, .15);
+      color: var(--lila-b);
+      border-color: rgba(184, 169, 201, .3)
+    }
+
+    .panel-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 10px
+    }
+
+    .panel-tagline {
+      font-size: .9rem;
+      color: var(--metal);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 420px;
+      border-left: 2px solid rgba(184, 169, 201, .15);
+      padding-left: 14px
+    }
+
+    .panel-for {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      border: 1px solid rgba(184, 169, 201, .1);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: .75rem;
+      color: var(--metal);
+      font-weight: 300;
+      margin-bottom: 24px;
+      line-height: 1.45;
+      max-width: fit-content
+    }
+
+    .panel-for strong {
+      color: var(--lila);
+      font-weight: 500
+    }
+
+    .panel-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+      flex: 1
+    }
+
+    .pb {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .83rem;
+      color: var(--txt);
+      font-weight: 300;
+      line-height: 1.45
+    }
+
+    .pb-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .22);
+      color: var(--lila);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .5rem;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .panel-price-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 6px
+    }
+
+    .panel-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      color: var(--lila);
+      line-height: 1
+    }
+
+    .panel.p-featured .panel-price {
+      color: var(--lila-b);
+      font-size: 2.6rem
+    }
+
+    .panel-price-note {
+      font-size: .68rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-bottom: 20px;
+      line-height: 1.5
+    }
+
+    .panel-price-note em {
+      color: var(--lila);
+      font-style: normal;
+      font-weight: 500
+    }
+
+    .panel-noprice {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .15);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: .78rem;
+      color: var(--metal);
+      font-weight: 300;
+      margin-bottom: 20px;
+      line-height: 1.45
+    }
+
+    .panel-noprice strong {
+      color: var(--lila);
+      font-weight: 500
+    }
+
+    .panel-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 700;
+      transition: all .3s;
+      max-width: 360px
+    }
+
+    .cta-filled {
+      background: var(--lila);
+      color: var(--uva-deep)
+    }
+
+    .cta-filled:hover {
+      background: var(--lila-b);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(184, 169, 201, .28)
+    }
+
+    .panel-no-pressure {
+      font-size: .67rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-top: 8px
+    }
+
+    /* ── PANEL RIGHT — BEFORE/AFTER IMAGE ── */
+    .panel-right {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--uva-mid);
+    }
+
+    @media(max-width:900px) {
+      .panel-right {
+        min-height: 260px
+      }
+    }
+
+    /* The two images stacked */
+    .panel-right .pr-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: opacity .55s ease;
+    }
+
+    .panel-right .pr-img-before {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .panel-right .pr-img-after {
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Toggle */
+    .panel-right.show-after .pr-img-before {
+      opacity: 0;
+    }
+
+    .panel-right.show-after .pr-img-after {
+      opacity: 1;
+    }
+
+    /* Dark gradient overlay */
+    .panel-right .pr-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10, 5, 20, .1) 0%, rgba(10, 5, 20, .65) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Antes / Después labels */
+    .panel-right .pr-lbl {
+      position: absolute;
+      z-index: 3;
+      top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(10, 5, 20, .65);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(184, 169, 201, .18);
+      padding: 6px 13px;
+      border-radius: 100px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--metal-l);
+      transition: all .35s;
+    }
+
+    .panel-right .pr-lbl-b {
+      left: 16px;
+    }
+
+    .panel-right .pr-lbl-a {
+      right: 16px;
+    }
+
+    /* Active label = lila */
+    .panel-right:not(.show-after) .pr-lbl-b {
+      background: var(--lila);
+      color: var(--uva-deep);
+      border-color: var(--lila);
+      box-shadow: 0 2px 10px rgba(184, 169, 201, .35);
+    }
+
+    .panel-right:not(.show-after) .pr-lbl-a {
+      opacity: .4;
+    }
+
+    .panel-right.show-after .pr-lbl-a {
+      background: var(--lila);
+      color: var(--uva-deep);
+      border-color: var(--lila);
+      box-shadow: 0 2px 10px rgba(184, 169, 201, .35);
+    }
+
+    .panel-right.show-after .pr-lbl-b {
+      opacity: .4;
+    }
+
+    /* Tap hint */
+    .panel-right .pr-hint {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      background: rgba(184, 169, 201, .15);
+      border: 1px solid rgba(184, 169, 201, .22);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: .62rem;
+      color: var(--lila);
+      font-weight: 600;
+      letter-spacing: .06em;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: opacity .4s;
+    }
+
+    .panel-right.show-after .pr-hint {
+      opacity: 0;
+    }
+
+    /* Stats overlay at bottom */
+    .panel-right .pr-stat {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 3;
+      background: rgba(10, 5, 20, .72);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(184, 169, 201, .15);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .pr-stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--lila);
+      line-height: 1;
+    }
+
+    .pr-stat-label {
+      font-size: .58rem;
+      color: var(--metal-d);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-top: 3px;
+    }
+
+    /* Quote at bottom left */
+    .panel-right .pr-quote {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      z-index: 3;
+      background: rgba(10, 5, 20, .72);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(184, 169, 201, .15);
+      border-radius: 12px;
+      padding: 12px 14px;
+      max-width: 180px;
+      pointer-events: none;
+    }
+
+    .pr-quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: .76rem;
+      color: var(--white);
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+
+    .pr-quote-author {
+      font-size: .58rem;
+      color: var(--metal-d);
+      font-weight: 300;
+    }
+
+    /* ── BOTTOM BAND ── */
+    .trat-band {
+      margin-top: 24px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184, 169, 201, .12);
+      border-radius: 16px;
+      padding: 26px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .trat-band-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 4px
+    }
+
+    .trat-band-title em {
+      font-style: italic;
+      color: var(--lila)
+    }
+
+    .trat-band-sub {
+      font-size: .78rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      max-width: 460px;
+      line-height: 1.6
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--uva-deep);
+      border-top: 1px solid rgba(184, 169, 201, .08);
+      padding: 28px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .72rem;
+      color: var(--metal-d);
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 40px
+    }
+
+    footer a {
+      color: var(--lila);
+      text-decoration: none
+    }
+
+    /* ── WHATSAPP ── */
+    .wa {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37, 211, 102, .5);
+      z-index: 99;
+      text-decoration: none;
+      transition: all .3s;
+      animation: wap 3s infinite
+    }
+
+    .wa:hover {
+      transform: scale(1.1)
+    }
+
+    @keyframes wap {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 24px rgba(37, 211, 102, .5)
+      }
+
+      50% {
+        box-shadow: 0 4px 40px rgba(37, 211, 102, .8)
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="ann" role="region">
+    <div class="ann-track">
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">DENTÍSTI<b>CA</b></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Abrir menú"><span
+        class="bar"></span></button>
+    <div class="nav-r">
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="valoracion.html">Valoraciones</a>
+      <a class="nav-link" href="tratamientos.html">Tratamientos</a>
+      <a class="nav-link" href="doctor.html">El Doctor</a>
+      <a class="nav-cta" href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración">Agendar
+        cita</a>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-link">Inicio</a>
+    <a href="valoracion.html" class="mobile-link">Valoraciones</a>
+    <a href="tratamientos.html" class="mobile-link">Tratamientos</a>
+    <a href="doctor.html" class="mobile-link">El Doctor</a>
+    <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración"
+      class="mobile-link mobile-cta">Agendar cita</a>
+  </div>
+
+  <section class="trat-section">
+    <div class="trat-inner">
+
+      <!-- HEADER -->
+      <div class="trat-header">
+        <div>
+          <div class="s-eyebrow">Qué podemos hacer por tu sonrisa</div>
+          <h2 class="s-title">Simple. Claro.<br><em>Sin complicaciones.</em></h2>
+          <p class="trat-intro">No necesitas saber nada de odontología para entender tus opciones. Aquí te lo explicamos
+            como a un amigo.</p>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20No%20sé%20qué%20tratamiento%20me%20conviene%2C%20¿me%20orientan?"
+          class="btn-main">
+          ¿Cuál me conviene?
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- TAB NAV -->
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="showTab('resina')"><span class="t-icon"><i
+              class="bi bi-stars"></i></span> Diseño en Resina</button>
+        <button class="tab-btn" onclick="showTab('disilicato')"><span class="t-icon"><i class="bi bi-gem"></i></span>
+          Diseño en Disilicato</button>
+        <button class="tab-btn" onclick="showTab('ortodoncia')"><span class="t-icon"><i
+              class="bi bi-emoji-smile-fill"></i></span> Ortodoncia</button>
+        <button class="tab-btn" onclick="showTab('blanqueamiento')"><span class="t-icon"><i
+              class="bi bi-brightness-high-fill"></i></span> Blanqueamiento</button>
+        <button class="tab-btn" onclick="showTab('rehabilitacion')"><span class="t-icon"><i
+              class="bi bi-tools"></i></span> Rehabilitación Oral</button>
+        <button class="tab-btn" onclick="showTab('limpieza')"><span class="t-icon"><i class="bi bi-wrench"></i></span>
+          Limpieza Profesional</button>
+        <button class="tab-btn" onclick="showTab('general')"><span class="t-icon"><i
+              class="bi bi-clipboard2-pulse"></i></span> Odontología General</button>
+      </div>
+
+      <!-- PANELS -->
+      <div class="panels-wrap">
+
+        <!-- ══ RESINA ══ -->
+        <div class="panel p-featured active" id="tab-resina">
+          <div class="panel-left">
+            <div class="panel-badge badge-star">El más solicitado</div>
+            <div class="panel-name">Diseño de Sonrisa<br>en Resina</div>
+            <p class="panel-tagline">Imagina una "funda" ultrafina que cubre tus dientes y los transforma al instante.
+              Sales con tu sonrisa nueva el mismo día — sin tocar ni desgastar el diente natural.</p>
+            <div class="panel-for"><strong>Ideal si:</strong> quieres cambio rápido, resultado visible de inmediato y
+              opción más accesible</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Resultado el mismo día de la cita
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>No se desgasta ni toca el diente natural
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Corrección de color, forma y espacios entre dientes
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Reversible si algún día quieres cambiar o mejorar
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Simulación digital incluida antes de iniciar
+              </div>
+            </div>
+            <div class="panel-price-row">
+              <div class="panel-price">$1.300.000</div>
+            </div>
+            <div class="panel-price-note">por diente · precio final se confirma en valoración · <em>descontable del
+                tratamiento</em></div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Resina"
+              class="panel-cta cta-filled">
+              <span>Me interesa este tratamiento</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · El Dr. Jorge te explica todo primero</div>
+          </div>
+          <!-- RIGHT: before/after images -->
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="caso1.jpeg"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="imgAntes2.jpeg"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes</span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">1 día</div>
+              <div class="pr-stat-label">resultado visible</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Salí con mi sonrisa nueva el mismo día."</div>
+              <div class="pr-quote-author">Rubén M. · Paciente real</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ DISILICATO ══ -->
+        <div class="panel p-featured" id="tab-disilicato">
+          <div class="panel-left">
+            <div class="panel-badge badge-star">La opción definitiva</div>
+            <div class="panel-name">Diseño de Sonrisa<br>en Disilicato</div>
+            <p class="panel-tagline">Cerámica de altísima calidad que imita exactamente el diente natural — misma
+              transparencia, mismo brillo, misma textura. No se nota que son carillas. Se nota que tienes una sonrisa
+              perfecta.</p>
+            <div class="panel-for"><strong>Ideal si:</strong> quieres el mejor resultado posible, permanente y con
+              acabado premium de larga duración</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>El resultado más natural y premium del mercado
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Resistencia muy superior a la resina
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Translucidez idéntica al diente real — no se nota
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Larga duración con cuidado básico normal
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Simulación digital incluida antes de iniciar
+              </div>
+            </div>
+            <div class="panel-price-row">
+              <div class="panel-price">$5.000.000</div>
+            </div>
+            <div class="panel-price-note">por diente · precio final se confirma en valoración · <em>descontable del
+                tratamiento</em></div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Disilicato"
+              class="panel-cta cta-filled">
+              <span>Me interesa este tratamiento</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · El Dr. Jorge te explica todo primero</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="imgDespues1.JPG"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="imgAntes1.JPG"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes</span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">100%</div>
+              <div class="pr-stat-label">natural a la vista</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Nadie sabe que son carillas. Todo el mundo cree que así nací."</div>
+              <div class="pr-quote-author">Valentina R. · Paciente real</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ ORTODONCIA ══ -->
+        <div class="panel" id="tab-ortodoncia">
+          <div class="panel-left">
+            <div class="panel-badge">Corrección dental</div>
+            <div class="panel-name">Ortodoncia</div>
+            <p class="panel-tagline">Es el tratamiento para alinear los dientes que están torcidos, apiñados o que
+              tienen espacios entre ellos. Corrige la posición de tus dientes poco a poco, de forma cómoda y sin que
+              casi se note.</p>
+            <div class="panel-for"><strong>Ideal si:</strong> tienes dientes torcidos, apiñados, con espacios o mordida
+              irregular</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Dientes alineados de forma gradual y segura
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Opciones tradicionales y estéticas (brackets invisibles)
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Mejora también la mordida y la salud dental a largo plazo
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Control y seguimiento personalizado en cada etapa
+              </div>
+            </div>
+            <div class="panel-noprice"><i class="bi bi-chat-dots"></i> <strong>El costo varía según tu caso.</strong> En
+              la valoración te damos el precio exacto para tu situación específica.</div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20la%20Ortodoncia%2C%20¿me%20pueden%20orientar?"
+              class="panel-cta cta-filled">
+              <span>Preguntar por Ortodoncia</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · Te explicamos todo antes de decidir</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="https://images.unsplash.com/photo-1595409085843-7d66f82ee94c?w=700&q=80&auto=format&fit=crop"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80&auto=format&fit=crop"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes</span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">+500</div>
+              <div class="pr-stat-label">casos transformados</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Fue mucho más fácil de lo que pensaba. Vale la pena."</div>
+              <div class="pr-quote-author">Paciente real · Dentística</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ BLANQUEAMIENTO ══ -->
+        <div class="panel" id="tab-blanqueamiento">
+          <div class="panel-left">
+            <div class="panel-badge">Cambio de color</div>
+            <div class="panel-name">Blanqueamiento<br>Dental</div>
+            <p class="panel-tagline">¿Tus dientes están más oscuros de lo que quisieras? El blanqueamiento los aclara
+              varias tonalidades de forma segura y controlada — sin dañar el esmalte ni causar sensibilidad excesiva.
+            </p>
+            <div class="panel-for"><strong>Ideal si:</strong> tus dientes están oscuros, manchados por café, té,
+              cigarrillo o simplemente por el tiempo</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Dientes varios tonos más claros en poco tiempo
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Procedimiento seguro y controlado por el Dr. Jorge
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Sin dañar el esmalte ni los dientes naturales
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Complemento perfecto antes de un diseño de sonrisa
+              </div>
+            </div>
+            <div class="panel-noprice"><i class="bi bi-chat-dots"></i> <strong>El precio depende del tipo de
+                blanqueamiento.</strong> Te damos opciones según tu caso en la valoración.</div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Blanqueamiento%20Dental"
+              class="panel-cta cta-filled">
+              <span>Preguntar por Blanqueamiento</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · Te explicamos todo antes de decidir</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="IMG_8280.JPG"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="IMG_8301.JPG"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes</span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">+8</div>
+              <div class="pr-stat-label">tonos más claro</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Mis dientes cambiaron muchísimo y no me dolió nada."</div>
+              <div class="pr-quote-author">Paciente real · Dentística</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ REHABILITACION ══ -->
+        <div class="panel" id="tab-rehabilitacion">
+          <div class="panel-left">
+            <div class="panel-badge">Restauración completa</div>
+            <div class="panel-name">Rehabilitación<br>Oral</div>
+            <p class="panel-tagline">Cuando hay varios dientes dañados, perdidos o con problemas al morder, la
+              rehabilitación oral devuelve la función y la estética de toda la boca — no solo un diente, sino todo en
+              conjunto.</p>
+            <div class="panel-for"><strong>Ideal si:</strong> tienes dientes perdidos, muy desgastados, con problemas al
+              morder o masticar</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Recuperas la capacidad de morder y masticar bien
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Tratamiento integral que une salud y estética
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Plan personalizado según cuántos dientes necesitas restaurar
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Resultado final: una boca sana, funcional y bonita
+              </div>
+            </div>
+            <div class="panel-noprice"><i class="bi bi-chat-dots"></i> <strong>Cada caso es diferente.</strong> El Dr.
+              Jorge evalúa tu situación y te presenta un plan claro con costos exactos.</div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20la%20Rehabilitación%20Oral"
+              class="panel-cta cta-filled">
+              <span>Preguntar por Rehabilitación</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · Te explicamos todo antes de decidir</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=700&q=80&auto=format&fit=crop"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=700&q=80&auto=format&fit=crop"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes
+            </span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">100%</div>
+              <div class="pr-stat-label">boca restaurada</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Hacía años que no podía comer bien. Hoy mastico sin ningún problema."</div>
+              <div class="pr-quote-author">Paciente real · Dentística</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ LIMPIEZA ══ -->
+        <div class="panel" id="tab-limpieza">
+          <div class="panel-left">
+            <div class="panel-badge">Mantenimiento esencial</div>
+            <div class="panel-name">Limpieza<br>Profesional</div>
+            <p class="panel-tagline">La limpieza profunda que no se puede hacer en casa. Eliminamos el sarro y la placa
+              acumulada que el cepillo normal no alcanza — dejando tus dientes limpios, sanos y con sensación de nuevo.
+            </p>
+            <div class="panel-for"><strong>Ideal si:</strong> no te has hecho limpieza en más de 6 meses, sientes los
+              dientes con sarro o quieres mantener tu salud bucal</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Eliminación total de sarro y placa bacteriana
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Previene caries, encías enfermas y mal aliento
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Incluida en el Diagnóstico Integral ($130.000)
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Recomendada cada 6 meses para mantenimiento
+              </div>
+            </div>
+            <div class="panel-noprice"><i class="bi bi-chat-dots"></i> <strong>Incluida gratis</strong> en el
+              Diagnóstico Integral. También disponible como servicio individual.</div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20la%20Limpieza%20Profesional"
+              class="panel-cta cta-filled">
+              <span>Preguntar por Limpieza</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · También incluida en la valoración integral</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=700&q=80&auto=format&fit=crop"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=700&q=80&auto=format&fit=crop"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes</span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">30</div>
+              <div class="pr-stat-label">minutos y listo</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"Sentí mis dientes completamente nuevos."</div>
+              <div class="pr-quote-author">Paciente real · Dentística</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ GENERAL ══ -->
+        <div class="panel" id="tab-general">
+          <div class="panel-left">
+            <div class="panel-badge">Salud bucal completa</div>
+            <div class="panel-name">Odontología<br>General</div>
+            <p class="panel-tagline">Caries, diente roto, muela del juicio, dolor de muela, revisión de rutina — todo lo
+              que necesita tu boca en el día a día lo manejamos aquí, con la misma atención personalizada de siempre.
+            </p>
+            <div class="panel-for"><strong>Ideal si:</strong> tienes dolor, caries, necesitas una revisión o simplemente
+              quieres saber cómo está tu salud bucal</div>
+            <div class="panel-bullets">
+              <div class="pb">
+                <div class="pb-check">✓</div>Revisión y diagnóstico completo de tu boca
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Tratamiento de caries, restauraciones y resinas
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>Extracciones y manejo de muelas del juicio
+              </div>
+              <div class="pb">
+                <div class="pb-check">✓</div>El mismo trato cercano y sin tecnicismos
+              </div>
+            </div>
+            <div class="panel-noprice"><i class="bi bi-chat-dots"></i> <strong>El costo depende del
+                tratamiento.</strong> Siempre te decimos el precio exacto antes de hacer cualquier cosa.</div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Necesito%20atención%20de%20Odontología%20General"
+              class="panel-cta cta-filled">
+              <span>Agendar cita general</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="panel-no-pressure">Sin compromiso · Te decimos el costo antes de empezar</div>
+          </div>
+          <div class="panel-right" onclick="this.classList.toggle('show-after')">
+            <img class="pr-img pr-img-before"
+              src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=700&q=80&auto=format&fit=crop"
+              alt="Antes" />
+            <img class="pr-img pr-img-after"
+              src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=700&q=80&auto=format&fit=crop"
+              alt="Después" />
+            <div class="pr-fade"></div>
+            <span class="pr-lbl pr-lbl-b">Después</span>
+            <span class="pr-lbl pr-lbl-a">Antes
+            </span>
+            <span class="pr-hint">Toca para cambiar →</span>
+            <div class="pr-stat">
+              <div class="pr-stat-num">10+</div>
+              <div class="pr-stat-label">años de experiencia</div>
+            </div>
+            <div class="pr-quote">
+              <div class="pr-quote-text">"El Dr. Jorge me hizo sentir completamente tranquilo desde el principio."</div>
+              <div class="pr-quote-author">Paciente real · Dentística</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /panels-wrap -->
+
+      <!-- BOTTOM BAND -->
+      <div class="trat-band">
+        <div>
+          <div class="trat-band-title">¿No sabes cuál es <em>tu opción</em>?</div>
+          <div class="trat-band-sub">Envíanos una foto y el Dr. Jorge te dice qué tratamiento tiene más sentido para tu
+            caso — sin costo y sin compromiso.</div>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20No%20sé%20qué%20tratamiento%20me%20conviene.%20¿Me%20pueden%20orientar?"
+          class="btn-main">
+          Enviar foto — es gratis
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
+    <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
+  </footer>
+
+  <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística"
+    target="_blank">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <script>
+    // ── TAB SYSTEM ──────────────────────────────
+    function showTab(id) {
+      // Reset all before/after states when switching tabs
+      document.querySelectorAll('.panel-right').forEach(function (r) {
+        r.classList.remove('show-after');
+      });
+      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      document.getElementById('tab-' + id).classList.add('active');
+      document.querySelectorAll('.tab-btn').forEach(function (b) {
+        if (b.getAttribute('onclick') === "showTab('" + id + "')") b.classList.add('active');
+      });
+    }
+
+    // ── HAMBURGER ───────────────────────────────
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('show') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = menu.classList.toggle('show');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      });
+      menu.querySelectorAll('.mobile-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
