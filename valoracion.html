@@ -1,893 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valoraciones · Dentística</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box }
-        html { font-size: 16px; scroll-behavior: smooth }
-
-        :root {
-            --uva: #110820;
-            --uva-deep: #0A0514;
-            --uva-mid: #1E1038;
-            --uva-light: #2A1650;
-            --metal: #A8B4BE;
-            --metal-l: #C8D4DC;
-            --metal-d: #6B7D8A;
-            --lila: #B8A9C9;
-            --lila-b: #CFC3DF;
-            --lila-d: #9B8AB5;
-            --lila-dim: rgba(184, 169, 201, 0.10);
-            --lila-glow: rgba(184, 169, 201, 0.18);
-            --surface: #160C2A;
-            --surface2: #1C1035;
-            --txt: #EDF0F3;
-            --txt-m: #7E8FA0;
-            --urgency: #E07070;
-            --urgency-dim: rgba(224, 112, 112, 0.09);
-            --white: #FAFBFC;
-        }
-
-        body {
-            font-family: 'Jost', sans-serif;
-            background: var(--uva);
-            color: var(--txt);
-            overflow-x: hidden;
-        }
-
-        /* ── ANNOUNCEMENT ── */
-        .ann {
-            background: var(--uva-deep);
-            color: var(--lila);
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            z-index: 201;
-            border-bottom: 1px solid rgba(184,169,201,.1);
-        }
-        .ann-track {
-            display: flex;
-            gap: 28px;
-            white-space: nowrap;
-            animation: ann-scroll 20s linear infinite;
-            padding-left: 6%;
-            align-items: center;
-            will-change: transform;
-        }
-        .ann-item {
-            display: inline-flex;
-            gap: 10px;
-            align-items: center;
-            font-size: .88rem;
-            font-weight: 300;
-            letter-spacing: .03em;
-            color: var(--lila);
-        }
-        .ann-item .bi { font-size: 1.05rem; flex-shrink: 0; }
-        @keyframes ann-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-40%); } }
-        .ann:hover .ann-track { animation-play-state: paused; }
-        @media(max-width:640px) {
-            .ann { height: 56px; }
-            .ann-track { animation-duration: 28s; padding-left: 14px; }
-            .ann-item { font-size: .82rem; gap: 8px; }
-        }
-
-        /* ── NAV ── */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            padding: 0 6%;
-            width: 100%;
-            height: 68px;
-            background: rgba(10,5,20,.93);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(184,169,201,.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: 'Marcellus', serif;
-            font-size: 1.25rem;
-            letter-spacing: .14em;
-            color: var(--white);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        .logo b { color: var(--lila); font-weight: 400 }
-        .nav-r { display: flex; align-items: center; gap: 18px }
-        .nav-link { color: var(--metal); text-decoration: none; font-size: .78rem; transition: color .2s }
-        .nav-link:hover { color: var(--lila) }
-        .nav-cta {
-            background: var(--lila);
-            color: var(--uva-deep);
-            padding: 10px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: .82rem;
-            font-weight: 600;
-            transition: all .3s;
-        }
-        .nav-cta:hover { background: var(--lila-b) }
-
-        /* ── HAMBURGER ── */
-        .nav-toggle {
-            display: none;
-            width: 44px;
-            height: 38px;
-            background: transparent;
-            border: 1px solid rgba(184,169,201,0.15);
-            border-radius: 10px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--metal-l);
-            flex-shrink: 0;
-        }
-        .nav-toggle .bar {
-            width: 20px;
-            height: 2px;
-            background: currentColor;
-            display: block;
-            position: relative;
-        }
-        .nav-toggle .bar::before,
-        .nav-toggle .bar::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 20px;
-            height: 2px;
-            background: currentColor;
-            transition: transform .22s;
-        }
-        .nav-toggle .bar::before { top: -6px; }
-        .nav-toggle .bar::after  { top:  6px; }
-
-        /* ── MOBILE MENU ── */
-        .mobile-menu {
-            position: fixed;
-            right: 16px;
-            top: 110px;
-            background: rgba(10,5,20,0.97);
-            border: 1px solid rgba(184,169,201,0.12);
-            border-radius: 14px;
-            padding: 10px;
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 1200;
-            min-width: 210px;
-            box-shadow: 0 12px 48px rgba(0,0,0,0.7);
-        }
-        .mobile-menu.show { display: flex; }
-        .mobile-menu .mobile-link {
-            color: var(--metal-l);
-            text-decoration: none;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: .85rem;
-            transition: background .18s, color .18s;
-        }
-        .mobile-menu .mobile-link:hover { background: rgba(184,169,201,0.07); color: var(--lila); }
-        .mobile-menu .mobile-cta {
-            background: var(--lila);
-            color: var(--uva-deep);
-            font-weight: 700;
-            text-align: center;
-            margin-top: 4px;
-        }
-        .mobile-menu .mobile-cta:hover { background: var(--lila-b); }
-
-        @media(max-width:768px) {
-            .nav-toggle { display: inline-flex; }
-            .nav-r      { display: none; }
-        }
-
-        /* ── PAGE CONTENT WRAPPER ── */
-        .page-body {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 60px 6% 80px;
-        }
-
-        /* ─── SECTION WRAPPER ── */
-        .val-section {
-            width: 100%;
-            max-width: 1080px;
-            position: relative;
-        }
-
-        /* ─── HEADER ── */
-        .val-header {
-            text-align: center;
-            margin-bottom: 52px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .val-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--lila);
-            margin-bottom: 16px;
-        }
-        .val-eyebrow::before,
-        .val-eyebrow::after { content: ''; width: 24px; height: 1px; background: var(--lila); }
-
-        .val-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--white);
-            margin-bottom: 12px;
-        }
-        .val-title em { font-style: italic; color: var(--lila) }
-
-        .val-subtitle {
-            font-size: 0.9rem;
-            color: var(--metal);
-            font-weight: 300;
-            line-height: 1.7;
-            max-width: 480px;
-            margin: 0 auto 20px;
-        }
-
-        .descuento-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184,169,201,0.22);
-            border-radius: 100px;
-            padding: 8px 18px;
-            font-size: 0.72rem;
-            color: var(--lila);
-            font-weight: 500;
-        }
-        .descuento-badge span {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--lila);
-            flex-shrink: 0;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%,100% { opacity: 1; transform: scale(1) }
-            50%      { opacity: .5; transform: scale(.8) }
-        }
-
-        /* ─── CUPOS STRIP ── */
-        .cupos-strip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--urgency-dim);
-            border: 1px solid rgba(224,112,112,0.18);
-            border-radius: 10px;
-            padding: 11px 20px;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-            max-width: 520px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .cs-dot {
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: var(--urgency);
-            flex-shrink: 0;
-            animation: blink 1.4s infinite;
-        }
-        @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
-        .cs-text { font-size: 0.78rem; color: var(--metal-l); font-weight: 400 }
-        .cs-text strong { color: var(--urgency); font-weight: 600 }
-        .cs-timer {
-            font-family: 'DM Serif Display', serif;
-            font-size: 0.95rem;
-            color: var(--urgency);
-            font-style: italic;
-            margin-left: auto;
-        }
-
-        /* ─── GRID ── */
-        .val-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.08fr;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-        @media(max-width:720px) { .val-grid { grid-template-columns: 1fr } }
-
-        /* ─── CARD BASE ── */
-        .val-card {
-            border-radius: 20px;
-            padding: 36px 36px 32px;
-            position: relative;
-            overflow: hidden;
-            transition: transform .3s ease, box-shadow .3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .val-card:hover { transform: translateY(-5px) }
-
-        /* Card estética */
-        .card-estetica {
-            background: var(--surface);
-            border: 1px solid rgba(184,169,201,0.1);
-        }
-        .card-estetica:hover { border-color: rgba(184,169,201,0.22); box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
-        .card-estetica::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184,169,201,0.2), transparent);
-        }
-
-        /* Card integral */
-        .card-integral {
-            background: linear-gradient(160deg, var(--surface2) 0%, #231245 100%);
-            border: 1px solid rgba(184,169,201,0.28);
-            box-shadow: 0 0 0 1px rgba(184,169,201,0.06), 0 24px 64px rgba(0,0,0,0.5);
-        }
-        .card-integral:hover { border-color: rgba(184,169,201,0.45); box-shadow: 0 0 0 1px rgba(184,169,201,0.1), 0 28px 80px rgba(0,0,0,0.6); }
-        .card-integral::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--lila), transparent);
-        }
-        .card-integral::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(184,169,201,0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(184,169,201,0.025) 1px, transparent 1px);
-            background-size: 32px 32px;
-            pointer-events: none;
-        }
-
-        /* Popular ribbon */
-        .popular-ribbon {
-            position: absolute;
-            top: 20px; right: -1px;
-            background: var(--lila);
-            color: var(--uva-deep);
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 5px 14px 5px 12px;
-            border-radius: 4px 0 0 4px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            z-index: 2;
-        }
-        .popular-ribbon::after {
-            content: '';
-            position: absolute;
-            right: 0; bottom: -5px;
-            border-left: 5px solid var(--lila-d);
-            border-bottom: 5px solid transparent;
-        }
-
-        /* Card inner */
-        .card-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            padding: 5px 12px;
-            border-radius: 100px;
-            margin-bottom: 20px;
-            width: fit-content;
-            position: relative;
-            z-index: 1;
-        }
-        .tag-entry   { background: rgba(168,180,190,0.08); color: var(--metal);   border: 1px solid rgba(168,180,190,0.14); }
-        .tag-premium { background: rgba(184,169,201,0.15); color: var(--lila-b);  border: 1px solid rgba(184,169,201,0.3); }
-
-        .card-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.7rem;
-            font-weight: 400;
-            color: var(--white);
-            margin-bottom: 8px;
-            line-height: 1.1;
-            position: relative;
-            z-index: 1;
-        }
-        .card-tagline {
-            font-size: 0.82rem;
-            color: var(--metal-d);
-            font-weight: 300;
-            line-height: 1.65;
-            margin-bottom: 28px;
-            position: relative;
-            z-index: 1;
-        }
-        .card-integral .card-tagline { color: var(--metal) }
-
-        /* Feature list */
-        .card-features {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 28px;
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-        .feat {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.82rem;
-            color: var(--txt);
-            font-weight: 300;
-            line-height: 1.4;
-        }
-        .feat-check {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 1px;
-            font-size: 0.55rem;
-        }
-        .check-entry   { background: rgba(168,180,190,0.08); border: 1px solid rgba(168,180,190,0.18); color: var(--metal); }
-        .check-premium { background: rgba(184,169,201,0.15); border: 1px solid rgba(184,169,201,0.3);  color: var(--lila-b); }
-        .feat.highlight .feat-text  { color: var(--lila-b); font-weight: 400 }
-        .feat.highlight .feat-check { background: rgba(184,169,201,0.2); border-color: rgba(184,169,201,0.45); color: var(--lila); }
-
-        /* Divider */
-        .card-divider {
-            height: 1px;
-            background: rgba(184,169,201,0.07);
-            margin-bottom: 22px;
-            position: relative;
-            z-index: 1;
-        }
-        .card-integral .card-divider { background: rgba(184,169,201,0.12) }
-
-        /* Price */
-        .price-block {
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .price-num {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.6rem;
-            font-weight: 400;
-            color: var(--lila);
-            line-height: 1;
-        }
-        .card-integral .price-num { color: var(--lila-b) }
-        .price-currency { font-size: 0.75rem; color: var(--metal-d); font-weight: 300; margin-bottom: 6px; }
-        .price-note {
-            font-size: 0.7rem;
-            color: var(--metal-d);
-            font-weight: 300;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            position: relative;
-            z-index: 1;
-        }
-        .price-note em { color: var(--lila); font-style: normal; font-weight: 500; }
-
-        /* CTA */
-        .card-cta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.025em;
-            transition: all .3s;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .card-cta::after { content: ''; position: absolute; inset: 0; background: white; opacity: 0; transition: opacity .3s }
-        .card-cta:hover::after { opacity: 0.06 }
-
-        .cta-ghost { border: 1px solid rgba(184,169,201,0.2); color: var(--metal-l); background: transparent; }
-        .cta-ghost:hover { border-color: rgba(184,169,201,0.4); color: var(--lila-b); transform: translateY(-1px) }
-        .cta-ghost::after { background: var(--lila) }
-
-        .cta-filled { background: var(--lila); color: var(--uva-deep); border: none; }
-        .cta-filled:hover { background: var(--lila-b); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184,169,201,0.3) }
-
-        .cta-icon {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform .3s;
-            position: relative;
-            z-index: 1;
-        }
-        .card-cta:hover .cta-icon { transform: translateX(3px) }
-        .icon-ghost  { background: rgba(184,169,201,0.1) }
-        .icon-filled { background: rgba(17,8,32,0.2) }
-
-        .cta-no-pressure {
-            text-align: center;
-            font-size: 0.67rem;
-            color: var(--metal-d);
-            margin-top: 10px;
-            font-weight: 300;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* OR divider */
-        .or-divider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
-        @media(max-width:720px) { .or-divider { display: none } }
-        .or-circle {
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            background: var(--uva-mid);
-            border: 1px solid rgba(184,169,201,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
-            color: var(--metal-d);
-            font-weight: 600;
-            letter-spacing: .05em;
-            text-transform: uppercase;
-        }
-
-        /* Footnote */
-        .val-footnote {
-            margin-top: 28px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184,169,201,0.12);
-            border-radius: 12px;
-            padding: 16px 20px;
-            position: relative;
-            z-index: 1;
-        }
-        .fn-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px }
-        .fn-text { font-size: 0.75rem; color: var(--metal); font-weight: 300; line-height: 1.65 }
-        .fn-text strong { color: var(--lila); font-weight: 500 }
-
-        /* Trust row */
-        .trust-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 24px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-        .trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--metal-d); font-weight: 300; }
-        .trust-item span { color: var(--lila); font-size: 0.75rem }
-        .trust-div { width: 1px; height: 14px; background: rgba(184,169,201,0.1) }
-        @media(max-width:500px) { .trust-div { display: none } }
-
-        /* Footer */
-        footer {
-            background: var(--uva-deep);
-            border-top: 1px solid rgba(184,169,201,.08);
-            padding: 28px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: .72rem;
-            color: var(--metal-d);
-            flex-wrap: wrap;
-            gap: 10px;
-            width: 100%;
-        }
-        footer a { color: var(--lila); text-decoration: none }
-
-        /* WhatsApp */
-        .wa {
-            position: fixed; bottom: 28px; right: 28px;
-            width: 58px; height: 58px;
-            background: #25D366; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 24px rgba(37,211,102,.5);
-            z-index: 99; text-decoration: none; transition: all .3s;
-            animation: wap 3s infinite;
-        }
-        .wa:hover { transform: scale(1.1) }
-        @keyframes wap { 0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,.5) } 50% { box-shadow: 0 4px 40px rgba(37,211,102,.8) } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valoraciones · Dentística</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-    <!-- ANNOUNCEMENT -->
-    <div class="ann" role="region" aria-label="Anuncios importantes">
-        <div class="ann-track">
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-            <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
-            <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-            <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
-            <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-        </div>
+  <!-- ANNOUNCEMENT -->
+  <div class="ann" role="region" aria-label="Anuncios">
+    <div class="ann-track">
+      <div class="ann-item"><i class="ti ti-award"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="ti ti-id-badge"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="ti ti-eye"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="ti ti-award"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="ti ti-id-badge"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="ti ti-eye"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="ti ti-award"></i> +500 sonrisas transformadas en Barranquilla</div>
     </div>
+  </div>
 
-    <!-- NAV -->
-    <nav>
-        <a class="logo" href="index.html">DENTÍSTI<b>CA</b></a>
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Abrir menú">
-            <span class="bar"></span>
-        </button>
-        <div class="nav-r">
-            <a class="nav-link" href="index.html">Inicio</a>
-            <a class="nav-link" href="valoracion.html">Valoraciones</a>
-            <a class="nav-link" href="tratamientos.html">Tratamientos</a>
-            <a class="nav-link" href="doctor.html">El Doctor</a>
-            <a class="nav-cta" href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración">Agendar cita</a>
-        </div>
-    </nav>
-
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="index.html" class="mobile-link">Inicio</a>
-        <a href="valoracion.html" class="mobile-link">Valoraciones</a>
-        <a href="tratamientos.html" class="mobile-link">Tratamientos</a>
-        <a href="doctor.html" class="mobile-link">El Doctor</a>
-        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="mobile-link mobile-cta">Agendar cita</a>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="logoDentisticaCompleto.webp" alt="Dentística" class="logo-img">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="valoracion.html" class="nav-link">Valoraciones</a>
+        <a href="tratamientos.html" class="nav-link">Tratamientos</a>
+        <a href="doctor.html" class="nav-link">El Doctor</a>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="nav-cta">Agendar cita</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- PAGE CONTENT -->
-    <div class="page-body">
+  <!-- CONTENT -->
+  <div class="page-body">
     <div class="val-section">
 
-        <!-- HEADER -->
-        <div class="val-header">
-            <div class="val-eyebrow">Tu punto de partida</div>
-            <h2 class="val-title">Dos experiencias.<br><em>Un mismo objetivo.</em></h2>
-            <p class="val-subtitle">El Dr. Jorge te acompaña personalmente en cualquiera. Sin pago previo para agendar — solo confirma por WhatsApp.</p>
-            <div class="descuento-badge">
-                <span></span>
-                El valor se descuenta del tratamiento si inicias en 7 días
+      <div class="val-header">
+        <div class="val-eyebrow">Tu punto de partida</div>
+        <h2 class="val-title">Dos experiencias.<br><em>Un mismo objetivo.</em></h2>
+        <p class="val-subtitle">El Dr. Jorge te acompaña personalmente en cualquiera. Sin pago previo — solo confirma por WhatsApp.</p>
+        <div class="descuento-badge">
+          <span></span>
+          El valor se descuenta del tratamiento si inicias en 7 días
+        </div>
+      </div>
+
+      <div class="val-grid">
+
+        <!-- ESTÉTICA -->
+        <div class="val-card card-estetica">
+          <div class="card-tag tag-entry">Entrada</div>
+          <div class="card-name">Valoración Estética</div>
+          <div class="card-tagline">Revisión clínica y simulación digital de tu sonrisa ideal. Sales viendo exactamente cómo puede quedar tu resultado.</div>
+          <div class="card-features">
+            <div class="feat"><div class="feat-check check-entry"><i class="ti ti-check"></i></div><span class="feat-text">Revisión clínica con el Dr. Jorge</span></div>
+            <div class="feat"><div class="feat-check check-entry"><i class="ti ti-check"></i></div><span class="feat-text">Simulación digital de tu sonrisa ideal</span></div>
+            <div class="feat"><div class="feat-check check-entry"><i class="ti ti-check"></i></div><span class="feat-text">Plan de tratamiento personalizado</span></div>
+            <div class="feat"><div class="feat-check check-entry"><i class="ti ti-check"></i></div><span class="feat-text">Diagnóstico visual al 70% de información</span></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="price-block">
+            <div class="price-num">$30.000</div>
+            <div class="price-currency">COP</div>
+          </div>
+          <div class="price-note">Descontable del tratamiento · <em>7 días para activarlo</em></div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Valoración%20Estética%20de%2030.000" class="card-cta cta-ghost">
+            <span>Agendar Valoración Estética</span>
+            <div class="cta-icon icon-ghost">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
+          </a>
+          <div class="cta-no-pressure">Sin pago previo · Sin compromiso</div>
         </div>
 
-        <!-- CARDS -->
-        <div class="val-grid" style="position:relative">
-
-            <!-- CARD ESTÉTICA -->
-            <div class="val-card card-estetica">
-                <div class="card-tag tag-entry">Punto de entrada</div>
-                <div class="card-name">Valoración Estética</div>
-                <div class="card-tagline">Revisión clínica y simulación digital de tu sonrisa ideal. Sales viendo exactamente cómo puede quedar tu resultado.</div>
-                <div class="card-features">
-                    <div class="feat">
-                        <div class="feat-check check-entry">✓</div>
-                        <span class="feat-text">Revisión clínica personalizada con el Dr. Jorge</span>
-                    </div>
-                    <div class="feat">
-                        <div class="feat-check check-entry">✓</div>
-                        <span class="feat-text">Simulación digital de tu sonrisa ideal</span>
-                    </div>
-                    <div class="feat">
-                        <div class="feat-check check-entry">✓</div>
-                        <span class="feat-text">Plan de tratamiento con opciones y costos</span>
-                    </div>
-                    <div class="feat">
-                        <div class="feat-check check-entry">✓</div>
-                        <span class="feat-text">Diagnóstico visual al 70% de información</span>
-                    </div>
-                </div>
-                <div class="card-divider"></div>
-                <div class="price-block">
-                    <div class="price-num">$30.000</div>
-                    <div class="price-currency">COP</div>
-                </div>
-                <div class="price-note">Descontable del tratamiento · <em>7 días para activarlo</em></div>
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Valoración%20Estética%20de%2030.000" class="card-cta cta-ghost">
-                    <span>Agendar Valoración Estética</span>
-                    <div class="cta-icon icon-ghost">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </div>
-                </a>
-                <div class="cta-no-pressure">Sin pago previo · Sin compromiso</div>
+        <!-- INTEGRAL -->
+        <div class="val-card card-integral">
+          <div class="popular-ribbon"><i class="ti ti-star-filled"></i> Más elegida</div>
+          <div class="card-tag tag-premium">Completa</div>
+          <div class="card-name">Diagnóstico Integral</div>
+          <div class="card-tagline">Sales con diagnóstico al 100%, limpieza y radiografía incluidas. Plan de tratamiento listo para iniciar cuando quieras.</div>
+          <div class="card-features">
+            <div class="feat"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Revisión clínica con el Dr. Jorge</span></div>
+            <div class="feat"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Simulación digital de tu sonrisa ideal</span></div>
+            <div class="feat highlight"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Limpieza profesional incluida</span></div>
+            <div class="feat highlight"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Radiografía panorámica incluida</span></div>
+            <div class="feat highlight"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Diagnóstico completo al <strong>100%</strong></span></div>
+            <div class="feat highlight"><div class="feat-check check-premium"><i class="ti ti-check"></i></div><span class="feat-text">Plan de tratamiento <strong>listo para iniciar</strong></span></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="price-block">
+            <div class="price-num">$130.000</div>
+            <div class="price-currency">COP</div>
+          </div>
+          <div class="price-note">Descontable del tratamiento · <em>7 días para activarlo</em></div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20el%20Diagnóstico%20Integral%20de%20130.000" class="card-cta cta-filled">
+            <span>Agendar Diagnóstico Integral</span>
+            <div class="cta-icon icon-filled">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
-
-            <!-- CARD INTEGRAL -->
-            <div class="val-card card-integral">
-                <div class="popular-ribbon"><i class="bi bi-star-fill"></i> Más elegida</div>
-                <div class="card-tag tag-premium">Experiencia completa</div>
-                <div class="card-name">Diagnóstico Integral</div>
-                <div class="card-tagline">Sales con diagnóstico al 100%, limpieza y radiografía incluidas. Plan de tratamiento listo para iniciar cuando quieras.</div>
-                <div class="card-features">
-                    <div class="feat">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Revisión clínica personalizada con el Dr. Jorge</span>
-                    </div>
-                    <div class="feat">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Simulación digital de tu sonrisa ideal</span>
-                    </div>
-                    <div class="feat highlight">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Limpieza profesional incluida</span>
-                    </div>
-                    <div class="feat highlight">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Radiografía panorámica incluida</span>
-                    </div>
-                    <div class="feat highlight">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Diagnóstico completo al <strong>100%</strong> de información</span>
-                    </div>
-                    <div class="feat highlight">
-                        <div class="feat-check check-premium">✓</div>
-                        <span class="feat-text">Plan de tratamiento <strong>listo para iniciar</strong></span>
-                    </div>
-                </div>
-                <div class="card-divider"></div>
-                <div class="price-block">
-                    <div class="price-num">$130.000</div>
-                    <div class="price-currency">COP</div>
-                </div>
-                <div class="price-note">Descontable del tratamiento · <em>7 días para activarlo</em></div>
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20el%20Diagnóstico%20Integral%20de%20130.000" class="card-cta cta-filled">
-                    <span>Agendar Diagnóstico Integral</span>
-                    <div class="cta-icon icon-filled">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </div>
-                </a>
-                <div class="cta-no-pressure" style="color:var(--metal-d)">Sin pago previo · Confirma por WhatsApp</div>
-            </div>
-
+          </a>
+          <div class="cta-no-pressure" style="color:var(--metal-d)">Sin pago previo · Confirma por WhatsApp</div>
         </div>
 
-        <!-- FOOTNOTE -->
-        <div class="val-footnote">
-            <div class="fn-icon"><i class="bi bi-lightbulb"></i></div>
-            <div class="fn-text">
-                <strong>¿No sabes cuál elegir?</strong> Empieza enviando una foto de tu sonrisa por WhatsApp —
-                completamente gratis. El Dr. Jorge te orienta y te dice cuál valoración tiene más sentido para tu caso
-                específico antes de que decidas cualquier cosa.
-                &nbsp;<a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20gratis"
-                    style="color:var(--lila);font-weight:500;text-decoration:none;">Enviar foto ahora →</a>
-            </div>
-        </div>
+      </div>
 
-        <!-- TRUST ROW -->
-        <div class="trust-row">
-            <div class="trust-item"><span>✓</span> Sin pago previo para agendar</div>
-            <div class="trust-div"></div>
-            <div class="trust-item"><span>✓</span> Sin compromiso de ningún tipo</div>
-            <div class="trust-div"></div>
-            <div class="trust-item"><span>✓</span> Respuesta en minutos</div>
-            <div class="trust-div"></div>
-            <div class="trust-item"><span>✓</span> Simulación digital incluida</div>
+      <div class="val-footnote">
+        <div class="fn-icon"><i class="ti ti-lightbulb"></i></div>
+        <div class="fn-text">
+          <strong>¿No sabes cuál elegir?</strong> Envía una foto de tu sonrisa por WhatsApp — completamente gratis. El Dr. Jorge te orienta antes de que decidas.
+          &nbsp;<a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20gratis" style="color:var(--lila);font-weight:500;">Enviar foto ahora →</a>
         </div>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-item"><i class="ti ti-check"></i> Sin pago previo</div>
+        <div class="trust-div"></div>
+        <div class="trust-item"><i class="ti ti-check"></i> Sin compromiso</div>
+        <div class="trust-div"></div>
+        <div class="trust-item"><i class="ti ti-check"></i> Respuesta en minutos</div>
+      </div>
 
     </div>
-    </div>
+  </div>
 
-    <footer>
-        <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
-        <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
-    </footer>
+  <footer>
+    <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
+    <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
+  </footer>
 
-    <!-- WhatsApp -->
-    <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística" target="_blank">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-    </a>
+  <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística" target="_blank" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
-    <script>
-        // ── HAMBURGER MENU ────────────────────────
-        (function() {
-            var toggle = document.getElementById('navToggle');
-            var menu   = document.getElementById('mobileMenu');
-            if (!toggle || !menu) return;
-
-            document.addEventListener('click', function(e) {
-                if (menu.classList.contains('show') &&
-                    !menu.contains(e.target) &&
-                    !toggle.contains(e.target)) {
-                    menu.classList.remove('show');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    menu.setAttribute('aria-hidden', 'true');
-                }
-            });
-
-            toggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                var isOpen = menu.classList.toggle('show');
-                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-                menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-            });
-
-            menu.querySelectorAll('.mobile-link').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    menu.classList.remove('show');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    menu.setAttribute('aria-hidden', 'true');
-                });
-            });
-        })();
-
-        // ── COUNTDOWN ────────────────────────────
-        (function() {
-            var now    = new Date();
-            var target = new Date(now);
-            target.setHours(23, 59, 59, 0);
-            function update() {
-                var diff = target - new Date();
-                if (diff <= 0) return;
-                var h = Math.floor(diff / 3600000);
-                var m = Math.floor((diff % 3600000) / 60000);
-                var s = Math.floor((diff % 60000) / 1000);
-                var f = function(n) { return String(n).padStart(2, '0'); };
-                var el = document.getElementById('cs-timer');
-                if (el) el.textContent = f(h) + ':' + f(m) + ':' + f(s);
-            }
-            update();
-            setInterval(update, 1000);
-        })();
-    </script>
+  <script src="app.js"></script>
 </body>
 </html>

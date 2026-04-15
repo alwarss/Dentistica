@@ -1,3266 +1,585 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dentística · Diseño de Sonrisa Premium | Barranquilla</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-
-        :root {
-            --uva: #110820;
-            --uva-deep: #0A0514;
-            --uva-mid: #1E1038;
-            --uva-light: #2A1650;
-            --metal: #A8B4BE;
-            --metal-l: #C8D4DC;
-            --metal-d: #6B7D8A;
-            --lila: #B8A9C9;
-            --lila-b: #C9BCDA;
-            --lila-d: #9B8AB5;
-            --lila-dim: rgba(184, 169, 201, 0.12);
-            --white: #FAFBFC;
-            --surface: #160C2A;
-            --surface2: #1C1035;
-            --txt: #EDF0F3;
-            --txt-m: #7E8FA0;
-            --urgency: #E07070;
-            --urgency-dim: rgba(224, 112, 112, 0.1);
-        }
-
-        body {
-            font-family: 'Jost', sans-serif;
-            background: var(--uva);
-            color: var(--txt);
-            overflow-x: hidden;
-            line-height: 1
-        }
-
-        /* ── ANNOUNCEMENT ── */
-        .ann {
-            background: var(--uva-deep);
-            overflow: hidden;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(184, 169, 201, .1)
-        }
-
-        .ann-track {
-            display: flex;
-            gap: 28px;
-            white-space: nowrap;
-            animation: ann-scroll 22s linear infinite;
-            padding-left: 6%;
-            align-items: center
-        }
-
-        .ann-item {
-            display: inline-flex;
-            gap: 10px;
-            align-items: center;
-            font-size: .88rem;
-            font-weight: 300;
-            color: var(--lila)
-        }
-
-        .ann-item .bi {
-            font-size: 1rem;
-            color: var(--lila);
-            flex-shrink: 0
-        }
-
-        @keyframes ann-scroll {
-            0% {
-                transform: translateX(0)
-            }
-
-            100% {
-                transform: translateX(-40%)
-            }
-        }
-
-        .ann:hover .ann-track {
-            animation-play-state: paused
-        }
-
-        @media(max-width:640px) {
-            .ann {
-                height: 50px
-            }
-
-            .ann-track {
-                animation-duration: 30s;
-                padding-left: 14px
-            }
-
-            .ann-item {
-                font-size: .8rem
-            }
-        }
-
-        /* ── ACTIVITY BAR ── */
-        .activity-bar {
-            background: var(--surface2);
-            border-bottom: 1px solid rgba(184, 169, 201, .08);
-            padding: 0 6%;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px
-        }
-
-        .ab-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 0;
-            flex: 1
-        }
-
-        .ab-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--lila-d), var(--lila));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: .75rem;
-            flex-shrink: 0
-        }
-
-        .ab-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #4ADE80;
-            flex-shrink: 0;
-            box-shadow: 0 0 6px rgba(74, 222, 128, .5);
-            animation: pulse 2s infinite
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .3
-            }
-        }
-
-        .ab-label {
-            font-size: .72rem;
-            color: var(--metal-l);
-            font-weight: 300;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis
-        }
-
-        .ab-label b {
-            color: var(--lila);
-            font-weight: 600
-        }
-
-        .ab-time {
-            font-size: .65rem;
-            color: var(--metal-d);
-            white-space: nowrap;
-            flex-shrink: 0
-        }
-
-        .ab-cta {
-            background: var(--lila);
-            color: var(--uva-deep);
-            font-size: .68rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: background .2s
-        }
-
-        .ab-cta:hover {
-            background: var(--lila-b)
-        }
-
-        @media(max-width:480px) {
-            .activity-bar {
-                padding: 0 14px
-            }
-
-            .ab-time {
-                display: none
-            }
-        }
-
-        /* ── NAV ── */
-        .nav-wrapper {
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            background: rgba(10, 5, 20, .95);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(184, 169, 201, .1)
-        }
-
-        nav {
-            padding: 0 6%;
-            height: 68px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center
-        }
-
-        .logo {
-            font-family: 'Marcellus', serif;
-            font-size: 1.45rem;
-            letter-spacing: .18em;
-            color: var(--white);
-            text-decoration: none;
-            text-transform: uppercase
-        }
-
-        .logo b {
-            color: var(--lila);
-            font-weight: 400
-        }
-
-        .nav-r {
-            display: flex;
-            align-items: center;
-            gap: 24px
-        }
-
-        .nav-link {
-            color: var(--metal);
-            text-decoration: none;
-            font-size: .78rem;
-            letter-spacing: .06em;
-            transition: color .2s
-        }
-
-        .nav-link:hover {
-            color: var(--lila)
-        }
-
-        .nav-cta {
-            background: var(--lila);
-            color: var(--uva-deep);
-            padding: 10px 22px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: .78rem;
-            font-weight: 600;
-            transition: all .3s
-        }
-
-        .nav-cta:hover {
-            background: var(--lila-b)
-        }
-
-        .nav-toggle {
-            display: none;
-            width: 44px;
-            height: 38px;
-            background: transparent;
-            border: 1px solid rgba(184, 169, 201, 0.15);
-            border-radius: 10px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--metal-l);
-            flex-shrink: 0
-        }
-
-        .nav-toggle .bar {
-            width: 20px;
-            height: 2px;
-            background: currentColor;
-            display: block;
-            position: relative
-        }
-
-        .nav-toggle .bar::before,
-        .nav-toggle .bar::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 20px;
-            height: 2px;
-            background: currentColor;
-            transition: transform .22s
-        }
-
-        .nav-toggle .bar::before {
-            top: -6px
-        }
-
-        .nav-toggle .bar::after {
-            top: 6px
-        }
-
-        @media(max-width:768px) {
-            .nav-toggle {
-                display: inline-flex
-            }
-
-            .nav-r {
-                display: none
-            }
-        }
-
-        /* ── MOBILE MENU ── */
-        .mobile-menu {
-            position: fixed;
-            right: 16px;
-            top: 164px;
-            background: rgba(10, 5, 20, 0.97);
-            border: 1px solid rgba(184, 169, 201, 0.12);
-            border-radius: 14px;
-            padding: 10px;
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 1200;
-            min-width: 210px;
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7)
-        }
-
-        .mobile-menu.show {
-            display: flex
-        }
-
-        .mobile-menu a {
-            color: var(--metal-l);
-            text-decoration: none;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: .85rem;
-            transition: background .18s, color .18s
-        }
-
-        .mobile-menu a:hover {
-            background: rgba(184, 169, 201, 0.07);
-            color: var(--lila)
-        }
-
-        .mobile-menu .mcta {
-            background: var(--lila);
-            color: var(--uva-deep);
-            font-weight: 700;
-            text-align: center;
-            margin-top: 4px
-        }
-
-        .mobile-menu .mcta:hover {
-            background: var(--lila-b)
-        }
-
-        /* ── HERO ── */
-        .hero {
-            min-height: 90vh;
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: start
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 55% 65% at 72% 38%, rgba(184, 169, 201, .07) 0%, transparent 60%), radial-gradient(ellipse 35% 45% at 18% 78%, rgba(42, 22, 80, .7) 0%, transparent 60%), linear-gradient(155deg, var(--uva-deep) 0%, var(--uva) 45%, var(--uva-mid) 100%)
-        }
-
-        .hero-left {
-            position: relative;
-            z-index: 2;
-            padding: 60px 6% 80px 8%
-        }
-
-        .hero-right {
-            height: 90vh;
-            position: relative;
-            z-index: 2;
-            padding: 40px 8% 40px 4%
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: .68rem;
-            font-weight: 600;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--lila);
-            margin-bottom: 1.8rem
-        }
-
-        .eline {
-            width: 28px;
-            height: 1px;
-            background: var(--lila)
-        }
-
-        .hero-h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.8rem, 5.5vw, 5.8rem);
-            font-weight: 400;
-            line-height: 1.02;
-            margin-bottom: 1.6rem
-        }
-
-        .hero-h1 .li {
-            font-style: italic;
-            color: var(--lila);
-            display: block
-        }
-
-        .hero-h1 .ln {
-            display: block;
-            color: var(--white)
-        }
-
-        .hero-sub {
-            font-size: 1rem;
-            color: var(--metal);
-            line-height: 1.75;
-            max-width: 480px;
-            margin-bottom: 2rem;
-            font-weight: 300
-        }
-
-        .hero-ctas {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 390px
-        }
-
-        .btn-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--lila);
-            color: var(--uva-deep);
-            padding: 18px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: .9rem;
-            font-weight: 700;
-            transition: all .3s
-        }
-
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 36px rgba(184, 169, 201, .35)
-        }
-
-        .btn-ghost {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid rgba(184, 169, 201, .2);
-            color: var(--metal-l);
-            padding: 15px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: .85rem;
-            transition: all .3s
-        }
-
-        .btn-ghost:hover {
-            border-color: var(--lila);
-            color: var(--lila)
-        }
-
-        .hero-trust {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: .72rem;
-            color: var(--txt-m);
-            margin-top: 4px;
-            font-weight: 300
-        }
-
-        .trust-dot {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: var(--lila);
-            flex-shrink: 0
-        }
-
-        .hero-stats {
-            display: flex;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(184, 169, 201, .1)
-        }
-
-        .stat {
-            flex: 1;
-            text-align: center;
-            position: relative
-        }
-
-        .stat+.stat::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10%;
-            height: 80%;
-            width: 1px;
-            background: rgba(184, 169, 201, .08)
-        }
-
-        .stat-n {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.2rem;
-            color: var(--lila);
-            line-height: 1
-        }
-
-        .stat-l {
-            font-size: .65rem;
-            color: var(--metal-d);
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            margin-top: 5px
-        }
-
-        /* ─────────────────────────────────────────────────
-   BEFORE / AFTER — mismo sistema hero y cards
-   Click en cualquier parte = toggle
-───────────────────────────────────────────────── */
-        .ba-wrap {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            user-select: none;
-            background: var(--uva-mid);
-        }
-
-        /* Las dos imágenes apiladas */
-        .ba-wrap .ba-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: opacity .5s ease;
-        }
-
-        .ba-wrap .ba-img-before {
-            opacity: 1;
-            z-index: 1
-        }
-
-        .ba-wrap .ba-img-after {
-            opacity: 0;
-            z-index: 1
-        }
-
-        /* Toggle */
-        .ba-wrap.show-after .ba-img-before {
-            opacity: 0
-        }
-
-        .ba-wrap.show-after .ba-img-after {
-            opacity: 1
-        }
-
-        /* Degradado inferior */
-        .ba-wrap .ba-fade {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 55%, rgba(10, 5, 20, .75));
-            pointer-events: none;
-            z-index: 2
-        }
-
-        /* Labels Antes / Después */
-        .ba-wrap .ba-lbl {
-            position: absolute;
-            z-index: 3;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: rgba(10, 5, 20, .62);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(184, 169, 201, .14);
-            padding: 6px 12px;
-            border-radius: 100px;
-            font-size: .7rem;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            color: var(--metal-l);
-            transition: all .35s;
-        }
-
-        .ba-wrap .ba-lbl-b {
-            top: 14px;
-            left: 14px
-        }
-
-        .ba-wrap .ba-lbl-a {
-            top: 14px;
-            right: 14px
-        }
-
-        /* Activo = lila */
-        .ba-wrap:not(.show-after) .ba-lbl-b {
-            background: var(--lila);
-            color: var(--uva-deep);
-            border-color: var(--lila);
-            box-shadow: 0 2px 10px rgba(184, 169, 201, .3)
-        }
-
-        .ba-wrap:not(.show-after) .ba-lbl-a {
-            opacity: .45
-        }
-
-        .ba-wrap.show-after .ba-lbl-a {
-            background: var(--lila);
-            color: var(--uva-deep);
-            border-color: var(--lila);
-            box-shadow: 0 2px 10px rgba(184, 169, 201, .3)
-        }
-
-        .ba-wrap.show-after .ba-lbl-b {
-            opacity: .45
-        }
-
-        /* Hint inferior */
-        .ba-wrap .ba-hint {
-            position: absolute;
-            bottom: 14px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            background: rgba(184, 169, 201, .15);
-            border: 1px solid rgba(184, 169, 201, .2);
-            border-radius: 100px;
-            padding: 5px 12px;
-            font-size: .6rem;
-            color: var(--lila);
-            font-weight: 600;
-            letter-spacing: .06em;
-            pointer-events: none;
-            transition: opacity .4s;
-            white-space: nowrap;
-        }
-
-        .ba-wrap.show-after .ba-hint {
-            opacity: 0
-        }
-
-        /* Hero right sizing */
-        .hero-ba-wrap {
-            height: 100%
-        }
-
-        @media(max-width:900px) {
-            .hero {
-                display: flex;
-                flex-direction: column-reverse;
-                min-height: auto
-            }
-
-            .hero-bg {
-                position: absolute;
-                inset: 0
-            }
-
-            .hero-right {
-                height: 65vw;
-                min-height: 260px;
-                width: 100%;
-                padding: 0
-            }
-
-            .hero-left {
-                padding: 40px 6% 60px
-            }
-
-            .strip {
-                margin-top: 0
-            }
-        }
-
-        @media(max-width:480px) {
-            .hero-right {
-                height: 75vw
-            }
-
-            .ba-wrap {
-                border-radius: 0
-            }
-        }
-
-        /* ── STRIP ── */
-        .strip {
-            background: var(--uva-deep);
-            border-top: 1px solid rgba(184, 169, 201, .07);
-            border-bottom: 1px solid rgba(184, 169, 201, .07);
-            padding: 18px 6%;
-            display: flex;
-            align-items: center;
-            gap: 36px;
-            justify-content: center;
-            overflow: hidden;
-            flex-wrap: wrap;
-        }
-
-        .si {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: .76rem;
-            color: var(--metal-d);
-            font-weight: 300;
-            flex-shrink: 0
-        }
-
-        .si .dot {
-            color: var(--lila);
-            font-size: .9rem
-        }
-
-        .si strong {
-            color: var(--metal-l);
-            font-weight: 500
-        }
-
-        .sd {
-            width: 1px;
-            height: 22px;
-            background: rgba(184, 169, 201, .08);
-            flex-shrink: 0
-        }
-
-        @media(max-width:768px) {
-            .sd {
-                display: none
-            }
-
-            .strip {
-                margin-top: 0
-            }
-        }
-
-        /* ── SECTION HELPERS ── */
-        .s-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: .65rem;
-            font-weight: 600;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--lila);
-            margin-bottom: 14px
-        }
-
-        .s-label::before {
-            content: '';
-            width: 22px;
-            height: 1px;
-            background: var(--lila)
-        }
-
-        .s-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3.4rem);
-            font-weight: 400;
-            line-height: 1.15;
-            color: var(--white)
-        }
-
-        .s-title em {
-            font-style: italic;
-            color: var(--lila)
-        }
-
-        /* ── QUIZ ── */
-        .quiz-sec {
-            padding: 80px 6%;
-            background: var(--surface);
-            position: relative
-        }
-
-        .quiz-sec::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .quiz-inner {
-            max-width: 720px;
-            margin: 0 auto;
-            text-align: center
-        }
-
-        .quiz-header {
-            margin-bottom: 40px
-        }
-
-        .quiz-header p {
-            color: var(--metal);
-            font-size: .95rem;
-            max-width: 440px;
-            margin: .8rem auto 0;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        .quiz-card {
-            background: var(--surface2);
-            border: 1px solid rgba(184, 169, 201, .12);
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden
-        }
-
-        .quiz-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--lila), transparent)
-        }
-
-        .quiz-step {
-            display: none
-        }
-
-        .quiz-step.active {
-            display: block;
-            animation: fadeUp .4s ease both
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .quiz-q {
-            font-family: 'DM Serif Display', serif;
-            font-style: italic;
-            font-size: 1.4rem;
-            color: var(--white);
-            margin-bottom: 28px;
-            line-height: 1.3
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px
-        }
-
-        .quiz-opt {
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .12);
-            border-radius: 10px;
-            padding: 16px 20px;
-            cursor: pointer;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all .25s;
-            font-size: .88rem;
-            color: var(--metal-l);
-            font-weight: 300
-        }
-
-        .quiz-opt:hover {
-            border-color: var(--lila);
-            color: var(--txt);
-            background: var(--lila-dim);
-            transform: translateX(4px)
-        }
-
-        .quiz-opt-icon {
-            font-size: 1.2rem;
-            flex-shrink: 0
-        }
-
-        .quiz-progress {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin-bottom: 24px
-        }
-
-        .qp-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(184, 169, 201, .15);
-            transition: all .3s
-        }
-
-        .qp-dot.done,
-        .qp-dot.active {
-            background: var(--lila)
-        }
-
-        .qp-dot.active {
-            box-shadow: 0 0 8px rgba(184, 169, 201, .4)
-        }
-
-        .quiz-result-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .25);
-            color: var(--lila);
-            font-size: .7rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 100px;
-            margin-bottom: 18px;
-            letter-spacing: .1em;
-            text-transform: uppercase
-        }
-
-        .quiz-result-title {
-            font-family: 'DM Serif Display', serif;
-            font-style: italic;
-            font-size: 1.6rem;
-            color: var(--white);
-            margin-bottom: 12px;
-            line-height: 1.2
-        }
-
-        .quiz-result-desc {
-            font-size: .9rem;
-            color: var(--metal);
-            line-height: 1.7;
-            font-weight: 300;
-            margin-bottom: 28px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        /* ── TRANSFORMACIONES ── */
-        .transform {
-            padding: 100px 6%;
-            background: var(--uva);
-            position: relative
-        }
-
-        .transform::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .transform-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .transform-top {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 40px;
-            align-items: end;
-            margin-bottom: 60px
-        }
-
-        @media(max-width:768px) {
-            .transform-top {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .transform-intro {
-            font-size: .92rem;
-            color: var(--metal);
-            line-height: 1.75;
-            font-weight: 300;
-            margin-top: 1.2rem;
-            max-width: 480px
-        }
-
-        .counter-badge {
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .2);
-            border-radius: 14px;
-            padding: 22px 28px;
-            text-align: center;
-            flex-shrink: 0
-        }
-
-        .counter-n {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3.2rem;
-            color: var(--lila);
-            line-height: 1;
-            font-style: italic
-        }
-
-        .counter-l {
-            font-size: .68rem;
-            color: var(--metal-d);
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            margin-top: 4px
-        }
-
-        .ba-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px
-        }
-
-        @media(max-width:900px) {
-            .ba-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        /* Card wrapper */
-        .ba-card {
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .07);
-            border-radius: 14px;
-            overflow: hidden;
-            transition: all .35s
-        }
-
-        .ba-card:hover {
-            border-color: rgba(184, 169, 201, .22);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .4)
-        }
-
-        .ba-card-visual {
-            height: 220px
-        }
-
-        .ba-card-visual .ba-wrap {
-            border-radius: 0
-        }
-
-        .ba-info {
-            padding: 20px
-        }
-
-        .ba-name {
-            font-size: .84rem;
-            font-weight: 600;
-            color: var(--txt);
-            margin-bottom: 3px
-        }
-
-        .ba-service {
-            font-size: .68rem;
-            color: var(--lila);
-            font-weight: 500;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            margin-bottom: 10px
-        }
-
-        .ba-quote {
-            font-size: .78rem;
-            color: var(--metal-d);
-            font-weight: 300;
-            line-height: 1.6;
-            font-style: italic
-        }
-
-        /* ── MIEDOS ── */
-        .miedos {
-            padding: 100px 6%;
-            background: var(--surface)
-        }
-
-        .miedos-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .miedos-header {
-            margin-bottom: 60px
-        }
-
-        .miedos-header p {
-            color: var(--metal);
-            font-size: .95rem;
-            max-width: 480px;
-            margin-top: 1rem;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        .miedos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px
-        }
-
-        @media(max-width:900px) {
-            .miedos-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .miedo {
-            background: var(--uva);
-            border: 1px solid rgba(184, 169, 201, .07);
-            border-radius: 14px;
-            padding: 30px;
-            transition: all .3s;
-            position: relative;
-            overflow: hidden
-        }
-
-        .miedo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--lila), transparent);
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform .4s
-        }
-
-        .miedo:hover {
-            border-color: rgba(184, 169, 201, .2);
-            transform: translateY(-4px)
-        }
-
-        .miedo:hover::after {
-            transform: scaleX(1)
-        }
-
-        .miedo-icon {
-            font-size: 1.8rem;
-            color: var(--lila);
-            margin-bottom: 14px
-        }
-
-        .miedo-q {
-            font-family: 'DM Serif Display', serif;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--metal-l);
-            margin-bottom: 12px;
-            line-height: 1.45
-        }
-
-        .miedo-a {
-            font-size: .83rem;
-            color: var(--txt-m);
-            line-height: 1.7;
-            font-weight: 300
-        }
-
-        .miedo-a strong {
-            color: var(--lila);
-            font-weight: 500
-        }
-
-        /* ── LOSS ANCHOR ── */
-        .loss-sec {
-            padding: 100px 6%;
-            background: var(--uva);
-            position: relative
-        }
-
-        .loss-sec::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .loss-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .loss-header {
-            text-align: center;
-            margin-bottom: 64px
-        }
-
-        .loss-sub {
-            color: var(--metal);
-            font-size: .95rem;
-            max-width: 480px;
-            margin: 1rem auto 0;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        .loss-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px
-        }
-
-        @media(max-width:900px) {
-            .loss-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .loss-card {
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .08);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all .3s;
-            position: relative;
-            overflow: hidden
-        }
-
-        .loss-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--lila), transparent);
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform .4s
-        }
-
-        .loss-card:hover {
-            border-color: rgba(184, 169, 201, .2);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .4)
-        }
-
-        .loss-card:hover::after {
-            transform: scaleX(1)
-        }
-
-        .loss-icon {
-            font-size: 1.8rem;
-            margin-bottom: 14px;
-            color: var(--lila);
-        }
-
-        .loss-badge {
-            display: inline-flex;
-            font-size: .6rem;
-            font-weight: 700;
-            letter-spacing: .16em;
-            text-transform: uppercase;
-            color: var(--lila);
-            margin-bottom: 12px;
-            padding: 4px 10px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .2);
-            border-radius: 100px;
-        }
-
-        .loss-badge-red {
-            color: var(--urgency);
-            background: var(--urgency-dim);
-            border-color: rgba(224, 112, 112, .2)
-        }
-
-        .loss-q {
-            font-family: 'DM Serif Display', serif;
-            font-style: italic;
-            font-size: 1.05rem;
-            color: var(--white);
-            margin-bottom: 12px;
-            line-height: 1.4
-        }
-
-        .loss-a {
-            font-size: .82rem;
-            color: var(--txt-m);
-            line-height: 1.7;
-            font-weight: 300
-        }
-
-        .loss-fn {
-            text-align: center;
-            font-size: .78rem;
-            color: var(--metal-d);
-            margin-top: 36px;
-            font-weight: 300;
-            font-style: italic
-        }
-
-        /* ── CHAT ── */
-        .chat-sec {
-            padding: 80px 6%;
-            background: var(--surface);
-            position: relative
-        }
-
-        .chat-sec::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .chat-inner {
-            max-width: 860px;
-            margin: 0 auto
-        }
-
-        .chat-header {
-            text-align: center;
-            margin-bottom: 52px
-        }
-
-        .chat-header p {
-            color: var(--metal);
-            font-size: .92rem;
-            max-width: 460px;
-            margin: 1rem auto 0;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        .chat-win {
-            background: var(--uva-deep);
-            border: 1px solid rgba(184, 169, 201, .14);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 32px 80px rgba(0, 0, 0, .6)
-        }
-
-        .chat-bar {
-            background: var(--surface2);
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(184, 169, 201, .08)
-        }
-
-        .c-av {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--lila-d), var(--lila));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0
-        }
-
-        .c-name {
-            font-size: .85rem;
-            font-weight: 600;
-            color: var(--white)
-        }
-
-        .c-status {
-            font-size: .68rem;
-            color: var(--lila);
-            display: flex;
-            align-items: center;
-            gap: 5px
-        }
-
-        .c-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--lila);
-            animation: pdot 2s infinite
-        }
-
-        @keyframes pdot {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .3
-            }
-        }
-
-        .chat-body {
-            padding: 22px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px
-        }
-
-        .msg {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-            opacity: 0;
-            transform: translateY(8px);
-            animation: msgin .4s ease forwards
-        }
-
-        .msg.r {
-            flex-direction: row-reverse
-        }
-
-        .msg:nth-child(1) {
-            animation-delay: .3s
-        }
-
-        .msg:nth-child(2) {
-            animation-delay: .8s
-        }
-
-        .msg:nth-child(3) {
-            animation-delay: 1.3s
-        }
-
-        .msg:nth-child(4) {
-            animation-delay: 1.8s
-        }
-
-        .msg:nth-child(5) {
-            animation-delay: 2.3s
-        }
-
-        .msg:nth-child(6) {
-            animation-delay: 2.8s
-        }
-
-        @keyframes msgin {
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .m-av {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: .8rem
-        }
-
-        .m-av.c {
-            background: linear-gradient(135deg, var(--lila-d), var(--lila))
-        }
-
-        .m-av.p {
-            background: rgba(168, 180, 190, .1)
-        }
-
-        .bub {
-            max-width: 72%;
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: .84rem;
-            line-height: 1.6;
-            font-weight: 300
-        }
-
-        .bub.c {
-            background: var(--surface2);
-            border: 1px solid rgba(184, 169, 201, .1);
-            color: var(--txt);
-            border-bottom-left-radius: 4px
-        }
-
-        .bub.p {
-            background: var(--lila);
-            color: var(--uva-deep);
-            border-bottom-right-radius: 4px;
-            font-weight: 500
-        }
-
-        .bub strong {
-            font-weight: 600
-        }
-
-        .bub .hi {
-            color: var(--lila-b)
-        }
-
-        .m-time {
-            font-size: .58rem;
-            color: var(--metal-d);
-            align-self: flex-end;
-            padding-bottom: 2px;
-            white-space: nowrap
-        }
-
-        .chat-foot {
-            background: var(--surface2);
-            padding: 12px 18px;
-            border-top: 1px solid rgba(184, 169, 201, .07);
-            display: flex;
-            align-items: center;
-            gap: 10px
-        }
-
-        .chat-input {
-            flex: 1;
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .1);
-            border-radius: 100px;
-            padding: 8px 16px;
-            font-size: .76rem;
-            color: var(--metal-d)
-        }
-
-        .chat-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--lila);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0
-        }
-
-        .chat-cta-wrap {
-            text-align: center;
-            margin-top: 28px
-        }
-
-        .chat-cta-note {
-            font-size: .78rem;
-            color: var(--metal-d);
-            margin-bottom: 14px;
-            font-weight: 300
-        }
-
-        /* ── PRECIOS ── */
-        .precios {
-            padding: 100px 6%
-        }
-
-        .precios-inner {
-            max-width: 1020px;
-            margin: 0 auto
-        }
-
-        .precios-header {
-            text-align: center;
-            margin-bottom: 64px
-        }
-
-        .precios-header p {
-            color: var(--metal);
-            font-size: .95rem;
-            max-width: 520px;
-            margin: 1rem auto 0;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px
-        }
-
-        @media(max-width:700px) {
-            .pricing-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .pc {
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .08);
-            border-radius: 18px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            transition: all .3s
-        }
-
-        .pc::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .25), transparent);
-            opacity: 0;
-            transition: opacity .3s
-        }
-
-        .pc:hover {
-            border-color: rgba(184, 169, 201, .2);
-            transform: translateY(-4px)
-        }
-
-        .pc:hover::before {
-            opacity: 1
-        }
-
-        .pc.star {
-            border-color: rgba(184, 169, 201, .28);
-            background: linear-gradient(145deg, var(--surface) 0%, rgba(184, 169, 201, .05) 100%)
-        }
-
-        .pc.star::before {
-            opacity: 1;
-            background: linear-gradient(to right, transparent, var(--lila), transparent)
-        }
-
-        .pc-tag {
-            display: inline-block;
-            padding: 5px 14px;
-            border-radius: 100px;
-            font-size: .6rem;
-            font-weight: 700;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            margin-bottom: 18px
-        }
-
-        .pc-tag.e {
-            background: rgba(168, 180, 190, .1);
-            color: var(--metal);
-            border: 1px solid rgba(168, 180, 190, .14)
-        }
-
-        .pc-tag.p {
-            background: var(--lila);
-            color: var(--uva-deep)
-        }
-
-        .free-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .2);
-            color: var(--lila);
-            font-size: .7rem;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 100px;
-            margin-bottom: 10px
-        }
-
-        .pc-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            color: var(--white);
-            margin-bottom: 10px
-        }
-
-        .pc-desc {
-            font-size: .82rem;
-            color: var(--metal-d);
-            line-height: 1.7;
-            font-weight: 300;
-            margin-bottom: 24px
-        }
-
-        .pc-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 28px
-        }
-
-        .pc-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: .82rem;
-            color: var(--txt);
-            font-weight: 300
-        }
-
-        .pc-check {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: .55rem;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .22);
-            color: var(--lila)
-        }
-
-        .pc-price {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.8rem;
-            color: var(--lila);
-            line-height: 1;
-            margin-bottom: 22px
-        }
-
-        .pc-price small {
-            font-family: 'Jost', sans-serif;
-            font-size: .75rem;
-            color: var(--metal-d);
-            font-weight: 300;
-            margin-left: 4px
-        }
-
-        .pc-cta {
-            display: block;
-            text-align: center;
-            padding: 15px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: .84rem;
-            font-weight: 600;
-            transition: all .3s
-        }
-
-        .pc-cta.main {
-            background: var(--lila);
-            color: var(--uva-deep)
-        }
-
-        .pc-cta.main:hover {
-            background: var(--lila-b);
-            transform: translateY(-1px)
-        }
-
-        .pc-cta.ghost {
-            border: 1px solid rgba(184, 169, 201, .2);
-            color: var(--metal-l)
-        }
-
-        .pc-cta.ghost:hover {
-            border-color: var(--lila);
-            color: var(--lila)
-        }
-
-        .pc-note {
-            font-size: .68rem;
-            color: var(--metal-d);
-            text-align: center;
-            margin-top: 10px;
-            font-weight: 300
-        }
-
-        .precios-fn {
-            text-align: center;
-            font-size: .75rem;
-            color: var(--metal-d);
-            margin-top: 28px;
-            font-weight: 300;
-            line-height: 1.7
-        }
-
-        /* ── GUARANTEE ── */
-        .guarantee {
-            padding: 56px 6%;
-            background: linear-gradient(135deg, var(--lila-dim), var(--surface2));
-            border-top: 1px solid rgba(184, 169, 201, .1);
-            border-bottom: 1px solid rgba(184, 169, 201, .1)
-        }
-
-        .guarantee-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 32px;
-            align-items: center
-        }
-
-        @media(max-width:768px) {
-            .guarantee-inner {
-                grid-template-columns: 1fr;
-                text-align: center
-            }
-        }
-
-        .g-icon {
-            font-size: 3rem
-        }
-
-        .g-title {
-            font-family: 'DM Serif Display', serif
-        }
-
-        .g-desc {
-            font-size: .82rem;
-            color: var(--metal-l);
-            line-height: 1.6;
-            font-weight: 300;
-            margin-top: 12px
-        }
-
-        /* ── DOCTOR ── */
-        .doctor {
-            padding: 100px 6%;
-            background: var(--surface);
-            position: relative
-        }
-
-        .doctor::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .doctor-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            align-items: center
-        }
-
-        @media(max-width:768px) {
-            .doctor-inner {
-                grid-template-columns: 1fr;
-                text-align: center
-            }
-        }
-
-        .doc-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 520px;
-            margin-bottom: 24px
-        }
-
-        .doc-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block
-        }
-
-        .doc-chip {
-            position: absolute;
-            bottom: 10px;
-            right: 22px;
-            background: var(--lila);
-            color: var(--uva-deep);
-            padding: 14px 18px;
-            border-radius: 12px;
-            text-align: center
-        }
-
-        .doc-chip-n {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2rem;
-            font-style: italic;
-            line-height: 1
-        }
-
-        .doc-chip-l {
-            font-size: .58rem;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            opacity: .8;
-            margin-top: 2px
-        }
-
-        .doc-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            line-height: 1.1;
-            margin: 1rem 0
-        }
-
-        .doc-name em {
-            font-style: italic;
-            color: var(--lila)
-        }
-
-        .doc-title {
-            font-size: .78rem;
-            color: var(--lila);
-            font-weight: 500;
-            letter-spacing: .08em;
-            margin-bottom: 1.5rem
-        }
-
-        .doc-desc {
-            font-size: .92rem;
-            color: var(--metal);
-            line-height: 1.8;
-            font-weight: 300;
-            margin-bottom: 2rem
-        }
-
-        .doc-creds {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 2.5rem
-        }
-
-        .dc {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px
-        }
-
-        .dc-ico {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .16);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: .9rem
-        }
-
-        .dc-txt {
-            font-size: .83rem;
-            color: var(--txt);
-            font-weight: 300;
-            line-height: 1.55;
-            padding-top: 8px
-        }
-
-        /* ── SERVICIOS ── */
-        .servicios {
-            padding: 100px 6%;
-            background: var(--surface);
-            position: relative
-        }
-
-        .servicios::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .svc-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .svc-header {
-            text-align: center;
-            margin-bottom: 60px
-        }
-
-        .svc-header p {
-            color: var(--metal);
-            font-size: .95rem;
-            max-width: 460px;
-            margin: 1rem auto 0;
-            font-weight: 300
-        }
-
-        .svc-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px
-        }
-
-        @media(max-width:900px) {
-            .svc-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .svc-card {
-            background: var(--surface2);
-            border: 1px solid rgba(184, 169, 201, .07);
-            border-radius: 16px;
-            padding: 36px;
-            position: relative;
-            overflow: hidden;
-            transition: all .35s
-        }
-
-        .svc-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--lila);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform .4s ease
-        }
-
-        .svc-card:hover {
-            border-color: rgba(184, 169, 201, .2);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .4)
-        }
-
-        .svc-card:hover::after {
-            transform: scaleX(1)
-        }
-
-        .svc-num {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3.5rem;
-            color: rgba(184, 169, 201, .07);
-            line-height: 1;
-            margin-bottom: 12px;
-            font-style: italic
-        }
-
-        .svc-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            color: var(--white);
-            margin-bottom: 12px
-        }
-
-        .svc-desc {
-            font-size: .82rem;
-            color: var(--metal-d);
-            line-height: 1.7;
-            font-weight: 300;
-            margin-bottom: 20px
-        }
-
-        .svc-price {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            color: var(--lila)
-        }
-
-        /* ── TESTIMONIOS ── */
-        .testimonios {
-            padding: 100px 6%
-        }
-
-        .test-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .test-header {
-            margin-bottom: 60px
-        }
-
-        .test-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px
-        }
-
-        @media(max-width:900px) {
-            .test-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .t-card {
-            background: var(--surface);
-            border: 1px solid rgba(184, 169, 201, .07);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all .3s
-        }
-
-        .t-card:hover {
-            border-color: rgba(184, 169, 201, .2);
-            transform: translateY(-4px)
-        }
-
-        .t-video {
-            width: 100%;
-            height: 380px;
-            overflow: hidden;
-            border-radius: 10px;
-            background: #0b0613
-        }
-
-        .t-video video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 10px
-        }
-
-        .t-caption {
-            margin-top: 14px;
-            color: var(--metal-l);
-            font-size: .9rem;
-            line-height: 1.5;
-            font-weight: 300;
-            min-height: 64px
-        }
-
-        .t-author {
-            margin-top: 12px;
-            color: var(--lila);
-            font-weight: 600;
-            font-size: .78rem;
-            letter-spacing: .06em
-        }
-
-        .t-service {
-            color: var(--metal-d);
-            font-size: .68rem;
-            margin-top: 2px
-        }
-
-        /* ── PROCESO ── */
-        .proceso {
-            padding: 100px 6%;
-            background: var(--surface);
-            position: relative
-        }
-
-        .proceso::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184, 169, 201, .2), transparent)
-        }
-
-        .proceso-inner {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .proceso-header {
-            text-align: center;
-            margin-bottom: 72px
-        }
-
-        .pasos {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            position: relative
-        }
-
-        @media(max-width:900px) {
-            .pasos {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px
-            }
-        }
-
-        .pasos-line {
-            position: absolute;
-            top: 32px;
-            left: calc(12.5% + 14px);
-            right: calc(12.5% + 14px);
-            height: 1px;
-            background: linear-gradient(to right, var(--lila), rgba(184, 169, 201, .15), var(--lila));
-            opacity: .2
-        }
-
-        @media(max-width:900px) {
-            .pasos-line {
-                display: none
-            }
-        }
-
-        .paso {
-            text-align: center;
-            padding: 0 14px
-        }
-
-        .paso-circ {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--surface2);
-            border: 1px solid rgba(184, 169, 201, .28);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 22px;
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--lila);
-            position: relative;
-            z-index: 1;
-            transition: all .3s
-        }
-
-        .paso:hover .paso-circ {
-            background: var(--lila);
-            color: var(--uva-deep);
-            box-shadow: 0 0 32px rgba(184, 169, 201, .35)
-        }
-
-        .paso-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--white);
-            margin-bottom: 8px
-        }
-
-        .paso-desc {
-            font-size: .75rem;
-            color: var(--metal-d);
-            line-height: 1.6;
-            font-weight: 300
-        }
-
-        /* ── FINAL CTA ── */
-        .final {
-            padding: 120px 6%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--uva-deep)
-        }
-
-        .final::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(184, 169, 201, .06) 0%, transparent 65%);
-            pointer-events: none
-        }
-
-        .final-inner {
-            position: relative;
-            z-index: 2
-        }
-
-        .final-urgency {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--urgency-dim);
-            border: 1px solid rgba(224, 112, 112, .2);
-            border-radius: 100px;
-            padding: 8px 20px;
-            font-size: .75rem;
-            color: var(--urgency);
-            font-weight: 500;
-            margin-bottom: 24px
-        }
-
-        .fu-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--urgency);
-            animation: blink 1.5s infinite;
-            flex-shrink: 0
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .3
-            }
-        }
-
-        .final h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 400;
-            line-height: 1.05;
-            max-width: 900px;
-            margin: 0 auto 1.5rem
-        }
-
-        .final h2 em {
-            font-style: italic;
-            color: var(--lila)
-        }
-
-        .final-desc {
-            color: var(--metal);
-            font-size: 1rem;
-            max-width: 480px;
-            margin: 0 auto 3rem;
-            font-weight: 300;
-            line-height: 1.75
-        }
-
-        .final-ctas {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 400px;
-            margin: 0 auto
-        }
-
-        .risk-rev {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--lila-dim);
-            border: 1px solid rgba(184, 169, 201, .14);
-            color: var(--metal);
-            font-size: .72rem;
-            font-weight: 300;
-            padding: 8px 18px;
-            border-radius: 100px;
-            margin-top: 4px
-        }
-
-        .risk-rev b {
-            color: var(--lila);
-            font-weight: 500
-        }
-
-        .final-loc {
-            margin-top: 2.5rem;
-            font-size: .72rem;
-            color: var(--metal-d);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap
-        }
-
-        /* ── FOOTER ── */
-        footer {
-            background: var(--uva-deep);
-            border-top: 1px solid rgba(184, 169, 201, .08);
-            padding: 28px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: .72rem;
-            color: var(--metal-d);
-            flex-wrap: wrap;
-            gap: 10px
-        }
-
-        footer a {
-            color: var(--lila);
-            text-decoration: none
-        }
-
-        /* ── WHATSAPP ── */
-        .wa {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 58px;
-            height: 58px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 24px rgba(37, 211, 102, .5);
-            z-index: 99;
-            text-decoration: none;
-            transition: all .3s;
-            animation: wap 3s infinite
-        }
-
-        .wa:hover {
-            transform: scale(1.1)
-        }
-
-        @keyframes wap {
-
-            0%,
-            100% {
-                box-shadow: 0 4px 24px rgba(37, 211, 102, .5)
-            }
-
-            50% {
-                box-shadow: 0 4px 40px rgba(37, 211, 102, .8)
-            }
-        }
-
-        .ab-cta2 {
-            color: var(--lila);
-            font-size: 12px;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 6px;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dentística · Diseño de Sonrisa Premium | Barranquilla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-    <!-- ANNOUNCEMENT -->
-    <div class="ann" role="region" aria-label="Anuncios importantes">
-        <div class="ann-track">
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-            <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración
-            </div>
-            <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-            <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración
-            </div>
-            <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
-            <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
-        </div>
+  <!-- ── ANNOUNCEMENT ── -->
+  <div class="ann" role="region" aria-label="Anuncios">
+    <div class="ann-track">
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
+      <div class="ann-item"><i class="bi bi-person-badge-fill"></i> Simulación digital incluida en toda valoración</div>
+      <div class="ann-item"><i class="bi bi-eye-fill"></i> Ves tu resultado antes de iniciar</div>
+      <div class="ann-item"><i class="bi bi-award-fill"></i> +500 sonrisas transformadas en Barranquilla</div>
     </div>
+  </div>
 
-    <!-- ACTIVITY BAR -->
-    <div class="activity-bar">
-        <div class="ab-left">
-            <div class="ab-avatar">😊</div>
-            <div class="ab-dot"></div>
-            <div class="ab-label" id="abLabel"><b>Alguien</b> envió fotos de su sonrisa</div>
-            <div class="ab-time" id="abTime">hace 51 min</div>
-        </div>
-        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20reservar%20mi%20cupo" class="ab-cta2">Reservar mi cupo
-            →</a>
+  <!-- ── ACTIVITY BAR ── -->
+  <div class="activity-bar">
+    <div class="ab-left">
+      <div class="ab-avatar">😊</div>
+      <div class="ab-label" id="abLabel"><b>Alguien</b> envió fotos de su sonrisa</div>
+      <div class="ab-time" id="abTime">hace 51 min</div>
     </div>
-
-    <!-- NAV -->
-    <div class="nav-wrapper">
-        <nav>
-            <a class="logo" href="index.html">DENTÍSTI<b>CA</b></a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menú"><span class="bar"></span></button>
-            <div class="nav-r">
-                <a class="nav-link" href="index.html">Inicio</a>
-                <a class="nav-link" href="valoracion.html">Valoraciones</a>
-                <a class="nav-link" href="tratamientos.html">Tratamientos</a>
-                <a class="nav-link" href="doctor.html">El Doctor</a>
-                <a class="nav-cta"
-                    href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración">Agendar cita</a>
-            </div>
-        </nav>
+    <div class="ab-urgency">
+      <span class="ab-dot"></span>
+      <span>Cupos hoy:</span>
+      <span class="ab-timer" id="abTimer">03</span>
     </div>
+    <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20reservar%20mi%20cupo" class="ab-cta">Reservar cupo →</a>
+  </div>
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Inicio</a>
-        <a href="valoracion.html">Valoraciones</a>
-        <a href="tratamientos.html">Tratamientos</a>
-        <a href="doctor.html">El Doctor</a>
-        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="mcta">Agendar
-            cita</a>
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="logoDentisticaCompleto.webp" alt="Dentística" class="logo-img">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="valoracion.html" class="nav-link">Valoraciones</a>
+        <a href="tratamientos.html" class="nav-link">Tratamientos</a>
+        <a href="doctor.html" class="nav-link">El Doctor</a>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="nav-cta">Agendar cita</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-
-        <div class="hero-left">
-            <div class="eyebrow"><span class="eline"></span>Diseño de Sonrisa Premium · Barranquilla</div>
-            <h1 class="hero-h1">
-                <span class="ln">La sonrisa que</span>
-                <span class="li">siempre quisiste.</span>
-            </h1>
-            <p class="hero-sub">El Dr. Jorge De La Rosa diseña tu sonrisa desde cero con simulación digital. Ves
-                exactamente cómo quedará antes de iniciar. Sin sorpresas. Sin presión.</p>
-            <div class="hero-ctas">
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20para%20mi%20valoración%20gratuita"
-                    class="btn-main">
-                    <span>Enviar foto de mi sonrisa — gratis</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </a>
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración%20desde%2030.000"
-                    class="btn-ghost">Agendar valoración — desde $30.000</a>
-                <div class="hero-trust"><span class="trust-dot"></span>Sin pago previo · Sin compromiso · Respuesta en
-                    minutos</div>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-n">10+</div>
-                    <div class="stat-l">Años de experiencia</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-n">500+</div>
-                    <div class="stat-l">Sonrisas diseñadas</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-n">98%</div>
-                    <div class="stat-l">Pacientes satisfechos</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- HERO RIGHT: mismo sistema que las cards, click en toda la imagen -->
-        <div class="hero-right">
-            <div class="ba-wrap hero-ba-wrap" onclick="this.classList.toggle('show-after')">
-                <img class="ba-img ba-img-before"
-                    src="imgDespues1.JPG"
-                    alt="Antes" />
-                <img class="ba-img ba-img-after"
-                    src="imgAntes1.JPG"
-                    alt="Después" />
-                <div class="ba-fade"></div>
-                <span class="ba-lbl ba-lbl-b">Después</span>
-                <span class="ba-lbl ba-lbl-a">Antes</span>
-                <span class="ba-hint">Toca para cambiar →</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- STRIP -->
-    <div class="strip">
-        <div class="si"><i class="bi bi-star-fill dot"></i><span>Simulación digital <strong>antes de
-                    iniciar</strong></span></div>
-        <div class="sd"></div>
-        <div class="si"><i class="bi bi-star-fill dot"></i><span>El Dr. Jorge atiende <strong>cada caso
-                    personalmente</strong></span></div>
-        <div class="sd"></div>
-        <div class="si"><i class="bi bi-star-fill dot"></i><span>Valoración <strong>se descuenta</strong> del
-                tratamiento</span></div>
-        <div class="sd"></div>
-        <div class="si"><i class="bi bi-star-fill dot"></i><span><strong>Sin pago previo</strong> para agendar</span>
-        </div>
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-left">
+      <div class="eyebrow"><span class="eline"></span>Diseño de Sonrisa Premium · Barranquilla</div>
+      <h1 class="hero-h1">
+        <span class="ln">La sonrisa que</span>
+        <span class="li">siempre quisiste.</span>
+      </h1>
+      <p class="hero-sub">El Dr. Jorge De La Rosa diseña tu sonrisa desde cero con simulación digital. Ves exactamente cómo quedará antes de iniciar. Sin sorpresas. Sin presión.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20para%20mi%20valoración%20gratuita" class="btn-main">
+          <span>Enviar foto de mi sonrisa — gratis</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración%20desde%2030.000" class="btn-ghost">Agendar valoración — desde $30.000</a>
+        <div class="hero-trust"><span class="trust-dot"></span>Sin pago previo · Sin compromiso · Respuesta en minutos</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Años de experiencia</div></div>
+        <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Sonrisas diseñadas</div></div>
+        <div class="stat"><div class="stat-n">98%</div><div class="stat-l">Pacientes satisfechos</div></div>
+      </div>
     </div>
-
-    <!-- QUIZ -->
-    <section class="quiz-sec">
-        <div class="quiz-inner">
-            <div class="quiz-header">
-                <span class="s-label">Descubre tu opción ideal</span>
-                <h2 class="s-title">¿Qué tipo de cambio<br><em>estás buscando?</em></h2>
-                <p>Responde 2 preguntas rápidas y te decimos exactamente qué valoración se adapta a tu caso.</p>
-            </div>
-            <div class="quiz-card">
-                <div class="quiz-progress">
-                    <div class="qp-dot active" id="dot-1"></div>
-                    <div class="qp-dot" id="dot-2"></div>
-                    <div class="qp-dot" id="dot-3"></div>
-                </div>
-                <div class="quiz-step active" id="step-1">
-                    <div class="quiz-q">¿Qué te molesta más de tu sonrisa ahora mismo?</div>
-                    <div class="quiz-options">
-                        <div class="quiz-opt" onclick="nextStep(2,'color')"><span class="quiz-opt-icon">🎨</span>El
-                            color — están oscuros o manchados</div>
-                        <div class="quiz-opt" onclick="nextStep(2,'forma')"><span class="quiz-opt-icon">✂️</span>La
-                            forma — están desgastados, chuecos o irregulares</div>
-                        <div class="quiz-opt" onclick="nextStep(2,'todo')"><span class="quiz-opt-icon">🔄</span>Todo en
-                            general — quiero un cambio completo</div>
-                        <div class="quiz-opt" onclick="nextStep(2,'info')"><span class="quiz-opt-icon"><i
-                                    class="bi bi-search-heart-fill"></i></span>Solo quiero saber mis opciones antes de
-                            decidir</div>
-                    </div>
-                </div>
-                <div class="quiz-step" id="step-2">
-                    <div class="quiz-q">¿Cuándo te gustaría ver el resultado?</div>
-                    <div class="quiz-options">
-                        <div class="quiz-opt" onclick="nextStep(3,'rapido')"><span class="quiz-opt-icon">⚡</span>Lo
-                            antes posible — quiero verlo pronto</div>
-                        <div class="quiz-opt" onclick="nextStep(3,'calidad')"><span class="quiz-opt-icon"><i
-                                    class="bi bi-gem"></i></span>Me tomo el tiempo necesario — quiero lo mejor</div>
-                        <div class="quiz-opt" onclick="nextStep(3,'no-se')"><span class="quiz-opt-icon">🤔</span>Aún no
-                            sé — primero quiero conocer mis opciones</div>
-                    </div>
-                </div>
-                <div class="quiz-step" id="step-3">
-                    <div class="quiz-result-badge"><i class="bi bi-stars"></i> Tu opción ideal</div>
-                    <div class="quiz-result-title" id="quiz-title">Valoración Estética — $30.000</div>
-                    <div class="quiz-result-desc" id="quiz-desc">Basado en lo que nos contaste, la Valoración Estética
-                        es el primer paso perfecto. En 30 minutos con el Dr. Jorge verás exactamente qué es posible para
-                        tu caso con simulación digital incluida.</div>
-                    <a id="quiz-cta"
-                        href="https://wa.me/573217264415?text=Hola!%20Hice%20el%20quiz%20y%20quiero%20agendar%20mi%20valoración"
-                        class="btn-main"
-                        style="max-width:320px;margin:18px auto 0;display:inline-flex;justify-content:center;">
-                        <span id="quiz-cta-text">Agendar mi Valoración Estética</span>
-                    </a>
-                </div>
-            </div>
+    <div class="hero-right">
+      <div class="ba-wrap" id="heroBA">
+        <img class="ba-img ba-img-before" src="imgDespues1.JPG" alt="Después">
+        <img class="ba-img ba-img-after"  src="imgAntes1.JPG"  alt="Antes">
+        <div class="ba-fade"></div>
+        <span class="ba-lbl ba-lbl-b">Después</span>
+        <span class="ba-lbl ba-lbl-a">Antes</span>
+        <div class="ba-slider">
+          <div class="ba-slider-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#110820" stroke-width="2.5"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+          </div>
         </div>
-    </section>
-
-    <!-- TRANSFORMACIONES -->
-    <section class="transform">
-        <div class="transform-inner">
-            <div class="transform-top">
-                <div>
-                    <span class="s-label">Resultados reales</span>
-                    <h2 class="s-title">Vidas que cambiaron<br>con <em>una sonrisa</em></h2>
-                    <p class="transform-intro">Cada caso es único y planificado desde cero con simulación digital. Estos
-                        son pacientes reales de Barranquilla.</p>
-                </div>
-                <div class="counter-badge">
-                    <div class="counter-n">500+</div>
-                    <div class="counter-l">Sonrisas transformadas</div>
-                </div>
-            </div>
-            <div class="ba-grid">
-
-                <!-- Card 1 -->
-                <div class="ba-card">
-                    <div class="ba-card-visual">
-                        <div class="ba-wrap" onclick="this.classList.toggle('show-after')">
-                            <img class="ba-img ba-img-before"
-                                src="imgDespues0.JPG"
-                                alt="Valentina antes" />
-                            <img class="ba-img ba-img-after"
-                                src="imgAntes0.JPG"
-                                alt="Valentina después" />
-                            <div class="ba-fade"></div>
-                            <span class="ba-lbl ba-lbl-b">Después</span>
-                            <span class="ba-lbl ba-lbl-a">Antes</span>
-                            <span class="ba-hint">Toca para cambiar</span>
-                        </div>
-                    </div>
-                    <div class="ba-info">
-                        <div class="ba-name">Valentina R.</div>
-                        <div class="ba-service">Diseño en Disilicato</div>
-                        <div class="ba-quote">"Nunca imaginé que mi sonrisa podía quedar así. El Dr. Jorge me mostró el
-                            resultado antes y fue exactamente eso."</div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="ba-card">
-                    <div class="ba-card-visual">
-                        <div class="ba-wrap" onclick="this.classList.toggle('show-after')">
-                            <img class="ba-img ba-img-before"
-                                src="imgDespues1.JPG"
-                                alt="Rubén antes" />
-                            <img class="ba-img ba-img-after"
-                                src="imgAntes1.JPG"
-                                alt="Rubén después" />
-                            <div class="ba-fade"></div>
-                            <span class="ba-lbl ba-lbl-b">Después</span>
-                            <span class="ba-lbl ba-lbl-a">Antes</span>
-                            <span class="ba-hint">Toca para cambiar</span>
-                        </div>
-                    </div>
-                    <div class="ba-info">
-                        <div class="ba-name">Rubén M.</div>
-                        <div class="ba-service">Diseño en Resina</div>
-                        <div class="ba-quote">"Llegué con miedo y salí con la sonrisa que siempre quise. El proceso fue
-                            más rápido de lo que esperaba."</div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="ba-card">
-                    <div class="ba-card-visual">
-                        <div class="ba-wrap" onclick="this.classList.toggle('show-after')">
-                            <img class="ba-img ba-img-before"
-                                src="imgDespues2.JPG"
-                                alt="Wendy antes" />
-                            <img class="ba-img ba-img-after"
-                                src="imgAntes2.jpeg"
-                                alt="Wendy después" />
-                            <div class="ba-fade"></div>
-                            <span class="ba-lbl ba-lbl-b">Después</span>
-                            <span class="ba-lbl ba-lbl-a">Antes</span>
-                            <span class="ba-hint">Toca para cambiar</span>
-                        </div>
-                    </div>
-                    <div class="ba-info">
-                        <div class="ba-name">Wendy C.</div>
-                        <div class="ba-service">Diseño en Resina</div>
-                        <div class="ba-quote">"Hoy sonrío en todas las fotos sin pensarlo dos veces. La mejor inversión
-                            de mi vida."</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- MIEDOS -->
-    <section class="miedos">
-        <div class="miedos-inner">
-            <div class="miedos-header">
-                <span class="s-label">Te entendemos</span>
-                <h2 class="s-title">Lo que la mayoría piensa<br>antes de escribirnos</h2>
-                <p>Es completamente normal tener dudas. Aquí respondemos lo que casi todos preguntan antes de dar el
-                    primer paso.</p>
-            </div>
-            <div class="miedos-grid">
-                <div class="miedo">
-                    <div class="miedo-icon"><i class="bi bi-person-heart"></i></div>
-                    <p class="miedo-q">"Me da pena porque mis dientes están muy mal..."</p>
-                    <p class="miedo-a">Llevamos más de 10 años viendo todo tipo de casos. Nuestro trabajo es exactamente
-                        ese. <strong>No hay casos imposibles aquí.</strong></p>
-                </div>
-                <div class="miedo">
-                    <div class="miedo-icon"><i class="bi bi-currency-dollar"></i></div>
-                    <p class="miedo-q">"Seguro es muy caro para mi bolsillo..."</p>
-                    <p class="miedo-a">Por eso la valoración empieza en $30.000. Primero conoces tu diagnóstico y
-                        opciones reales. <strong>Nunca decidirás sin saber el costo exacto.</strong></p>
-                </div>
-                <div class="miedo">
-                    <div class="miedo-icon"><i class="bi bi-person-fill-x"></i></div>
-                    <p class="miedo-q">"¿Y si no quedo como espero?"</p>
-                    <p class="miedo-a">Usamos simulación digital para que veas el resultado exacto antes de iniciar.
-                        <strong>No empezamos hasta que estés 100% seguro.</strong>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LOSS ANCHOR -->
-    <section class="loss-sec">
-        <div class="loss-inner">
-            <div class="loss-header">
-                <span class="s-label">El costo de esperar</span>
-                <h2 class="s-title">Lo que pasa cuando<br><em>lo dejamos para después</em></h2>
-                <p class="loss-sub">No es presión. Es honestidad. Estas son situaciones reales que vemos cada semana en
-                    el consultorio.</p>
-            </div>
-            <div class="loss-grid">
-                <div class="loss-card">
-                    <div class="loss-icon"><i class="bi bi-camera-fill"></i></div>
-                    <div class="loss-badge">Patrón frecuente</div>
-                    <div class="loss-q">"Evito salir en fotos de grupo"</div>
-                    <p class="loss-a">Pacientes que llevan años posicionándose siempre al lado derecho, o tapándose la
-                        boca al reír, o simplemente no saliendo en fotos. Todo por una sonrisa que tiene solución.</p>
-                </div>
-                <div class="loss-card">
-                    <div class="loss-icon"><i class="bi bi-bag-dash-fill"></i></div>
-                    <div class="loss-badge">Patrón frecuente</div>
-                    <div class="loss-q">"Me costó la primera impresión"</div>
-                    <p class="loss-a">La sonrisa es lo primero que se ve en una entrevista, una reunión, una cita.
-                        Varios de nuestros pacientes reconocen que la inseguridad con su sonrisa los frenó en momentos
-                        clave.</p>
-                </div>
-                <div class="loss-card">
-                    <div class="loss-icon"><i class="bi bi-heart-fill"></i></div>
-                    <div class="loss-badge">Patrón frecuente</div>
-                    <div class="loss-q">"Perdí meses de confianza"</div>
-                    <p class="loss-a">El tratamiento toma semanas. La seguridad que da una sonrisa nueva cambia cómo te
-                        mueves en el mundo. Cada mes que se espera es un mes sin esa versión de ti.</p>
-                </div>
-            </div>
-            <p class="loss-fn">La valoración dura 30 minutos. El cambio dura años.</p>
-        </div>
-    </section>
-
-    <!-- CHAT -->
-    <section class="chat-sec">
-        <div class="chat-inner">
-            <div class="chat-header">
-                <span class="s-label">Así de fácil comienza</span>
-                <h2 class="s-title">Una foto.<br><em>Una conversación real.</em></h2>
-                <p>No hay formularios. Solo escríbenos por WhatsApp, envíanos una foto y el Dr. Jorge te orienta — sin
-                    costo, sin presión.</p>
-            </div>
-            <div class="chat-win">
-                <div class="chat-bar">
-                    <div class="c-av"><i class="bi bi-emoji-smile-fill"></i></div>
-                    <div>
-                        <div class="c-name">Dentística · Dr. Jorge De La Rosa</div>
-                        <div class="c-status"><span class="c-dot"></span>En línea ahora</div>
-                    </div>
-                </div>
-                <div class="chat-body">
-                    <div class="msg r">
-                        <div class="m-time">9:14 am</div>
-                        <div class="bub p">Hola! Vi su página y quería preguntar sobre el diseño de sonrisa... no sé muy
-                            bien por dónde empezar 😊</div>
-                        <div class="m-av p"><i class="bi bi-person-fill"></i></div>
-                    </div>
-                    <div class="msg">
-                        <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
-                        <div class="bub c">¡Hola! Bienvenida 😊 No te preocupes — la mayoría llega igual. El mejor
-                            primer paso es enviarnos una foto de tu sonrisa. El Dr. Jorge te da una orientación
-                            <strong>completamente gratuita</strong> para que sepas qué opciones tienes.
-                        </div>
-                        <div class="m-time">9:15 am</div>
-                    </div>
-                    <div class="msg r">
-                        <div class="m-time">9:16 am</div>
-                        <div class="bub p">¿Y eso es gratis de verdad? ¿No me van a presionar? 😊</div>
-                        <div class="m-av p"><i class="bi bi-person-fill"></i></div>
-                    </div>
-                    <div class="msg">
-                        <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
-                        <div class="bub c">100% gratuito y sin ningún compromiso 😊 Aquí nadie presiona — el Dr. Jorge
-                            prefiere que vengas cuando estés lista. <strong>La decisión siempre es tuya.</strong></div>
-                        <div class="m-time">9:16 am</div>
-                    </div>
-                    <div class="msg r">
-                        <div class="m-time">9:18 am</div>
-                        <div class="bub p">Listo, te mando la foto 📷</div>
-                        <div class="m-av p"><i class="bi bi-person-fill"></i></div>
-                    </div>
-                    <div class="msg">
-                        <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
-                        <div class="bub c">¡Gracias! Ya vi tu foto 👁️ Tienes potencial real para un cambio muy bonito.
-                            Hay algo que <span class="hi">se ve mejor con la simulación en persona.</span> ¿Agendamos
-                            esta semana?</div>
-                        <div class="m-time">9:20 am</div>
-                    </div>
-                </div>
-                <div class="chat-foot">
-                    <div class="chat-input">Escribe tu mensaje...</div>
-                    <div class="chat-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#110820"
-                            stroke-width="2.5">
-                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                        </svg></div>
-                </div>
-            </div>
-            <div class="chat-cta-wrap">
-                <p class="chat-cta-note">Sin formularios. Sin presión. Solo una conversación humana.</p>
-                <a href="https://wa.me/573217264415?text=Hola!%20Vi%20la%20página%20y%20me%20gustaría%20saber%20más%20sobre%20mi%20sonrisa"
-                    class="btn-main" style="display:inline-flex;max-width:340px;"><span>Iniciar conversación
-                        ahora</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRECIOS -->
-    <section class="precios" id="precios">
-        <div class="precios-inner">
-            <div class="precios-header">
-                <span class="s-label">Tu punto de partida</span>
-                <h2 class="s-title">Dos experiencias.<br><em>Un mismo objetivo.</em></h2>
-                <p>Elige la que mejor se adapta. El valor se descuenta si inicias tratamiento en los próximos 7 días.
-                </p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pc">
-                    <span class="pc-tag e">Entrada</span>
-                    <div class="pc-name">Valoración Estética</div>
-                    <div class="pc-desc">Revisión clínica y simulación digital. Sales viendo exactamente cómo puede
-                        quedar tu sonrisa ideal.</div>
-                    <div class="pc-list">
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Revisión clínica con el Dr. Jorge
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Simulación digital de tu sonrisa
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Plan de tratamiento personalizado
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Asesoría de opciones y presupuesto
-                        </div>
-                    </div>
-                    <div class="pc-price">$30.000 <small>COP</small></div>
-                    <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Valoración%20Estética%20de%2030.000"
-                        class="pc-cta ghost">Agendar esta valoración</a>
-                    <p class="pc-note">Sin pago previo · Solo confirma por WhatsApp</p>
-                </div>
-                <div class="pc star">
-                    <div class="free-badge"><i class="bi bi-stars"></i> Upgrade recomendado</div>
-                    <span class="pc-tag p"><i class="bi bi-star-fill"></i> Más elegida</span>
-                    <div class="pc-name">Diagnóstico Integral</div>
-                    <div class="pc-desc">La experiencia completa. Sales con diagnóstico al 100% y plan listo para
-                        iniciar cuando quieras.</div>
-                    <div class="pc-list">
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Revisión clínica con el Dr. Jorge
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Simulación digital de tu sonrisa
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Limpieza profesional incluida
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Radiografía panorámica incluida
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Diagnóstico completo al 100%
-                        </div>
-                        <div class="pc-item">
-                            <div class="pc-check">✓</div>Plan de tratamiento listo para iniciar
-                        </div>
-                    </div>
-                    <div class="pc-price">$130.000 <small>COP</small></div>
-                    <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Experiencia%20Diagnóstica%20Completa%20de%20130.000"
-                        class="pc-cta main">Agendar experiencia completa</a>
-                    <p class="pc-note">Sin pago previo · Solo confirma por WhatsApp</p>
-                </div>
-            </div>
-            <p class="precios-fn">El valor de tu valoración se descuenta del tratamiento si inicias en los próximos 7
-                días.<br>No necesitas pagar nada para agendar — solo confirma por WhatsApp.</p>
-        </div>
-    </section>
-
-    <!-- GUARANTEE -->
-    <div class="guarantee">
-        <div class="guarantee-inner">
-            <div class="g-icon"><i class="bi bi-shield-fill-check"></i></div>
-            <div>
-                <div class="g-title">Ves el resultado antes de iniciar. Siempre.</div>
-                <div class="g-desc">Simulación digital en cada caso. No empezamos hasta que estés completamente seguro.
-                    Esa es nuestra promesa — sin excepciones.</div>
-            </div>
-            <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="btn-main"
-                style="flex-shrink:0;white-space:nowrap;"><span>Agendar ahora</span><svg width="14" height="14"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></a>
-        </div>
+        <span class="ba-hint">← Desliza para comparar →</span>
+      </div>
     </div>
+  </section>
 
-    <!-- DOCTOR -->
-    <section class="doctor" id="doctor">
-        <div class="doctor-inner">
-            <div style="position:relative">
-                <div class="doc-card">
-                    <img src="doctor.JPG"
-                        alt="Dr. Jorge De La Rosa">
-                </div>
-                <div class="doc-chip">
-                    <div class="doc-chip-n">10+</div>
-                    <div class="doc-chip-l">Años en<br>estética dental</div>
-                </div>
-            </div>
-            <div>
-                <span class="s-label">Tu especialista</span>
-                <h2 class="doc-name">Dr. Jorge<br><em>De La Rosa</em></h2>
-                <p class="doc-title">Especialista en Diseño de Sonrisa y Estética Dental · Barranquilla</p>
-                <p class="doc-desc">Más de una década diseñando sonrisas que cambian vidas. Cada caso planificado desde
-                    cero con simulación digital — ves tu resultado exacto antes de iniciar cualquier procedimiento.</p>
-                <div class="doc-creds">
-                    <div class="dc">
-                        <div class="dc-ico"><i class="bi bi-record-circle-fill"></i></div>
-                        <div class="dc-txt">Simulación digital previa en toda valoración — ves el resultado antes de
-                            decidir</div>
-                    </div>
-                    <div class="dc">
-                        <div class="dc-ico">📋</div>
-                        <div class="dc-txt">Más de 500 casos documentados con resultados verificables en Barranquilla
-                        </div>
-                    </div>
-                    <div class="dc">
-                        <div class="dc-ico"><i class="bi bi-people-fill"></i></div>
-                        <div class="dc-txt">El Dr. Jorge acompaña personalmente cada etapa — de la valoración al
-                            resultado final</div>
-                    </div>
-                </div>
-                <a href="https://wa.me/573217264415?text=Hola%20Dr.%20Jorge!%20Quiero%20agendar%20mi%20valoración"
-                    class="btn-main" style="width:fit-content;display:inline-flex;"><span>Hablar con el Dr.
-                        Jorge</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
+  <!-- ── STRIP ── -->
+  <div class="strip">
+    <div class="si"><i class="bi bi-star-fill dot"></i><span>Simulación digital <strong>antes de iniciar</strong></span></div>
+    <div class="sd"></div>
+    <div class="si"><i class="bi bi-star-fill dot"></i><span>El Dr. Jorge atiende <strong>cada caso personalmente</strong></span></div>
+    <div class="sd"></div>
+    <div class="si"><i class="bi bi-star-fill dot"></i><span>Valoración <strong>se descuenta</strong> del tratamiento</span></div>
+    <div class="sd"></div>
+    <div class="si"><i class="bi bi-star-fill dot"></i><span><strong>Sin pago previo</strong> para agendar</span></div>
+  </div>
+
+  <!-- ── QUIZ ── -->
+  <section class="quiz-sec">
+    <div class="quiz-inner">
+      <div class="quiz-header">
+        <span class="s-eyebrow-c">Descubre tu opción ideal</span>
+        <h2 class="s-title">¿Qué tipo de cambio<br><em>estás buscando?</em></h2>
+        <p>Responde 2 preguntas rápidas y te decimos exactamente qué valoración se adapta a tu caso.</p>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-progress">
+          <div class="qp-dot active" id="dot-1"></div>
+          <div class="qp-dot" id="dot-2"></div>
+          <div class="qp-dot" id="dot-3"></div>
         </div>
-    </section>
-
-    <!-- SERVICIOS -->
-    <section class="servicios" id="servicios">
-        <div class="svc-inner">
-            <div class="svc-header">
-                <span class="s-label">Tratamientos</span>
-                <h2 class="s-title">La sonrisa que imaginas<br><em>tiene un camino claro</em></h2>
-                <p>Cada tratamiento diseñado para tu caso específico, con materiales de alta calidad.</p>
-            </div>
-            <div class="svc-grid">
-                <div class="svc-card">
-                    <div class="svc-num">01</div>
-                    <div class="svc-name">Diseño en Resina</div>
-                    <div class="svc-desc">Estética rápida y mínimamente invasiva. Resultados el mismo día sin desgaste
-                        del diente. Ideal para forma, color y alineación.</div>
-                    <div class="svc-price">$1.300.000</div>
-                </div>
-                <div class="svc-card">
-                    <div class="svc-num">02</div>
-                    <div class="svc-name">Diseño en Disilicato</div>
-                    <div class="svc-desc">La opción premium permanente. Alta resistencia con translucidez que imita el
-                        esmalte natural. Para el mejor resultado posible.</div>
-                    <div class="svc-price">$5.000.000</div>
-                </div>
-                <div class="svc-card">
-                    <div class="svc-num">03</div>
-                    <div class="svc-name">Otros Tratamientos</div>
-                    <div class="svc-desc">Ortodoncia, blanqueamiento, rehabilitación oral y odontología general. Un
-                        equipo completo para toda tu salud bucal.</div>
-                    <div style="margin-top:18px"><a href="tratamientos.html"
-                            style="color:var(--lila);text-decoration:none;font-size:.83rem;font-weight:500">Mas
-                            informacion
-                            →</a></div>
-                </div>
-            </div>
+        <div class="quiz-step active" id="step-1">
+          <div class="quiz-q">¿Qué te molesta más de tu sonrisa ahora mismo?</div>
+          <div class="quiz-options">
+            <div class="quiz-opt" onclick="nextStep(2,'color')"><span class="quiz-opt-icon">🎨</span>El color — están oscuros o manchados</div>
+            <div class="quiz-opt" onclick="nextStep(2,'forma')"><span class="quiz-opt-icon">✂️</span>La forma — están desgastados, chuecos o irregulares</div>
+            <div class="quiz-opt" onclick="nextStep(2,'todo')"><span class="quiz-opt-icon">🔄</span>Todo en general — quiero un cambio completo</div>
+            <div class="quiz-opt" onclick="nextStep(2,'info')"><span class="quiz-opt-icon"><i class="bi bi-search-heart-fill"></i></span>Solo quiero saber mis opciones antes de decidir</div>
+          </div>
         </div>
-    </section>
-
-    <!-- TESTIMONIOS -->
-    <section class="testimonios">
-        <div class="test-inner">
-            <div class="test-header">
-                <span class="s-label">Lo que dicen nuestros pacientes</span>
-                <h2 class="s-title">Resultados que<br><em>hablan por sí solos</em></h2>
-            </div>
-            <div class="test-grid">
-                <div class="t-card">
-                    <div class="t-video"><video src="STUAR GRINGO.mp4" controls playsinline preload="metadata"></video>
-                    </div>
-                    <div class="t-caption">"Llegué con miedo y salí con la sonrisa que siempre quise. El Dr. Jorge me
-                        mostró el resultado antes y fue exactamente eso."</div>
-                    <div class="t-author">RUBÉN M.</div>
-                    <div class="t-service">Diseño en Resina</div>
-                </div>
-                <div class="t-card">
-                    <div class="t-video"><video src="PEGY PROCEDIMIENTO.mp4" controls playsinline
-                            preload="metadata"></video></div>
-                    <div class="t-caption">"La simulación previa fue lo que me convenció. Ver mi sonrisa antes de
-                        cualquier procedimiento me dio la confianza que necesitaba."</div>
-                    <div class="t-author">VALENTINA R.</div>
-                    <div class="t-service">Diseño en Disilicato</div>
-                </div>
-                <div class="t-card">
-                    <div class="t-video"><video src="ENTREVISTA LOCUTOR dentistica.mp4" controls playsinline
-                            preload="metadata"></video></div>
-                    <div class="t-caption">"Hoy sonrío en todas las fotos sin pensarlo dos veces. Fue la mejor inversión
-                        que he hecho en mí misma."</div>
-                    <div class="t-author">WENDY C.</div>
-                    <div class="t-service">Diseño en Resina</div>
-                </div>
-            </div>
+        <div class="quiz-step" id="step-2">
+          <div class="quiz-q">¿Cuándo te gustaría ver el resultado?</div>
+          <div class="quiz-options">
+            <div class="quiz-opt" onclick="nextStep(3,'rapido')"><span class="quiz-opt-icon">⚡</span>Lo antes posible — quiero verlo pronto</div>
+            <div class="quiz-opt" onclick="nextStep(3,'calidad')"><span class="quiz-opt-icon"><i class="bi bi-gem"></i></span>Me tomo el tiempo — quiero lo mejor</div>
+            <div class="quiz-opt" onclick="nextStep(3,'no-se')"><span class="quiz-opt-icon">🤔</span>Aún no sé — primero quiero conocer mis opciones</div>
+          </div>
         </div>
-    </section>
-
-    <!-- PROCESO -->
-    <section class="proceso">
-        <div class="proceso-inner">
-            <div class="proceso-header">
-                <span class="s-label">Cómo funciona</span>
-                <h2 class="s-title">De la foto de tu sonrisa<br><em>a tu resultado en 4 pasos</em></h2>
-            </div>
-            <div class="pasos">
-                <div class="pasos-line"></div>
-                <div class="paso">
-                    <div class="paso-circ">1</div>
-                    <div class="paso-name">Mini valoración</div>
-                    <div class="paso-desc">Foto por WhatsApp. Orientación gratuita del Dr. Jorge sin compromiso.</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-circ">2</div>
-                    <div class="paso-name">Agenda tu cita</div>
-                    <div class="paso-desc">Sin pago previo. Solo confirma por WhatsApp y asegura tu cupo.</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-circ">3</div>
-                    <div class="paso-name">Simulación digital</div>
-                    <div class="paso-desc">Ves exactamente cómo quedará tu sonrisa antes de decidir nada.</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-circ">4</div>
-                    <div class="paso-name">Tu nueva sonrisa</div>
-                    <div class="paso-desc">Plan claro, fechas definidas, resultado garantizado.</div>
-                </div>
-            </div>
+        <div class="quiz-step" id="step-3">
+          <div class="quiz-result-badge"><i class="bi bi-stars"></i> Tu opción ideal</div>
+          <div class="quiz-result-title" id="quiz-title">Valoración Estética — $30.000</div>
+          <div class="quiz-result-desc" id="quiz-desc">Basado en lo que nos contaste, la Valoración Estética es el primer paso perfecto.</div>
+          <a id="quiz-cta" href="https://wa.me/573217264415?text=Hola!%20Hice%20el%20quiz%20y%20quiero%20agendar" class="btn-main" style="max-width:320px;margin:18px auto 0;justify-content:center;">
+            <span id="quiz-cta-text">Agendar mi Valoración Estética</span>
+          </a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- FINAL CTA -->
-    <section class="final">
-        <div class="final-inner">
-            <div class="final-urgency"><span class="fu-dot"></span>Los cupos se asignan por orden de confirmación</div>
-            <h2>¿Listo para ver cómo puede quedar<br><em>tu sonrisa</em>?</h2>
-            <p class="final-desc">Envíanos una foto hoy. Sin costo, sin compromiso. Solo claridad total de lo que es
-                posible para tu caso — directamente del Dr. Jorge.</p>
-            <div class="final-ctas">
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20para%20mi%20valoración%20gratuita"
-                    class="btn-main" style="justify-content:space-between;"><span>Enviar foto de mi sonrisa —
-                        gratis</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-                <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración%20directamente"
-                    class="btn-ghost" style="justify-content:center;">Agendar valoración directamente</a>
-                <div class="risk-rev"><b>✓</b> Sin pago previo <span style="opacity:.3;margin:0 4px">·</span> <b>✓</b>
-                    Sin compromiso <span style="opacity:.3;margin:0 4px">·</span> <b>✓</b> Respuesta en minutos</div>
-            </div>
-            <div class="final-loc">
-                <span><i class="bi bi-geo-alt-fill"></i> Cra. 52 #76-167 Local 301, Barranquilla</span>
-                <span style="opacity:.3">·</span><span>Lunes a Sábado</span>
-                <span style="opacity:.3">·</span>
-                <a href="tel:+573217264415" style="color:var(--lila);text-decoration:none">+57 321 726 4415</a>
-            </div>
+  <!-- ── TRANSFORMACIONES ── -->
+  <section class="transform">
+    <div class="transform-inner">
+      <div class="transform-top">
+        <div>
+          <span class="s-label">Resultados reales</span>
+          <h2 class="s-title">Vidas que cambiaron<br>con <em>una sonrisa</em></h2>
+          <p class="transform-intro">Cada caso es único y planificado desde cero con simulación digital. Estos son pacientes reales de Barranquilla.</p>
         </div>
-    </section>
+        <div class="counter-badge">
+          <div class="counter-n">500+</div>
+          <div class="counter-l">Sonrisas transformadas</div>
+        </div>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card">
+          <div class="ba-card-visual">
+            <div class="ba-wrap">
+              <img class="ba-img ba-img-before" src="imgDespues0.JPG" alt="Después">
+              <img class="ba-img ba-img-after"  src="imgAntes0.JPG"  alt="Antes">
+              <div class="ba-fade"></div>
+              <span class="ba-lbl ba-lbl-b">Después</span>
+              <span class="ba-lbl ba-lbl-a">Antes</span>
+              <div class="ba-slider"><div class="ba-slider-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#110820" stroke-width="2.5"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg></div></div>
+              <span class="ba-hint">← Desliza →</span>
+            </div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-name">Valentina R.</div>
+            <div class="ba-service">Diseño en Disilicato</div>
+            <div class="ba-quote">"Nunca imaginé que mi sonrisa podía quedar así. El Dr. Jorge me mostró el resultado antes y fue exactamente eso."</div>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-card-visual">
+            <div class="ba-wrap">
+              <img class="ba-img ba-img-before" src="imgDespues1.JPG" alt="Después">
+              <img class="ba-img ba-img-after"  src="imgAntes1.JPG"  alt="Antes">
+              <div class="ba-fade"></div>
+              <span class="ba-lbl ba-lbl-b">Después</span>
+              <span class="ba-lbl ba-lbl-a">Antes</span>
+              <div class="ba-slider"><div class="ba-slider-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#110820" stroke-width="2.5"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg></div></div>
+              <span class="ba-hint">← Desliza →</span>
+            </div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-name">Rubén M.</div>
+            <div class="ba-service">Diseño en Resina</div>
+            <div class="ba-quote">"Llegué con miedo y salí con la sonrisa que siempre quise. El proceso fue más rápido de lo que esperaba."</div>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-card-visual">
+            <div class="ba-wrap">
+              <img class="ba-img ba-img-before" src="imgDespues2.JPG" alt="Después">
+              <img class="ba-img ba-img-after"  src="imgAntes2.jpeg"  alt="Antes">
+              <div class="ba-fade"></div>
+              <span class="ba-lbl ba-lbl-b">Después</span>
+              <span class="ba-lbl ba-lbl-a">Antes</span>
+              <div class="ba-slider"><div class="ba-slider-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#110820" stroke-width="2.5"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg></div></div>
+              <span class="ba-hint">← Desliza →</span>
+            </div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-name">Wendy C.</div>
+            <div class="ba-service">Diseño en Resina</div>
+            <div class="ba-quote">"Hoy sonrío en todas las fotos sin pensarlo dos veces. La mejor inversión de mi vida."</div>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="nav-cta btn-ex">Agendar cita</a>
+    </div>
+  </section>
 
-    <footer>
-        <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
-        <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
-    </footer>
+  <!-- ── MIEDOS ── -->
+  <section class="miedos">
+    <div class="miedos-inner">
+      <div class="miedos-header">
+        <span class="s-label">Te entendemos</span>
+        <h2 class="s-title">Lo que la mayoría piensa<br>antes de escribirnos</h2>
+        <p>Es completamente normal tener dudas. Aquí respondemos lo que casi todos preguntan antes de dar el primer paso.</p>
+      </div>
+      <div class="miedos-grid">
+        <div class="miedo">
+          <div class="miedo-icon"><i class="bi bi-person-heart"></i></div>
+          <p class="miedo-q">"Me da pena porque mis dientes están muy mal..."</p>
+          <p class="miedo-a">Llevamos más de 10 años viendo todo tipo de casos. Nuestro trabajo es exactamente ese. <strong>No hay casos imposibles aquí.</strong></p>
+        </div>
+        <div class="miedo">
+          <div class="miedo-icon"><i class="bi bi-currency-dollar"></i></div>
+          <p class="miedo-q">"Seguro es muy caro para mi bolsillo..."</p>
+          <p class="miedo-a">Por eso la valoración empieza en $30.000. Primero conoces tu diagnóstico y opciones reales. <strong>Nunca decidirás sin saber el costo exacto.</strong></p>
+        </div>
+        <div class="miedo">
+          <div class="miedo-icon"><i class="bi bi-person-fill-x"></i></div>
+          <p class="miedo-q">"¿Y si no quedo como espero?"</p>
+          <p class="miedo-a">Usamos simulación digital para que veas el resultado exacto antes de iniciar. <strong>No empezamos hasta que estés 100% seguro.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística"
-        target="_blank">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-    </a>
+  <!-- ── LOSS ANCHOR ── -->
+  <section class="loss-sec">
+    <div class="loss-inner">
+      <div class="loss-header">
+        <span class="s-label">El costo de esperar</span>
+        <h2 class="s-title">Lo que pasa cuando<br><em>lo dejamos para después</em></h2>
+        <p class="loss-sub">No es presión. Es honestidad. Estas son situaciones reales que vemos cada semana en el consultorio.</p>
+      </div>
+      <div class="loss-grid">
+        <div class="loss-card">
+          <div class="loss-icon"><i class="bi bi-camera-fill"></i></div>
+          <div class="loss-badge">Patrón frecuente</div>
+          <div class="loss-q">"Evito salir en fotos de grupo"</div>
+          <p class="loss-a">Pacientes que llevan años tapándose la boca al reír, posicionándose siempre al lado derecho, o simplemente no saliendo en fotos. Todo por una sonrisa que tiene solución.</p>
+        </div>
+        <div class="loss-card">
+          <div class="loss-icon"><i class="bi bi-bag-dash-fill"></i></div>
+          <div class="loss-badge">Patrón frecuente</div>
+          <div class="loss-q">"Me costó la primera impresión"</div>
+          <p class="loss-a">La sonrisa es lo primero que se ve en una entrevista, una reunión, una cita. Varios pacientes reconocen que la inseguridad con su sonrisa los frenó en momentos clave.</p>
+        </div>
+        <div class="loss-card">
+          <div class="loss-icon"><i class="bi bi-heart-fill"></i></div>
+          <div class="loss-badge">Patrón frecuente</div>
+          <div class="loss-q">"Perdí meses de confianza"</div>
+          <p class="loss-a">El tratamiento toma semanas. La seguridad que da una sonrisa nueva cambia cómo te mueves en el mundo. Cada mes que se espera es un mes sin esa versión de ti.</p>
+        </div>
+      </div>
+      <p class="loss-fn">La valoración dura 30 minutos. El cambio dura años.</p>
+    </div>
+  </section>
 
-    <script>
-        // ── QUIZ ──────────────────────────────────────────
-        window.quizAnswers = {};
-        function nextStep(step, answer) {
-            window.quizAnswers['step' + (step - 1)] = answer;
-            var prev = document.getElementById('dot-' + (step - 1));
-            if (prev) { prev.classList.remove('active'); prev.classList.add('done'); }
-            var next = document.getElementById('dot-' + step);
-            if (next) next.classList.add('active');
-            document.querySelectorAll('.quiz-step').forEach(function (s) { s.classList.remove('active'); });
-            if (step === 3) {
-                var a1 = window.quizAnswers['step1'], a2 = window.quizAnswers['step2'];
-                var title, desc, cta;
-                if (a2 === 'calidad') {
-                    title = 'Diagnóstico Integral — $130.000';
-                    desc = 'Sales con diagnóstico al 100%, radiografía panorámica, limpieza incluida y plan de tratamiento listo para el mejor resultado posible.';
-                    cta = 'Agendar Diagnóstico Integral';
-                } else if (a1 === 'info' || a2 === 'no-se') {
-                    title = 'Empieza con la foto gratuita';
-                    desc = 'Antes de decidir cualquier cosa, envíanos una foto de tu sonrisa. El Dr. Jorge te orienta directamente y sin costo.';
-                    cta = 'Enviar foto — completamente gratis';
-                } else {
-                    title = 'Valoración Estética — $30.000';
-                    desc = 'En 30 minutos con el Dr. Jorge verás exactamente qué es posible para tu caso con simulación digital incluida.';
-                    cta = 'Agendar mi Valoración Estética';
-                }
-                document.getElementById('quiz-title').textContent = title;
-                document.getElementById('quiz-desc').textContent = desc;
-                document.getElementById('quiz-cta-text').textContent = cta;
-            }
-            var s = document.getElementById('step-' + step);
-            if (s) s.classList.add('active');
-        }
+  <!-- ── CHAT ── -->
+  <section class="chat-sec">
+    <div class="chat-inner">
+      <div class="chat-header">
+        <span class="s-label">Así de fácil comienza</span>
+        <h2 class="s-title">Una foto.<br><em>Una conversación real.</em></h2>
+        <p>No hay formularios. Solo escríbenos por WhatsApp, envíanos una foto y el Dr. Jorge te orienta — sin costo, sin presión.</p>
+      </div>
+      <div class="chat-win">
+        <div class="chat-bar">
+          <div class="c-av"><i class="bi bi-emoji-smile-fill"></i></div>
+          <div>
+            <div class="c-name">Dentística · Dr. Jorge De La Rosa</div>
+            <div class="c-status"><span class="c-dot"></span>En línea ahora</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="msg r">
+            <div class="m-time">9:14 am</div>
+            <div class="bub p">Hola! Vi su página y quería preguntar sobre el diseño de sonrisa... no sé muy bien por dónde empezar 😊</div>
+            <div class="m-av p"><i class="bi bi-person-fill"></i></div>
+          </div>
+          <div class="msg">
+            <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
+            <div class="bub c">¡Hola! Bienvenida 😊 No te preocupes — la mayoría llega igual. El mejor primer paso es enviarnos una foto de tu sonrisa. El Dr. Jorge te da una orientación <strong>completamente gratuita</strong> para que sepas qué opciones tienes.</div>
+            <div class="m-time">9:15 am</div>
+          </div>
+          <div class="msg r">
+            <div class="m-time">9:16 am</div>
+            <div class="bub p">¿Y eso es gratis de verdad? ¿No me van a presionar? 😊</div>
+            <div class="m-av p"><i class="bi bi-person-fill"></i></div>
+          </div>
+          <div class="msg">
+            <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
+            <div class="bub c">100% gratuito y sin ningún compromiso 😊 Aquí nadie presiona — el Dr. Jorge prefiere que vengas cuando estés lista. <strong>La decisión siempre es tuya.</strong></div>
+            <div class="m-time">9:16 am</div>
+          </div>
+          <div class="msg r">
+            <div class="m-time">9:18 am</div>
+            <div class="bub p">Listo, te mando la foto 📷</div>
+            <div class="m-av p"><i class="bi bi-person-fill"></i></div>
+          </div>
+          <div class="msg">
+            <div class="m-av c"><i class="bi bi-emoji-smile-fill"></i></div>
+            <div class="bub c">¡Gracias! Ya vi tu foto 👁️ Tienes potencial real para un cambio muy bonito. Hay algo que <span class="hi">se ve mejor con la simulación en persona.</span> ¿Agendamos esta semana?</div>
+            <div class="m-time">9:20 am</div>
+          </div>
+        </div>
+        <div class="chat-foot">
+          <div class="chat-input">Escribe tu mensaje...</div>
+          <div class="chat-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#110820" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="chat-cta-wrap">
+        <p class="chat-cta-note">Sin formularios. Sin presión. Solo una conversación humana.</p>
+        <a href="https://wa.me/573217264415?text=Hola!%20Vi%20la%20página%20y%20me%20gustaría%20saber%20más%20sobre%20mi%20sonrisa" class="btn-main" style="display:inline-flex;max-width:340px;">
+          <span>Iniciar conversación ahora</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        // ── HAMBURGER ────────────────────────────────────
-        (function () {
-            var toggle = document.getElementById('navToggle');
-            var menu = document.getElementById('mobileMenu');
-            if (!toggle || !menu) return;
-            toggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var open = menu.classList.toggle('show');
-                toggle.setAttribute('aria-expanded', open);
-            });
-            document.addEventListener('click', function (e) {
-                if (menu.classList.contains('show') && !menu.contains(e.target) && !toggle.contains(e.target)) {
-                    menu.classList.remove('show');
-                }
-            });
-            menu.querySelectorAll('a').forEach(function (a) {
-                a.addEventListener('click', function () { menu.classList.remove('show'); });
-            });
-        })();
+  <!-- ── PRECIOS ── -->
+  <section class="precios" id="precios">
+    <div class="precios-inner">
+      <div class="precios-header">
+        <span class="s-label">Tu punto de partida</span>
+        <h2 class="s-title">Dos experiencias.<br><em>Un mismo objetivo.</em></h2>
+        <p>Elige la que mejor se adapta. El valor se descuenta si inicias tratamiento en los próximos 7 días.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pc">
+          <span class="pc-tag e">Entrada</span>
+          <div class="pc-name">Valoración Estética</div>
+          <div class="pc-desc">Revisión clínica y simulación digital. Sales viendo exactamente cómo puede quedar tu sonrisa ideal.</div>
+          <div class="pc-list">
+            <div class="pc-item"><div class="pc-check">✓</div>Revisión clínica con el Dr. Jorge</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Simulación digital de tu sonrisa</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Plan de tratamiento personalizado</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Asesoría de opciones y presupuesto</div>
+          </div>
+          <div class="pc-price">$30.000 <small>COP</small></div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Valoración%20Estética%20de%2030.000" class="pc-cta ghost">Agendar esta valoración</a>
+          <p class="pc-note">Sin pago previo · Solo confirma por WhatsApp</p>
+        </div>
+        <div class="pc star">
+          <div class="free-badge"><i class="bi bi-stars"></i> Upgrade recomendado</div>
+          <span class="pc-tag p"><i class="bi bi-star-fill"></i> Más elegida</span>
+          <div class="pc-name">Diagnóstico Integral</div>
+          <div class="pc-desc">La experiencia completa. Sales con diagnóstico al 100% y plan listo para iniciar cuando quieras.</div>
+          <div class="pc-list">
+            <div class="pc-item"><div class="pc-check">✓</div>Revisión clínica con el Dr. Jorge</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Simulación digital de tu sonrisa</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Limpieza profesional incluida</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Radiografía panorámica incluida</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Diagnóstico completo al 100%</div>
+            <div class="pc-item"><div class="pc-check">✓</div>Plan de tratamiento listo para iniciar</div>
+          </div>
+          <div class="pc-price">$130.000 <small>COP</small></div>
+          <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20la%20Experiencia%20Diagnóstica%20Completa%20de%20130.000" class="pc-cta main">Agendar experiencia completa</a>
+          <p class="pc-note">Sin pago previo · Solo confirma por WhatsApp</p>
+        </div>
+      </div>
+      <p class="precios-fn">El valor de tu valoración se descuenta del tratamiento si inicias en los próximos 7 días.<br>No necesitas pagar nada para agendar — solo confirma por WhatsApp.</p>
+    </div>
+  </section>
 
-        // ── ACTIVITY BAR ─────────────────────────────────
-        (function () {
-            var items = [
-                { label: '<b>Alguien</b> envió fotos de su sonrisa', time: 'hace 51 min' },
-                { label: '<b>Alguien</b> reservó su cupo de valoración', time: 'hace 23 min' },
-                { label: '<b>Alguien</b> agendó su Diagnóstico Integral', time: 'hace 1 hora' },
-                { label: '<b>Alguien</b> solicitó su simulación digital', time: 'hace 38 min' },
-                { label: '<b>Alguien</b> envió foto para orientación gratuita', time: 'hace 12 min' },
-            ];
-            var idx = 0;
-            var lbl = document.getElementById('abLabel');
-            var tim = document.getElementById('abTime');
-            if (!lbl || !tim) return;
-            lbl.style.transition = tim.style.transition = 'opacity .3s';
-            setInterval(function () {
-                idx = (idx + 1) % items.length;
-                lbl.style.opacity = tim.style.opacity = '0';
-                setTimeout(function () {
-                    lbl.innerHTML = items[idx].label;
-                    tim.textContent = items[idx].time;
-                    lbl.style.opacity = tim.style.opacity = '1';
-                }, 300);
-            }, 8000);
-        })();
-    </script>
+  <!-- ── GUARANTEE ── -->
+  <div class="guarantee">
+    <div class="guarantee-inner">
+      <div class="g-icon"><i class="bi bi-shield-fill-check"></i></div>
+      <div>
+        <div class="g-title">Ves el resultado antes de iniciar. Siempre.</div>
+        <div class="g-desc">Simulación digital en cada caso. No empezamos hasta que estés completamente seguro. Esa es nuestra promesa — sin excepciones.</div>
+      </div>
+      <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración" class="btn-main" style="flex-shrink:0;white-space:nowrap;">
+        <span>Agendar ahora</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DOCTOR (index) ── -->
+  <section class="doctor-idx" id="doctor">
+    <div class="doctor-idx-inner">
+      <div style="position:relative">
+        <div class="doc-card">
+          <img src="doctor.JPG" alt="Dr. Jorge De La Rosa">
+        </div>
+        <div class="doc-chip">
+          <div class="doc-chip-n">10+</div>
+          <div class="doc-chip-l">Años en<br>estética dental</div>
+        </div>
+      </div>
+      <div>
+        <span class="s-label">Tu especialista</span>
+        <h2 class="doc-name">Dr. Jorge<br><em>De La Rosa</em></h2>
+        <p class="doc-title-txt">Especialista en Diseño de Sonrisa y Estética Dental · Barranquilla</p>
+        <p class="doc-desc">Más de una década diseñando sonrisas que cambian vidas. Cada caso planificado desde cero con simulación digital — ves tu resultado exacto antes de iniciar cualquier procedimiento.</p>
+        <div class="doc-creds">
+          <div class="dc">
+            <div class="dc-ico"><i class="bi bi-record-circle-fill"></i></div>
+            <div class="dc-txt">Simulación digital previa en toda valoración — ves el resultado antes de decidir</div>
+          </div>
+          <div class="dc">
+            <div class="dc-ico">📋</div>
+            <div class="dc-txt">Más de 500 casos documentados con resultados verificables en Barranquilla</div>
+          </div>
+          <div class="dc">
+            <div class="dc-ico"><i class="bi bi-people-fill"></i></div>
+            <div class="dc-txt">El Dr. Jorge acompaña personalmente cada etapa — de la valoración al resultado final</div>
+          </div>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola%20Dr.%20Jorge!%20Quiero%20agendar%20mi%20valoración" class="btn-main" style="display:inline-flex;max-width:300px;">
+          <span>Hablar con el Dr. Jorge</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICIOS ── -->
+  <section class="servicios" id="servicios">
+    <div class="svc-inner">
+      <div class="svc-header">
+        <span class="s-label">Tratamientos</span>
+        <h2 class="s-title">La sonrisa que imaginas<br><em>tiene un camino claro</em></h2>
+        <p>Cada tratamiento diseñado para tu caso específico, con materiales de alta calidad.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-num">01</div>
+          <div class="svc-name">Diseño en Resina</div>
+          <div class="svc-desc">Estética rápida y mínimamente invasiva. Resultados el mismo día sin desgaste del diente. Ideal para mejorar forma, color y alineación.</div>
+          <div class="svc-price">$130.000 por carilla</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-num">02</div>
+          <div class="svc-name">Diseño en Disilicato</div>
+          <div class="svc-desc">La opción premium permanente. Alta resistencia con translucidez que imita el esmalte natural. Si quieres el resultado más natural y duradero, este es tu material.</div>
+          <div class="svc-price">$500.000 por carilla</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-num">03</div>
+          <div class="svc-name">Otros Tratamientos</div>
+          <div class="svc-desc">Ortodoncia, blanqueamiento, rehabilitación oral y odontología general. Un equipo completo para toda tu salud bucal.</div>
+          <a href="tratamientos.html" class="svc-link">Ver todos los tratamientos →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIOS ── -->
+  <section class="testimonios">
+    <div class="test-inner">
+      <div class="test-header">
+        <span class="s-label">Lo que dicen nuestros pacientes</span>
+        <h2 class="s-title">Resultados que<br><em>hablan por sí solos</em></h2>
+      </div>
+      <div class="test-grid">
+        <div class="t-card">
+          <div class="t-video"><video src="STUAR GRINGO.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="t-caption">"Llegué con miedo y salí con la sonrisa que siempre quise. El Dr. Jorge me mostró el resultado antes y fue exactamente eso."</div>
+          <div class="t-author">RUBÉN M.</div>
+          <div class="t-service">Diseño en Resina</div>
+        </div>
+        <div class="t-card">
+          <div class="t-video"><video src="PEGY PROCEDIMIENTO.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="t-caption">"La simulación previa fue lo que me convenció. Ver mi sonrisa antes de cualquier procedimiento me dio la confianza que necesitaba."</div>
+          <div class="t-author">VALENTINA R.</div>
+          <div class="t-service">Diseño en Disilicato</div>
+        </div>
+        <div class="t-card">
+          <div class="t-video"><video src="ENTREVISTA LOCUTOR dentistica.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="t-caption">"Hoy sonrío en todas las fotos sin pensarlo dos veces. Fue la mejor inversión que he hecho en mí misma."</div>
+          <div class="t-author">WENDY C.</div>
+          <div class="t-service">Diseño en Resina</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESO ── -->
+  <section class="proceso">
+    <div class="proceso-inner">
+      <div class="proceso-header">
+        <span class="s-label">Cómo funciona</span>
+        <h2 class="s-title">De la foto de tu sonrisa<br><em>a tu resultado en 4 pasos</em></h2>
+      </div>
+      <div class="pasos">
+        <div class="pasos-line"></div>
+        <div class="paso">
+          <div class="paso-circ">1</div>
+          <div class="paso-name">Mini valoración</div>
+          <div class="paso-desc">Foto por WhatsApp. Orientación gratuita del Dr. Jorge sin compromiso.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-circ">2</div>
+          <div class="paso-name">Agenda tu cita</div>
+          <div class="paso-desc">Sin pago previo. Solo confirma por WhatsApp y asegura tu cupo.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-circ">3</div>
+          <div class="paso-name">Simulación digital</div>
+          <div class="paso-desc">Ves exactamente cómo quedará tu sonrisa antes de decidir nada.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-circ">4</div>
+          <div class="paso-name">Tu nueva sonrisa</div>
+          <div class="paso-desc">Plan claro, fechas definidas, resultado garantizado.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="final">
+    <div class="final-inner">
+      <div class="final-urgency"><span class="fu-dot"></span>Los cupos se asignan por orden de confirmación</div>
+      <h2>¿Listo para ver cómo puede quedar<br><em>tu sonrisa</em>?</h2>
+      <p class="final-desc">Envíanos una foto hoy. Sin costo, sin compromiso. Solo claridad total de lo que es posible para tu caso — directamente del Dr. Jorge.</p>
+      <div class="final-ctas">
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa%20para%20mi%20valoración%20gratuita" class="btn-main" style="justify-content:space-between;">
+          <span>Enviar foto de mi sonrisa — gratis</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20agendar%20mi%20valoración%20directamente" class="btn-ghost" style="justify-content:center;">Agendar valoración directamente</a>
+        <div class="risk-rev"><b>✓</b> Sin pago previo <span style="opacity:.3;margin:0 6px">·</span> <b>✓</b> Sin compromiso <span style="opacity:.3;margin:0 6px">·</span> <b>✓</b> Respuesta en minutos</div>
+      </div>
+      <div class="final-loc">
+        <span><i class="bi bi-geo-alt-fill"></i> Cra. 52 #76-167 Local 301, Barranquilla</span>
+        <span style="opacity:.3">·</span>
+        <span>Lunes a Sábado</span>
+        <span style="opacity:.3">·</span>
+        <a href="tel:+573217264415">+57 321 726 4415</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2025 Dentística · Dr. Jorge De La Rosa · Barranquilla, Colombia</span>
+    <a href="https://wa.me/573217264415">WhatsApp: +57 321 726 4415</a>
+  </footer>
+
+  <!-- ── WHATSAPP FLOAT ── -->
+  <a class="wa" href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20Dentística" target="_blank" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="app.js"></script>
 </body>
-
 </html>
