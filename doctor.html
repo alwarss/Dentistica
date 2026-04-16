@@ -8,6 +8,450 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="logoDentisticaCompleto.png">
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       FORMACIÓN CARDS
+    ══════════════════════════════════════════════════════ */
+    .doc-formation {
+      margin-bottom: 32px;
+    }
+    .doc-formation-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--metal-d);
+      margin-bottom: 14px;
+    }
+    .form-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .form-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface2);
+      border: 1px solid rgba(184,169,201,.08);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color .25s;
+    }
+    .form-card:hover { border-color: rgba(184,169,201,.2) }
+    .form-card.featured {
+      border-color: rgba(184,169,201,.2);
+      background: linear-gradient(135deg, var(--surface2), rgba(184,169,201,.05));
+    }
+    .form-icon {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184,169,201,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; margin-top: 1px;
+    }
+    .form-info {}
+    .form-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .form-card.featured .form-name { color: var(--lila-b) }
+    .form-institution {
+      font-size: 0.875rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+    .form-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--lila-dim);
+      border: 1px solid rgba(184,169,201,.2);
+      color: var(--lila);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-top: 5px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TRAITS GRID
+    ══════════════════════════════════════════════════════ */
+    .doc-traits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .trait {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1px solid rgba(184,169,201,.06);
+      border-radius: 10px;
+      padding: 14px;
+      transition: border-color .25s;
+    }
+    .trait:hover { border-color: rgba(184,169,201,.16) }
+    .trait-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px }
+    .trait-text {
+      font-size: 0.875rem;
+      color: var(--metal);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .trait-text strong {
+      color: var(--txt);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       FLOATING QUOTE CARD
+    ══════════════════════════════════════════════════════ */
+    .doc-quote-card {
+      position: absolute;
+      top: 28px;
+      left: -20px;
+      background: rgba(28,16,53,.92);
+      border: 1px solid rgba(184,169,201,.15);
+      border-radius: 14px;
+      padding: 16px 18px;
+      max-width: 220px;
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+    .dqc-stars {
+      color: var(--lila);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+    .dqc-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--white);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .dqc-author {
+      font-size: 0.75rem;
+      color: var(--metal-d);
+      font-weight: 300;
+    }
+    @media (max-width: 960px) {
+      .doc-quote-card { display: none }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       DOCTOR CTA ROW
+    ══════════════════════════════════════════════════════ */
+    .doc-ctas {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 500px) {
+      .doc-traits { grid-template-columns: 1fr }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TRATAMIENTOS SECTION
+    ══════════════════════════════════════════════════════ */
+    .trat-section {
+      padding: 100px 6%;
+      background: var(--uva);
+      position: relative;
+    }
+    .trat-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(184,169,201,.15), transparent);
+    }
+    .trat-inner { max-width: 1100px; margin: 0 auto }
+
+    .trat-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 768px) { .trat-header { grid-template-columns: 1fr } }
+
+    .trat-intro {
+      font-size: 1rem;
+      color: var(--metal);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-top: .8rem;
+      max-width: 460px;
+    }
+    .trat-header-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--lila);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: gap .25s;
+    }
+    .trat-header-cta:hover { gap: 10px }
+
+    /* Grid */
+    .trat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 768px) { .trat-grid { grid-template-columns: 1fr } }
+
+    /* Treatment card base */
+    .trat-card {
+      background: var(--surface);
+      border: 1px solid rgba(184,169,201,.07);
+      border-radius: 18px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all .35s;
+      display: flex;
+      flex-direction: column;
+    }
+    .trat-card:hover {
+      border-color: rgba(184,169,201,.2);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    .trat-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent);
+      transform: scaleX(0); transform-origin: center;
+      transition: transform .4s ease;
+    }
+    .trat-card:hover::after { transform: scaleX(1) }
+
+    /* Featured card */
+    .trat-card.featured {
+      background: linear-gradient(150deg, var(--surface) 0%, rgba(184,169,201,.06) 100%);
+      border-color: rgba(184,169,201,.16);
+    }
+    .trat-card.featured::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--lila), transparent);
+    }
+
+    /* Wide card */
+    .trat-card.wide {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+      padding: 28px 36px;
+    }
+    @media (max-width: 768px) {
+      .trat-card.wide {
+        flex-direction: column;
+        gap: 20px;
+        grid-column: auto;
+      }
+    }
+
+    .trat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4rem;
+      font-style: italic;
+      color: rgba(184,169,201,.07);
+      line-height: 1;
+      margin-bottom: 10px;
+      transition: color .3s;
+    }
+    .trat-card:hover .trat-num { color: rgba(184,169,201,.14) }
+
+    .trat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+    .badge-resina {
+      background: rgba(184,169,201,.1);
+      color: var(--lila);
+      border: 1px solid rgba(184,169,201,.2);
+    }
+    .badge-disilicato {
+      background: rgba(184,169,201,.15);
+      color: var(--lila-b);
+      border: 1px solid rgba(184,169,201,.28);
+    }
+    .badge-otros {
+      background: rgba(168,180,190,.08);
+      color: var(--metal);
+      border: 1px solid rgba(168,180,190,.14);
+    }
+
+    .trat-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .trat-card.featured .trat-name { font-size: 1.8rem }
+
+    .trat-simple-desc {
+      font-size: 1rem;
+      color: var(--metal);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .trat-simple-desc strong { color: var(--metal-l); font-weight: 500 }
+
+    .trat-for {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(184,169,201,.07);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .trat-for span { color: var(--lila); font-weight: 500 }
+
+    .trat-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .tb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--txt);
+      font-weight: 300;
+    }
+    .tb-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--lila);
+      flex-shrink: 0;
+      opacity: .7;
+    }
+
+    .trat-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--lila);
+      margin-bottom: 4px;
+    }
+    .trat-card.featured .trat-price { font-size: 2.2rem; color: var(--lila-b) }
+    .trat-price-note {
+      font-size: 0.75rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .trat-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all .3s;
+    }
+    .tc-filled { background: var(--lila); color: var(--uva-deep) }
+    .tc-filled:hover { background: var(--lila-b); box-shadow: 0 8px 24px rgba(184,169,201,.3) }
+    .tc-ghost { border: 1px solid rgba(184,169,201,.18); color: var(--metal-l) }
+    .tc-ghost:hover { border-color: var(--lila); color: var(--lila) }
+
+    /* Wide card internals */
+    .wide-left { flex-shrink: 0 }
+    .wide-right { flex: 1 }
+    .otros-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .otro-tag {
+      background: var(--surface2);
+      border: 1px solid rgba(184,169,201,.1);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.875rem;
+      color: var(--metal);
+      font-weight: 300;
+      transition: all .25s;
+      cursor: default;
+    }
+    .otro-tag:hover { border-color: rgba(184,169,201,.28); color: var(--lila) }
+
+    /* Bottom band */
+    .trat-band-full {
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--lila-dim), var(--surface));
+      border: 1px solid rgba(184,169,201,.12);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .trat-band-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .trat-band-title em { font-style: italic; color: var(--lila) }
+    .trat-band-sub {
+      font-size: 0.875rem;
+      color: var(--metal-d);
+      font-weight: 300;
+      max-width: 460px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
 
@@ -28,7 +472,7 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="logoDentisticaCompleto.webp" alt="Dentística" class="logo-img">
+        <img src="logoDentisticaCompleto.png" alt="Dentística" class="logo-img">
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -43,29 +487,107 @@
     </div>
   </nav>
 
-  <!-- DOCTOR SECTION -->
+  <!-- ══════════════════════════════════════════════════════
+       DOCTOR SECTION — versión expandida
+  ══════════════════════════════════════════════════════ -->
   <section class="doctor-section">
     <div class="doctor-inner">
 
+      <!-- VISUAL -->
       <div class="doctor-visual">
+
         <img src="doctor.JPG" alt="Dr. Jorge De La Rosa" class="doctor-photo">
+
         <div class="doctor-years">
           <div class="dy-num">10+</div>
           <div class="dy-label">Años en<br>estética dental</div>
         </div>
       </div>
 
+      <!-- CONTENT -->
       <div class="doctor-content">
         <div class="s-label">Tu especialista</div>
         <h2 class="doctor-name">Dr. Jorge<br><em>De La Rosa</em></h2>
         <p class="doctor-specialty">Especialista en Diseño de Sonrisa y Estética Dental · Barranquilla</p>
 
         <p class="doctor-bio">
-          Más de una década diseñando sonrisas que cambian vidas. Cada caso planificado desde cero con simulación digital — ves tu resultado exacto antes de iniciar cualquier procedimiento.
+          Soy odontólogo con más de 10 años dedicados casi exclusivamente a la estética dental.
+          Lo que más me gusta de este trabajo no es el procedimiento en sí —
+          es ese momento en que el paciente se mira al espejo por primera vez
+          y no puede dejar de sonreír.
           <br><br>
-          Aquí no hay tecnicismos ni protocolos fríos. Te explico todo en palabras simples, te muestro exactamente qué vamos a hacer y <strong>no empezamos hasta que estés completamente seguro</strong>.
+          Aquí no vas a encontrar tecnicismos ni protocolos fríos. Te explico todo en lenguaje sencillo,
+          te muestro exactamente qué vamos a hacer y <strong>no empezamos hasta que estés completamente seguro</strong>.
+          Cada caso lo manejo yo personalmente — desde la primera valoración hasta el resultado final.
         </p>
 
+        <!-- FORMACIÓN -->
+        <div class="doc-formation">
+          <div class="doc-formation-title">Formación y certificaciones</div>
+          <div class="form-cards">
+
+            <div class="form-card featured">
+              <div class="form-icon">🎓</div>
+              <div class="form-info">
+                <div class="form-name">Diplomado en Odontología Estética</div>
+                <div class="form-institution">Universidad del Norte · Barranquilla<br>Una de las instituciones académicas más reconocidas de Colombia en ciencias de la salud</div>
+                <div class="form-badge">✦ Formación de alto nivel</div>
+              </div>
+            </div>
+
+            <div class="form-card featured">
+              <div class="form-icon">⭐</div>
+              <div class="form-info">
+                <div class="form-name">Curso Especializado en Estética Dental</div>
+                <div class="form-institution">Instituto Opzione · Formación internacional en técnicas avanzadas de diseño de sonrisa y materiales estéticos</div>
+                <div class="form-badge">✦ Técnicas internacionales</div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-icon">📚</div>
+              <div class="form-info">
+                <div class="form-name">Formación continua en diseño de sonrisa</div>
+                <div class="form-institution">Actualización constante en protocolos, materiales y técnicas digitales — porque en estética dental quien deja de aprender deja de avanzar</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TRAITS -->
+        <div class="doc-traits">
+          <div class="trait">
+            <div class="trait-icon">🤝</div>
+            <div class="trait-text">
+              <strong>Cercano y sin tecnicismos</strong>
+              Te explico todo en palabras simples. Sin jerga, sin apresurarte.
+            </div>
+          </div>
+          <div class="trait">
+            <div class="trait-icon">🔍</div>
+            <div class="trait-text">
+              <strong>Perfeccionista con cada detalle</strong>
+              Los milímetros importan en estética. Cada caso lo reviso hasta que esté exactamente como debe estar.
+            </div>
+          </div>
+          <div class="trait">
+            <div class="trait-icon">🗺️</div>
+            <div class="trait-text">
+              <strong>Contigo en todo el proceso</strong>
+              No te transfiero a asistentes. Desde la primera cita hasta el resultado final, soy yo quien te acompaña.
+            </div>
+          </div>
+          <div class="trait">
+            <div class="trait-icon">❤️</div>
+            <div class="trait-text">
+              <strong>Apasionado por lo que hace</strong>
+              Elegí la estética dental porque me cambia la vida verle cambiar la tuya. Eso no es un slogan — es lo que me levanta cada mañana.
+            </div>
+          </div>
+        </div>
+
+        <!-- STATS -->
         <div class="doctor-stats">
           <div class="dstat">
             <div class="dstat-n">500+</div>
@@ -81,9 +603,144 @@
           </div>
         </div>
 
-        <a href="https://wa.me/573217264415?text=Hola%20Dr.%20Jorge!%20Quiero%20agendar%20mi%20valoración" class="btn-main" style="display:inline-flex;max-width:340px;">
-          <span>Hablar con el Dr. Jorge</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <!-- CTAs -->
+        <div class="doc-ctas">
+          <a href="https://wa.me/573217264415?text=Hola%20Dr.%20Jorge!%20Quiero%20agendar%20mi%20valoración" class="btn-main">
+            <span>Hablar con el Dr. Jorge</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20enviar%20la%20foto%20de%20mi%20sonrisa" class="btn-ghost">
+            Enviar foto gratis
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       TRATAMIENTOS SECTION
+  ══════════════════════════════════════════════════════ -->
+  <section class="trat-section">
+    <div class="trat-inner">
+
+      <div class="trat-header">
+        <div>
+          <div class="s-label">Qué podemos hacer por tu sonrisa</div>
+          <h2 class="s-title">Simple. Claro.<br><em>Sin complicaciones.</em></h2>
+          <p class="trat-intro">No necesitas saber nada de odontología para entender tus opciones. Aquí te lo explicamos como a un amigo.</p>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20saber%20qué%20tratamiento%20me%20conviene" class="trat-header-cta">
+          ¿No sabes cuál te conviene? Pregúntanos
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="trat-grid">
+
+        <!-- RESINA -->
+        <div class="trat-card">
+          <div class="trat-num">01</div>
+          <div class="trat-badge badge-resina">El más solicitado</div>
+          <div class="trat-name">Diseño de Sonrisa<br>en Resina</div>
+
+          <p class="trat-simple-desc">
+            Imagina que le ponemos una "funda" muy delgada a tus dientes que los hace ver perfectos al instante.
+            <strong>El mismo día sales con tu sonrisa nueva</strong>, sin desgastar ni tocar el diente natural.
+            Es la opción más rápida y accesible para transformar tu sonrisa.
+          </p>
+
+          <div class="trat-for">
+            <span>Ideal si:</span> quieres cambio rápido, presupuesto más accesible o un resultado visible de inmediato
+          </div>
+
+          <div class="trat-bullets">
+            <div class="tb"><div class="tb-dot"></div>Resultado el mismo día de la cita</div>
+            <div class="tb"><div class="tb-dot"></div>No se toca ni desgasta el diente natural</div>
+            <div class="tb"><div class="tb-dot"></div>Corrección de color, forma y espacios</div>
+            <div class="tb"><div class="tb-dot"></div>Reversible si algún día quieres cambiar</div>
+          </div>
+
+          <div class="trat-price">$1.300.000</div>
+          <div class="trat-price-note">por diente · precio final después de valoración</div>
+
+          <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Resina" class="trat-cta tc-ghost">
+            <span>Me interesa la Resina</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- DISILICATO -->
+        <div class="trat-card featured">
+          <div class="trat-num">02</div>
+          <div class="trat-badge badge-disilicato">✦ La opción definitiva</div>
+          <div class="trat-name">Diseño de Sonrisa<br>en Disilicato</div>
+
+          <p class="trat-simple-desc">
+            Disilicato es una cerámica de altísima calidad que imita exactamente el aspecto del diente natural —
+            con la misma transparencia, el mismo brillo, la misma textura.
+            <strong>No se nota que son carillas. Se nota que tienes una sonrisa perfecta.</strong>
+            Es permanente, muy resistente y dura muchísimos años con el cuidado correcto.
+          </p>
+
+          <div class="trat-for">
+            <span>Ideal si:</span> quieres el mejor resultado posible, permanente y con acabado de más alta calidad
+          </div>
+
+          <div class="trat-bullets">
+            <div class="tb"><div class="tb-dot"></div>Resultado más natural y premium del mercado</div>
+            <div class="tb"><div class="tb-dot"></div>Resistencia muy superior a la resina</div>
+            <div class="tb"><div class="tb-dot"></div>Larga duración con cuidado básico</div>
+            <div class="tb"><div class="tb-dot"></div>Translucidez idéntica al diente real</div>
+          </div>
+
+          <div class="trat-price">$5.000.000</div>
+          <div class="trat-price-note">por diente · precio final después de valoración</div>
+
+          <a href="https://wa.me/573217264415?text=Hola!%20Me%20interesa%20el%20Diseño%20en%20Disilicato" class="trat-cta tc-filled">
+            <span>Me interesa el Disilicato</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- OTROS (wide) -->
+        <div class="trat-card wide">
+          <div class="wide-left">
+            <div class="trat-num" style="margin-bottom:6px">03</div>
+            <div class="trat-badge badge-otros">También hacemos</div>
+            <div class="trat-name" style="font-size:1.4rem;margin-bottom:8px">Otros tratamientos</div>
+            <p style="font-size:0.875rem;color:var(--metal-d);font-weight:300;max-width:240px;line-height:1.6">
+              Si tu caso necesita algo diferente, también lo tenemos cubierto.
+            </p>
+          </div>
+          <div class="wide-right">
+            <div class="otros-list">
+              <div class="otro-tag">🦷 Ortodoncia</div>
+              <div class="otro-tag">✨ Blanqueamiento dental</div>
+              <div class="otro-tag">🔧 Rehabilitación oral</div>
+              <div class="otro-tag">🧹 Limpieza profesional</div>
+              <div class="otro-tag">🩺 Odontología general</div>
+              <div class="otro-tag">📸 Radiografías</div>
+            </div>
+            <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20información%20sobre%20otros%20tratamientos"
+               style="display:inline-flex;align-items:center;gap:6px;color:var(--lila);text-decoration:none;font-size:0.875rem;font-weight:500;">
+              Preguntar por un tratamiento específico
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM BAND -->
+      <div class="trat-band-full">
+        <div>
+          <div class="trat-band-title">¿No sabes cuál es <em>tu opción</em>?</div>
+          <div class="trat-band-sub">Envíanos una foto de tu sonrisa y el Dr. Jorge te dice exactamente qué tratamiento tiene más sentido para tu caso — sin costo y sin compromiso.</div>
+        </div>
+        <a href="https://wa.me/573217264415?text=Hola!%20Quiero%20saber%20qué%20tratamiento%20me%20conviene%20para%20mi%20caso" class="btn-main">
+          <span>Enviar foto — es gratis</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
