@@ -238,13 +238,11 @@ a { text-decoration: none }
   display: flex;
   align-items: center;
   text-decoration: none;
-  height: 44px;
   flex-shrink: 0;
 }
 .logo-img {
-  height: 100%;
-  width: auto;
-  object-fit: contain;
+  height: 120px;
+  width: 120px;
 }
 .logo-text {
   font-family: 'Marcellus', serif;
