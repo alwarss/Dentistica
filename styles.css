@@ -377,13 +377,14 @@ a { text-decoration: none }
    BEFORE / AFTER SLIDER
 ══════════════════════════════════════════════════════ */
 .ba-wrap {
-  position: relative;
-  width: 100%; height: 100%;
+  width: 100%; height: 50%;
   border-radius: var(--radius);
   overflow: hidden;
   user-select: none;
   background: var(--uva-mid);
   cursor: ew-resize;
+  position: sticky;
+  top: 0;
 }
 .ba-wrap .ba-img {
   position: absolute; inset: 0;
@@ -391,6 +392,9 @@ a { text-decoration: none }
   object-fit: cover;
   pointer-events: none;
 }
+
+
+
 .ba-wrap .ba-img-before { z-index: 1 }
 .ba-wrap .ba-img-after  { z-index: 2; clip-path: inset(0 100% 0 0) }
 .ba-wrap .ba-slider {
