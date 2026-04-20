@@ -377,18 +377,21 @@ a { text-decoration: none }
    BEFORE / AFTER SLIDER
 ══════════════════════════════════════════════════════ */
 .ba-wrap {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 50vh;
   border-radius: var(--radius);
   overflow: hidden;
   user-select: none;
   background: var(--uva-mid);
   cursor: ew-resize;
   position: sticky;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
-.bawrap2{
-  height: 50% !important;
+.bawrap2 {
+  height: 50vh !important;
 }
 
 .ba-wrap .ba-img {
@@ -1326,7 +1329,7 @@ footer a { color: var(--lila) }
    GUARANTEE (index)
 ══════════════════════════════════════════════════════ */
 .guarantee {
-  padding: 56px 6%;
+  padding: 56px  6%;
   background: linear-gradient(135deg, var(--lila-dim), var(--surface2));
   border-top: 1px solid rgba(184,169,201,.1); border-bottom: 1px solid rgba(184,169,201,.1);
 }
