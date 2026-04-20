@@ -377,7 +377,7 @@ a { text-decoration: none }
    BEFORE / AFTER SLIDER
 ══════════════════════════════════════════════════════ */
 .ba-wrap {
-  width: 100%; height: 50%;
+  width: 100%; height: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   user-select: none;
@@ -386,6 +386,11 @@ a { text-decoration: none }
   position: sticky;
   top: 0;
 }
+
+.bawrap2{
+  height: 50% !important;
+}
+
 .ba-wrap .ba-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
