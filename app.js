@@ -159,13 +159,20 @@ window.showTab = function(id) {
   const timeEl = document.getElementById('abTime');
   
   if (!labelEl || !timeEl) return;
-  
+
+  // que salgan nombres random
+  const names = ['Miguel', 'Ana', 'Luis', 'Sofía', 'Juan', 'Carla', 'Diego', 'Valentina', 'Pablo', 'Isabella', 'Mateo', 'Emilia', 'Nicolás', 'Gabriel', 'Lucía', 'Santiago', 'Camila', 'Andrés', 'María', 'Jorge', 'Fernanda', 'Alejandro'];
+
+  function getRandomName() {
+    return names[Math.floor(Math.random() * names.length)];
+  }
+
   const items = [
-    { label: '<b>Alguien</b> envió fotos de su sonrisa', time: 'hace 51 min' },
-    { label: '<b>Alguien</b> reservó su cupo de valoración', time: 'hace 23 min' },
-    { label: '<b>Alguien</b> agendó su Diagnóstico Integral', time: 'hace 1 hora' },
-    { label: '<b>Alguien</b> solicitó su simulación digital', time: 'hace 38 min' },
-    { label: '<b>Alguien</b> envió foto para orientación gratuita', time: 'hace 12 min' },
+    { label: `<b>${getRandomName()}</b> envió fotos de su sonrisa`, time: 'hace 51 min' },
+    { label: `<b>${getRandomName()}</b> reservó su cupo de valoración`, time: 'hace 23 min' },
+    { label: `<b>${getRandomName()}</b> agendó su Diagnóstico Integral`, time: 'hace 1 hora' },
+    { label: `<b>${getRandomName()}</b> solicitó su simulación digital`, time: 'hace 38 min' },
+    { label: `<b>${getRandomName()}</b> envió foto para orientación gratuita`, time: 'hace 12 min' },
   ];
   
   let idx = 0;
