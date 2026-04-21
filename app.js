@@ -185,8 +185,8 @@ window.showTab = function(id) {
       labelEl.innerHTML = items[idx].label;
       timeEl.textContent = items[idx].time;
       labelEl.style.opacity = timeEl.style.opacity = '1';
-    }, 300);
-  }, 5000);
+    }, 1000);
+  }, 7000);
 })();
 
 // ══════════════════════════════════════════════════════
