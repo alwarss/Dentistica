@@ -829,6 +829,21 @@ a { text-decoration: none }
   color: var(--metal-d); margin-top: 10px; font-weight: 300;
   position: relative; z-index: 1;
 }
+.photo-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(184,169,201,.06);
+  border: 1px solid rgba(184,169,201,.12);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  position: relative; z-index: 1;
+}
+.photo-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px }
+.photo-text { font-size: 0.9375rem; color: var(--metal); font-weight: 300; line-height: 1.65 }
+.photo-text strong { color: var(--lila); font-weight: 500 }
+
 .val-footnote {
   margin-top: 28px; display: flex; align-items: flex-start; gap: 10px;
   background: var(--lila-dim); border: 1px solid rgba(184,169,201,.12);
